@@ -20,7 +20,7 @@ var (
 		Port:   getEnv("DB_PORT", "3306"),
 		User:   getEnv("DB_USERNAME", "root"),
 		Pwd:    getEnv("DB_PASSWORD", "root"),
-		DbName: getEnv("DB_DATABASE", "note"),
+		DbName: getEnv("DB_DATABASE", "ddc"),
 	}
 
 	SlaveDbConfig = DbConf{
@@ -28,7 +28,7 @@ var (
 		Port:   getEnv("DB_SLAVE_PORT", "3306"),
 		User:   getEnv("DB_SLAVE_USERNAME", "root"),
 		Pwd:    getEnv("DB_SLAVE_PASSWORD", "root"),
-		DbName: getEnv("DB_SLAVE_DATABASE", "note"),
+		DbName: getEnv("DB_SLAVE_DATABASE", "ddc"),
 	}
 )
 
