@@ -4,7 +4,7 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"time"
-	"wumiao/controllers"
+	"wumiao/controllers/frontend"
 	"wumiao/models"
 	"wumiao/services"
 )
@@ -47,7 +47,7 @@ func FrontendStart() {
 	page := mvc.New(app.Party("/"))
 	pageService := services.NewPageService()
 	page.Register(pageService)
-	page.Handle(new(controllers.PageController))
+	page.Handle(new(frontend.PageController))
 
 	//app.Get("/login",controllers.Login)
 	//app.Get("/register",controllers.Register)

@@ -1,4 +1,4 @@
-package controllers
+package frontend
 
 import "github.com/kataras/iris/v12"
 
@@ -8,6 +8,6 @@ func Index(ctx iris.Context) {
 	err := ctx.View("index.html")
 	if err != nil {
 		ctx.StatusCode(iris.StatusInternalServerError)
-		ctx.Writef(err.Error())
+		_, _ = ctx.Writef(err.Error())
 	}
 }
