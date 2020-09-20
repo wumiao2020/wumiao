@@ -1,107 +1,183 @@
 demo = {
 
-      initContactUsMap: function(){
-           var myLatlng = new google.maps.LatLng(44.433530, 26.093928);
-           var mapOptions = {
-             zoom: 14,
-             center: myLatlng,
-             styles:
-   [{"featureType":"water","stylers":[{"saturation":43},{"lightness":-11},{"hue":"#0088ff"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"hue":"#ff0000"},{"saturation":-100},{"lightness":99}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#808080"},{"lightness":54}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ece2d9"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#ccdca1"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#767676"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#b8cb93"}]},{"featureType":"poi.park","stylers":[{"visibility":"on"}]},{"featureType":"poi.sports_complex","stylers":[{"visibility":"on"}]},{"featureType":"poi.medical","stylers":[{"visibility":"on"}]},{"featureType":"poi.business","stylers":[{"visibility":"simplified"}]}],
-             scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-          };
-           var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
+    initContactUsMap: function () {
+        var myLatlng = new google.maps.LatLng(44.433530, 26.093928);
+        var mapOptions = {
+            zoom: 14,
+            center: myLatlng,
+            styles:
+                [{
+                    "featureType": "water",
+                    "stylers": [{"saturation": 43}, {"lightness": -11}, {"hue": "#0088ff"}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"hue": "#ff0000"}, {"saturation": -100}, {"lightness": 99}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{"color": "#808080"}, {"lightness": 54}]
+                }, {
+                    "featureType": "landscape.man_made",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ece2d9"}]
+                }, {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ccdca1"}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [{"color": "#767676"}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [{"color": "#ffffff"}]
+                }, {"featureType": "poi", "stylers": [{"visibility": "off"}]}, {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"visibility": "on"}, {"color": "#b8cb93"}]
+                }, {"featureType": "poi.park", "stylers": [{"visibility": "on"}]}, {
+                    "featureType": "poi.sports_complex",
+                    "stylers": [{"visibility": "on"}]
+                }, {"featureType": "poi.medical", "stylers": [{"visibility": "on"}]}, {
+                    "featureType": "poi.business",
+                    "stylers": [{"visibility": "simplified"}]
+                }],
+            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+        };
+        var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
 
-           var marker = new google.maps.Marker({
-               position: myLatlng,
-               title:"Hello World!"
-           });
-           marker.setMap(map);
-       },
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Hello World!"
+        });
+        marker.setMap(map);
+    },
 
-       initContactUs2Map: function(){
-           var lat = 44.433530;
-           var long = 26.093928;
+    initContactUs2Map: function () {
+        var lat = 44.433530;
+        var long = 26.093928;
 
-           var centerLong = long - 0.025;
+        var centerLong = long - 0.025;
 
-           var myLatlng = new google.maps.LatLng(lat,long);
-           var centerPosition = new google.maps.LatLng(lat, centerLong);
+        var myLatlng = new google.maps.LatLng(lat, long);
+        var centerPosition = new google.maps.LatLng(lat, centerLong);
 
-           var mapOptions = {
-             zoom: 14,
-             center: centerPosition,
-             styles:
-   [{"featureType":"water","stylers":[{"saturation":43},{"lightness":-11},{"hue":"#0088ff"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"hue":"#ff0000"},{"saturation":-100},{"lightness":99}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#808080"},{"lightness":54}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ece2d9"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#ccdca1"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#767676"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#b8cb93"}]},{"featureType":"poi.park","stylers":[{"visibility":"on"}]},{"featureType":"poi.sports_complex","stylers":[{"visibility":"on"}]},{"featureType":"poi.medical","stylers":[{"visibility":"on"}]},{"featureType":"poi.business","stylers":[{"visibility":"simplified"}]}],
-             scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-          };
-           var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
+        var mapOptions = {
+            zoom: 14,
+            center: centerPosition,
+            styles:
+                [{
+                    "featureType": "water",
+                    "stylers": [{"saturation": 43}, {"lightness": -11}, {"hue": "#0088ff"}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"hue": "#ff0000"}, {"saturation": -100}, {"lightness": 99}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [{"color": "#808080"}, {"lightness": 54}]
+                }, {
+                    "featureType": "landscape.man_made",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ece2d9"}]
+                }, {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"color": "#ccdca1"}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [{"color": "#767676"}]
+                }, {
+                    "featureType": "road",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [{"color": "#ffffff"}]
+                }, {"featureType": "poi", "stylers": [{"visibility": "off"}]}, {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry.fill",
+                    "stylers": [{"visibility": "on"}, {"color": "#b8cb93"}]
+                }, {"featureType": "poi.park", "stylers": [{"visibility": "on"}]}, {
+                    "featureType": "poi.sports_complex",
+                    "stylers": [{"visibility": "on"}]
+                }, {"featureType": "poi.medical", "stylers": [{"visibility": "on"}]}, {
+                    "featureType": "poi.business",
+                    "stylers": [{"visibility": "simplified"}]
+                }],
+            scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+        };
+        var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
 
-           var marker = new google.maps.Marker({
-               position: myLatlng,
-               title:"Hello World!"
-           });
-           marker.setMap(map);
-       },
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title: "Hello World!"
+        });
+        marker.setMap(map);
+    },
 
-       presentationAnimations: function(){
-           $(function() {
+    presentationAnimations: function () {
+        $(function () {
 
-             var $window           = $(window),
-                 isTouch           = Modernizr.touch;
+            var $window = $(window),
+                isTouch = Modernizr.touch;
 
-             if (isTouch) { $('.add-animation').addClass('animated'); }
+            if (isTouch) {
+                $('.add-animation').addClass('animated');
+            }
 
-             $window.on('scroll', revealAnimation);
+            $window.on('scroll', revealAnimation);
 
-             function revealAnimation() {
-               // Showed...
-               $(".add-animation:not(.animated)").each(function () {
-                 var $this     = $(this),
-                     offsetTop = $this.offset().top,
-                     scrolled = $window.scrollTop(),
-                     win_height_padded = $window.height();
-                 if (scrolled + win_height_padded > offsetTop) {
-                     $this.addClass('animated');
-                 }
-               });
-               // Hidden...
-              $(".add-animation.animated").each(function (index) {
-                 var $this     = $(this),
-                     offsetTop = $this.offset().top;
-                     scrolled = $window.scrollTop(),
-                     windowHeight = $window.height();
+            function revealAnimation() {
+                // Showed...
+                $(".add-animation:not(.animated)").each(function () {
+                    var $this = $(this),
+                        offsetTop = $this.offset().top,
+                        scrolled = $window.scrollTop(),
+                        win_height_padded = $window.height();
+                    if (scrolled + win_height_padded > offsetTop) {
+                        $this.addClass('animated');
+                    }
+                });
+                // Hidden...
+                $(".add-animation.animated").each(function (index) {
+                    var $this = $(this),
+                        offsetTop = $this.offset().top;
+                    scrolled = $window.scrollTop(),
+                        windowHeight = $window.height();
 
-                     win_height_padded = windowHeight * 0.8;
-                 if (scrolled + win_height_padded < offsetTop) {
-                   $(this).removeClass('animated')
-                 }
-               });
-             }
+                    win_height_padded = windowHeight * 0.8;
+                    if (scrolled + win_height_padded < offsetTop) {
+                        $(this).removeClass('animated')
+                    }
+                });
+            }
 
-             revealAnimation();
-           });
+            revealAnimation();
+        });
 
-       },
+    },
 
-       initDateTimePicker: function(){
-           $('.datetimepicker').datetimepicker({
-               icons: {
-                   time: "fa fa-clock-o",
-                   date: "fa fa-calendar",
-                   up: "fa fa-chevron-up",
-                   down: "fa fa-chevron-down",
-                   previous: 'fa fa-chevron-left',
-                   next: 'fa fa-chevron-right',
-                   today: 'fa fa-screenshot',
-                   clear: 'fa fa-trash',
-                   close: 'fa fa-remove'
-               }
-            });
-       },
+    initDateTimePicker: function () {
+        $('.datetimepicker').datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            }
+        });
+    },
 
 
-    initPickColor: function() {
-        $('.pick-class-label').click(function() {
+    initPickColor: function () {
+        $('.pick-class-label').click(function () {
             var new_class = $(this).attr('new-class');
             var old_class = $('#display-buttons').attr('data-class');
             var display_div = $('#display-buttons');
@@ -114,7 +190,7 @@ demo = {
         });
     },
 
-    initMaterialWizard: function() {
+    initMaterialWizard: function () {
         // Code for the Validator
         var $validator = $('.card-wizard form').validate({
             rules: {
@@ -132,17 +208,16 @@ demo = {
                 }
             },
 
-            highlight: function(element) {
+            highlight: function (element) {
                 $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
             },
-            success: function(element) {
+            success: function (element) {
                 $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
             },
-            errorPlacement : function(error, element) {
+            errorPlacement: function (error, element) {
                 $(element).append(error);
             }
         });
-
 
 
         // Wizard Initialization
@@ -151,7 +226,7 @@ demo = {
             'nextSelector': '.btn-next',
             'previousSelector': '.btn-previous',
 
-            onNext: function(tab, navigation, index) {
+            onNext: function (tab, navigation, index) {
                 var $valid = $('.card-wizard form').valid();
                 if (!$valid) {
                     $validator.focusInvalid();
@@ -159,7 +234,7 @@ demo = {
                 }
             },
 
-            onInit: function(tab, navigation, index) {
+            onInit: function (tab, navigation, index) {
                 //check number of tabs and fill the entire row
                 var $total = navigation.find('li').length;
                 var $wizard = navigation.closest('.card-wizard');
@@ -173,7 +248,7 @@ demo = {
                 $('.moving-tab').css('transition', 'transform 0s');
             },
 
-            onTabClick: function(tab, navigation, index) {
+            onTabClick: function (tab, navigation, index) {
                 var $valid = $('.card-wizard form').valid();
 
                 if (!$valid) {
@@ -183,7 +258,7 @@ demo = {
                 }
             },
 
-            onTabShow: function(tab, navigation, index) {
+            onTabShow: function (tab, navigation, index) {
                 var $total = navigation.find('li').length;
                 var $current = index + 1;
 
@@ -200,7 +275,7 @@ demo = {
 
                 button_text = navigation.find('li:nth-child(' + $current + ') a').html();
 
-                setTimeout(function() {
+                setTimeout(function () {
                     $('.moving-tab').text(button_text);
                 }, 150);
 
@@ -225,11 +300,11 @@ demo = {
 
 
         // Prepare the preview for profile picture
-        $("#wizard-picture").change(function() {
+        $("#wizard-picture").change(function () {
             readURL(this);
         });
 
-        $('[data-toggle="wizard-radio"]').click(function() {
+        $('[data-toggle="wizard-radio"]').click(function () {
             wizard = $(this).closest('.card-wizard');
             wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
             $(this).addClass('active');
@@ -237,7 +312,7 @@ demo = {
             $(this).find('[type="radio"]').attr('checked', 'true');
         });
 
-        $('[data-toggle="wizard-checkbox"]').click(function() {
+        $('[data-toggle="wizard-checkbox"]').click(function () {
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
                 $(this).find('[type="checkbox"]').removeAttr('checked');
@@ -255,15 +330,15 @@ demo = {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        $(window).resize(function() {
-            $('.card-wizard').each(function() {
+        $(window).resize(function () {
+            $('.card-wizard').each(function () {
                 $wizard = $(this);
 
                 index = $wizard.bootstrapWizard('currentIndex');
@@ -319,7 +394,7 @@ demo = {
         }
     },
 
-    initCharts: function() {
+    initCharts: function () {
         if ($('#roundedLineChart').length != 0 && $('#straightLinesChart').length != 0 && $('#colouredRoundedLineChart').length != 0 && $('#colouredBarsChart').length != 0 && $('#simpleBarChart').length != 0 && $('#multipleBarsChart').length != 0) {
             /* ----------==========    Rounded Line Chart initialization    ==========---------- */
 
@@ -453,7 +528,6 @@ demo = {
             md.startAnimationForLineChart(colouredBarsChart);
 
 
-
             /*  **************** Public Preferences - Pie Chart ******************** */
 
             var dataPreferences = {
@@ -487,7 +561,7 @@ demo = {
                 ['screen and (max-width: 640px)', {
                     seriesBarDistance: 5,
                     axisX: {
-                        labelInterpolationFnc: function(value) {
+                        labelInterpolationFnc: function (value) {
                             return value[0];
                         }
                     }
@@ -520,7 +594,7 @@ demo = {
                 ['screen and (max-width: 640px)', {
                     seriesBarDistance: 5,
                     axisX: {
-                        labelInterpolationFnc: function(value) {
+                        labelInterpolationFnc: function (value) {
                             return value[0];
                         }
                     }
@@ -535,7 +609,7 @@ demo = {
 
     },
 
-    showSwal: function(type) {
+    showSwal: function (type) {
         if (type == 'basic') {
             swal({
                 title: "Here's a message!",
@@ -570,7 +644,7 @@ demo = {
                 cancelButtonClass: 'btn btn-danger',
                 confirmButtonText: 'Yes, delete it!',
                 buttonsStyling: false
-            }).then(function() {
+            }).then(function () {
                 swal({
                     title: 'Deleted!',
                     text: 'Your file has been deleted.',
@@ -590,7 +664,7 @@ demo = {
                 confirmButtonClass: "btn btn-success",
                 cancelButtonClass: "btn btn-danger",
                 buttonsStyling: false
-            }).then(function() {
+            }).then(function () {
                 swal({
                     title: 'Deleted!',
                     text: 'Your imaginary file has been deleted.',
@@ -598,7 +672,7 @@ demo = {
                     confirmButtonClass: "btn btn-success",
                     buttonsStyling: false
                 }).catch(swal.noop)
-            }, function(dismiss) {
+            }, function (dismiss) {
                 // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
                 if (dismiss === 'cancel') {
                     swal({
@@ -638,7 +712,7 @@ demo = {
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false
-            }).then(function(result) {
+            }).then(function (result) {
                 swal({
                     type: 'success',
                     html: 'You entered: <strong>' +
@@ -652,7 +726,7 @@ demo = {
         }
     },
 
-    initGoogleMaps: function() {
+    initGoogleMaps: function () {
         var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
         var mapOptions = {
             zoom: 13,
@@ -756,7 +830,7 @@ demo = {
         marker.setMap(map);
     },
 
-    initSmallGoogleMaps: function() {
+    initSmallGoogleMaps: function () {
 
         // Regular Map
         var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
@@ -880,7 +954,6 @@ demo = {
         });
 
         marker.setMap(map);
-
 
 
         // Satellite Map

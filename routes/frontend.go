@@ -4,6 +4,7 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"time"
+	"wumiao/config"
 	"wumiao/controllers/frontend"
 	"wumiao/models"
 	"wumiao/services"
@@ -52,7 +53,7 @@ func FrontendStart() {
 	//app.Get("/login",controllers.Login)
 	//app.Get("/register",controllers.Register)
 	err := app.Run(
-		iris.Addr(":8090"),
+		iris.Addr(":"+config.GetEnv("FRONTEND_HOST_PORT", "8090")),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)

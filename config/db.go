@@ -16,23 +16,23 @@ type DbConf struct {
 
 var (
 	MasterDbConfig = DbConf{
-		Host:   getEnv("DB_HOST", "127.0.0.1"),
-		Port:   getEnv("DB_PORT", "3306"),
-		User:   getEnv("DB_USERNAME", "root"),
-		Pwd:    getEnv("DB_PASSWORD", "root"),
-		DbName: getEnv("DB_DATABASE", "ddc"),
+		Host:   GetEnv("DB_HOST", "127.0.0.1"),
+		Port:   GetEnv("DB_PORT", "3306"),
+		User:   GetEnv("DB_USERNAME", "root"),
+		Pwd:    GetEnv("DB_PASSWORD", "root"),
+		DbName: GetEnv("DB_DATABASE", "ddc"),
 	}
 
 	SlaveDbConfig = DbConf{
-		Host:   getEnv("DB_SLAVE_HOST", "127.0.0.1"),
-		Port:   getEnv("DB_SLAVE_PORT", "3306"),
-		User:   getEnv("DB_SLAVE_USERNAME", "root"),
-		Pwd:    getEnv("DB_SLAVE_PASSWORD", "root"),
-		DbName: getEnv("DB_SLAVE_DATABASE", "ddc"),
+		Host:   GetEnv("DB_SLAVE_HOST", "127.0.0.1"),
+		Port:   GetEnv("DB_SLAVE_PORT", "3306"),
+		User:   GetEnv("DB_SLAVE_USERNAME", "root"),
+		Pwd:    GetEnv("DB_SLAVE_PASSWORD", "root"),
+		DbName: GetEnv("DB_SLAVE_DATABASE", "ddc"),
 	}
 )
 
-func getEnv(key string, value string) string {
+func GetEnv(key string, value string) string {
 	var val = os.Getenv(key)
 	if val == "" {
 		return value

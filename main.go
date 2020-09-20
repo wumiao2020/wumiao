@@ -6,5 +6,6 @@ import (
 )
 
 func main() {
-	routes.FrontendStart()
+	go routes.FrontendStart()
+	routes.BackendStart()
 }

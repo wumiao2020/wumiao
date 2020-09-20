@@ -4,8 +4,8 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"time"
+	"wumiao/config"
 	"wumiao/controllers/backend"
-	"wumiao/controllers/frontend"
 	"wumiao/services"
 )
 
@@ -13,7 +13,7 @@ func BackendStart() {
 
 	app := iris.New()
 	app.Logger().SetLevel("debug")
-	app.HandleDir("/", "./public")
+	app.HandleDir("/", "./public/material")
 	// 设置关注的视图目录，和文件后缀
 	tmpl := iris.HTML("./views/backend", ".html")
 	tmpl.Layout("layouts/layout.html")
@@ -29,27 +29,55 @@ func BackendStart() {
 		return time.Now().UTC().Year()
 	})
 
+	app.OnErrorCode(iris.StatusNotFound, notFound)
+	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
+	app.RegisterView(tmpl)
+
+	account := mvc.New(app.Party("/"))
+	account.Handle(new(backend.AccountController))
+
+	app.Use(before)
+
 	app.Use(func(ctx iris.Context) {
 		ctx.ViewData("nav", Nav())
 		ctx.Next()
 	})
 
-	app.OnErrorCode(iris.StatusNotFound, notFound)
-	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
-	app.RegisterView(tmpl)
-
 	page := mvc.New(app.Party("/"))
-
 	pageService := services.NewPageService()
 	page.Register(pageService)
 	page.Handle(new(backend.PageController))
-
-	//app.Get("/login",controllers.Login)
-	//app.Get("/register",controllers.Register)
 	err := app.Run(
-		iris.Addr(":8090"),
+		iris.Addr(":"+config.GetEnv("BACKEND_HOST_PORT", "8091")),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
 	println(err)
+}
+
+func before(ctx iris.Context) {
+	shareInformation := "this is a sharable information between handlers"
+
+	requestPath := ctx.Path()
+	println("Before the mainHandler: " + requestPath)
+
+	ctx.Values().Set("info", shareInformation)
+	ctx.Next() // execute the next handler, in this case the main one.
+}
+
+func after(ctx iris.Context) {
+	println("After the mainHandler")
+}
+
+func mainHandler(ctx iris.Context) {
+	println("Inside mainHandler")
+
+	// take the info from the "before" handler.
+	info := ctx.Values().GetString("info")
+
+	// write something to the client as a response.
+	ctx.HTML("<h1>Response</h1>")
+	ctx.HTML("<br/> Info: " + info)
+
+	ctx.Next() // execute the "after".
 }
