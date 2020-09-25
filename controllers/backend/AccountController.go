@@ -42,8 +42,6 @@ func (a *AccountController) PostLogin() {
 	username := a.Ctx.PostValue("username")
 	password := a.Ctx.PostValue("password")
 
-	list := a.Service.GetList()
-	println(list)
 	admin := a.Service.GetByEmail(username)
 	if admin == nil {
 		_, _ = a.Ctx.JSON(iris.Map{"status": false, "message": "用户不存在，请先注册！！！"})

@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
@@ -9,6 +10,11 @@ import (
 	"wumiao/controllers/backend"
 	"wumiao/services"
 )
+
+var sessManager = sessions.New(sessions.Config{
+	Cookie:  "sessioncookiename",
+	Expires: 1 * time.Hour,
+})
 
 func BackendStart() {
 
@@ -34,10 +40,6 @@ func BackendStart() {
 	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
 	app.RegisterView(tmpl)
 	// "/user" 基于mvc的应用程序.
-	sessManager := sessions.New(sessions.Config{
-		Cookie:  "sessioncookiename",
-		Expires: 1 * time.Hour,
-	})
 
 	account := mvc.New(app.Party("/account"))
 	adminService := services.NewAdminService()
@@ -46,7 +48,6 @@ func BackendStart() {
 		sessManager.Start,
 	)
 	account.Handle(new(backend.AccountController))
-
 	app.Use(before)
 
 	app.Use(func(ctx iris.Context) {
@@ -68,6 +69,8 @@ func BackendStart() {
 
 func before(ctx iris.Context) {
 
+	userID := sessManager.Start(ctx).GetInt64Default("adminSessionId", 0)
+	fmt.Println(userID)
 	shareInformation := "this is a sharable information between handlers"
 
 	requestPath := ctx.Path()
@@ -92,4 +95,9 @@ func mainHandler(ctx iris.Context) {
 	ctx.HTML("<br/> Info: " + info)
 
 	ctx.Next() // execute the "after".
+}
+
+func connectSess() *sessions.Sessions {
+	// Creating Gorilla SecureCookie Session
+	// returning session
 }
