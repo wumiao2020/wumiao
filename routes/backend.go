@@ -1,13 +1,14 @@
 package routes
 
 import (
-	"fmt"
 	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/hero"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
 	"time"
 	"wumiao/config"
 	"wumiao/controllers/backend"
+	"wumiao/middleware"
 	"wumiao/services"
 )
 
@@ -41,14 +42,16 @@ func BackendStart() {
 	app.RegisterView(tmpl)
 	// "/user" 基于mvc的应用程序.
 
+	hero.Register(sessManager.Start)
+
 	account := mvc.New(app.Party("/account"))
 	adminService := services.NewAdminService()
 	account.Register(
 		adminService,
-		sessManager.Start,
 	)
 	account.Handle(new(backend.AccountController))
-	app.Use(before)
+
+	app.Use(hero.Handler(middleware.Authentication))
 
 	app.Use(func(ctx iris.Context) {
 		ctx.ViewData("nav", Nav())
@@ -65,39 +68,4 @@ func BackendStart() {
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
 	println(err)
-}
-
-func before(ctx iris.Context) {
-
-	userID := sessManager.Start(ctx).GetInt64Default("adminSessionId", 0)
-	fmt.Println(userID)
-	shareInformation := "this is a sharable information between handlers"
-
-	requestPath := ctx.Path()
-	println("Before the mainHandler: " + requestPath)
-
-	ctx.Values().Set("info", shareInformation)
-	ctx.Next() // execute the next handler, in this case the main one.
-}
-
-func after(ctx iris.Context) {
-	println("After the mainHandler")
-}
-
-func mainHandler(ctx iris.Context) {
-	println("Inside mainHandler")
-
-	// take the info from the "before" handler.
-	info := ctx.Values().GetString("info")
-
-	// write something to the client as a response.
-	ctx.HTML("<h1>Response</h1>")
-	ctx.HTML("<br/> Info: " + info)
-
-	ctx.Next() // execute the "after".
-}
-
-func connectSess() *sessions.Sessions {
-	// Creating Gorilla SecureCookie Session
-	// returning session
 }
