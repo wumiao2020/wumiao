@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
+	"github.com/kataras/iris/v12/sessions"
 	"time"
 	"wumiao/config"
 	"wumiao/controllers/backend"
@@ -32,8 +33,18 @@ func BackendStart() {
 	app.OnErrorCode(iris.StatusNotFound, notFound)
 	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
 	app.RegisterView(tmpl)
+	// "/user" 基于mvc的应用程序.
+	sessManager := sessions.New(sessions.Config{
+		Cookie:  "sessioncookiename",
+		Expires: 24 * time.Hour,
+	})
 
-	account := mvc.New(app.Party("/"))
+	account := mvc.New(app.Party("/account"))
+	adminService := services.NewAdminService()
+	account.Register(
+		adminService,
+		sessManager.Start,
+	)
 	account.Handle(new(backend.AccountController))
 
 	app.Use(before)
@@ -56,6 +67,7 @@ func BackendStart() {
 }
 
 func before(ctx iris.Context) {
+
 	shareInformation := "this is a sharable information between handlers"
 
 	requestPath := ctx.Path()
