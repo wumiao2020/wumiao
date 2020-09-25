@@ -18,8 +18,8 @@ type AccountController struct {
 	Session *sessions.Session
 }
 
-func (p *AccountController) GetLogin() mvc.Result {
-	if p.isLoggedIn() {
+func (a *AccountController) GetLogin() mvc.Result {
+	if a.isLoggedIn() {
 
 		return mvc.Response{
 			// 重定向.
@@ -37,36 +37,36 @@ func (p *AccountController) GetLogin() mvc.Result {
 	}
 }
 
-func (p *AccountController) PostLogin() {
+func (a *AccountController) PostLogin() {
 
-	username := p.Ctx.PostValue("username")
-	password := p.Ctx.PostValue("password")
+	username := a.Ctx.PostValue("username")
+	password := a.Ctx.PostValue("password")
 
-	list := p.Service.GetList()
+	list := a.Service.GetList()
 	println(list)
-	admin := p.Service.GetByEmail(username)
+	admin := a.Service.GetByEmail(username)
 	if admin == nil {
-		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": "用户不存在，请先注册！！！"})
+		_, _ = a.Ctx.JSON(iris.Map{"status": false, "message": "用户不存在，请先注册！！！"})
 	} else {
 		err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(password)) //验证（对比）
 		if err != nil {
-			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": "用户名或密码不正确，请重新输入！！！"})
+			_, _ = a.Ctx.JSON(iris.Map{"status": false, "message": "用户名或密码不正确，请重新输入！！！"})
 		} else {
-			p.Session.Set(adminSessionId, admin.Id)
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "登录成功！！！"})
+			a.Session.Set(adminSessionId, admin.Id)
+			_, _ = a.Ctx.JSON(iris.Map{"status": true, "message": "登录成功！！！"})
 		}
 	}
 }
 
-func (p *AccountController) Get() mvc.Result {
+func (a *AccountController) Get() mvc.Result {
 
-	if !p.isLoggedIn() {
+	if !a.isLoggedIn() {
 		return mvc.Response{
 			// 重定向
 			Path: "/account/login",
 		}
 	}
-	u := p.Service.GetById(p.getCurrentUserID())
+	u := a.Service.GetById(a.getCurrentUserID())
 	return mvc.View{
 		Layout: "layouts/layout.html",
 		Name:   "account/profile.html",
@@ -77,7 +77,7 @@ func (p *AccountController) Get() mvc.Result {
 	}
 }
 
-func (p *AccountController) GetRegister() mvc.Result {
+func (a *AccountController) GetRegister() mvc.Result {
 	return mvc.View{
 		Layout: "layouts/account.html",
 		Name:   "account/register.html",
@@ -88,17 +88,17 @@ func (p *AccountController) GetRegister() mvc.Result {
 	}
 }
 
-func (p *AccountController) PostRegister() mvc.Result {
+func (a *AccountController) PostRegister() mvc.Result {
 
-	username := p.Ctx.PostValue("username")
-	password := p.Ctx.PostValue("password")
+	username := a.Ctx.PostValue("username")
+	password := a.Ctx.PostValue("password")
 
-	admin := p.Service.GetByEmail(username)
+	admin := a.Service.GetByEmail(username)
 	if admin == nil {
 		hash, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost) //加密处理
 		data := models.Admins{Name: username, Email: username, Password: string(hash)}
-		_ = p.Service.Create(&data)
-		p.Session.Set(adminSessionId, data.Id)
+		_ = a.Service.Create(&data)
+		a.Session.Set(adminSessionId, data.Id)
 		return mvc.Response{
 			Path: "/account",
 		}
@@ -109,11 +109,19 @@ func (p *AccountController) PostRegister() mvc.Result {
 	}
 }
 
-func (p *AccountController) isLoggedIn() bool {
-	return p.getCurrentUserID() > 0
+func (a *AccountController) AnyLogout() {
+	if a.isLoggedIn() {
+		a.Session.Destroy()
+	}
+
+	a.Ctx.Redirect("/account/login")
 }
 
-func (p *AccountController) getCurrentUserID() int64 {
-	userID := p.Session.GetInt64Default(adminSessionId, 0)
+func (a *AccountController) isLoggedIn() bool {
+	return a.getCurrentUserID() > 0
+}
+
+func (a *AccountController) getCurrentUserID() int64 {
+	userID := a.Session.GetInt64Default(adminSessionId, 0)
 	return userID
 }

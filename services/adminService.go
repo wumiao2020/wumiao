@@ -11,7 +11,7 @@ type AdminService interface {
 	GetList() []models.Admins
 	GetById(Id int64) *models.Admins
 	GetByEmail(email string) *models.Admins
-	DeleteByID(id int) error
+	DeleteByID(id int64) error
 	Update(data *models.Admins, columns []string) error
 	Create(data *models.Admins) error
 }
@@ -67,7 +67,7 @@ func (a adminService) GetByEmail(email string) *models.Admins {
 	}
 }
 
-func (a adminService) DeleteByID(id int) error {
+func (a adminService) DeleteByID(id int64) error {
 	data := models.Admins{Id: id, Status: 0}
 	_, err := a.engine.Id(data.Id).Update(data)
 	return err

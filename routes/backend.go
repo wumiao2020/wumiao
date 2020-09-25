@@ -36,7 +36,7 @@ func BackendStart() {
 	// "/user" 基于mvc的应用程序.
 	sessManager := sessions.New(sessions.Config{
 		Cookie:  "sessioncookiename",
-		Expires: 24 * time.Hour,
+		Expires: 1 * time.Hour,
 	})
 
 	account := mvc.New(app.Party("/account"))
