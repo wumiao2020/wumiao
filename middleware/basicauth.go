@@ -12,7 +12,7 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 	if userID == 0 {
 		return mvc.Response{
 			// 重定向.
-			Path: "/account",
+			Path: "/account/login",
 		}
 	}
 
