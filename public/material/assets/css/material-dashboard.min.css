@@ -22870,7 +22870,7 @@ select.bs-select-hidden, select.selectpicker {
 
 @media (max-width: 991px) {
     [class*=navbar-expand-] > .container, [class*=navbar-expand-] > .container-fluid {
-        padding-left: 15px;
+        padding-left: 0px;
         padding-right: 15px
     }
 
@@ -22899,7 +22899,7 @@ select.bs-select-hidden, select.selectpicker {
         top: 0;
         height: 100vh;
         width: 230px;
-        right: 0;
+        left: 0;
         margin-right: 0 !important;
         z-index: 1032;
         visibility: visible;
@@ -23290,7 +23290,7 @@ select.bs-select-hidden, select.selectpicker {
     }
 
     .nav-open .off-canvas-sidebar .navbar-collapse, .nav-open .sidebar {
-        transform: translateZ(0)
+        transform: translateZ(260px)
     }
 
     .navbar .container, .navbar .container .navbar-toggler, .navbar .container .navbar-wrapper, .wrapper-full-page {

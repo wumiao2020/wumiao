@@ -2,761 +2,68 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
         {{ .title }}
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
     <!-- Extra details for Live View on GitHub Pages -->
     <!-- Canonical SEO -->
-    <link rel="canonical" href="/" />
+    <link rel="canonical" href="/"/>
     <!--  Social tags      -->
-    <meta name="keywords" content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 4 dashboard, bootstrap 4, css3 dashboard, bootstrap 4 admin, material dashboard bootstrap 4 dashboard, frontend, responsive bootstrap 4 dashboard, material design, material dashboard bootstrap 4 dashboard">
-    <meta name="description" content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design.">
+    <meta name="keywords"
+          content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 4 dashboard, bootstrap 4, css3 dashboard, bootstrap 4 admin, material dashboard bootstrap 4 dashboard, frontend, responsive bootstrap 4 dashboard, material design, material dashboard bootstrap 4 dashboard">
+    <meta name="description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design.">
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="Material Dashboard PRO by Creative Tim">
-    <meta itemprop="description" content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design.">
-    <meta itemprop="image" content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_thumbnail.jpg">
+    <meta itemprop="description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design.">
+    <meta itemprop="image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_thumbnail.jpg">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@creativetim">
     <meta name="twitter:title" content="Material Dashboard PRO by Creative Tim">
-    <meta name="twitter:description" content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design.">
+    <meta name="twitter:description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design.">
     <meta name="twitter:creator" content="@creativetim">
-    <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_thumbnail.jpg">
+    <meta name="twitter:image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_thumbnail.jpg">
     <!-- Open Graph data -->
     <meta property="fb:app_id" content="655968634437471">
-    <meta property="og:title" content="Material Dashboard PRO by Creative Tim" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="http://demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html" />
-    <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_thumbnail.jpg" />
-    <meta property="og:description" content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design." />
-    <meta property="og:site_name" content="Creative Tim" />
+    <meta property="og:title" content="Material Dashboard PRO by Creative Tim"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html"/>
+    <meta property="og:image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/51/original/opt_mdp_thumbnail.jpg"/>
+    <meta property="og:description"
+          content="Material Dashboard PRO is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design."/>
+    <meta property="og:site_name" content="Creative Tim"/>
     <!--     Fonts and icons     -->
     <link href="/iconfont/material-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="/assets/css/material-dashboard.min.css?v=2.1.0" rel="stylesheet" />
+    <link href="/assets/css/material-dashboard.min.css?v=2.1.0" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <link href="/assets/demo/demo.css" rel="stylesheet"/>
 </head>
 
 <body class="">
 <!-- Extra details for Live View on GitHub Pages -->
 <div class="wrapper ">
-    <div class="sidebar" data-color="rose" data-background-color="black" data-image="/assets/img/sidebar-1.jpg">
-        <!--
-          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-          Tip 2: you can also add an image using data-image tag
-      -->
-        <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-                WM
-            </a>
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                Wu Miao
-            </a>
-        </div>
-        <div class="sidebar-wrapper">
-            <div class="user">
-                <div class="photo">
-                    <img src="/assets/img/faces/avatar.jpg" />
-                </div>
-                <div class="user-info">
-                    <a data-toggle="collapse" href="#collapseExample" class="username">
-              <span>
-                Tania Andrew
-                <b class="caret"></b>
-              </span>
-                    </a>
-                    <div class="collapse" id="collapseExample">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="sidebar-mini"> MP </span>
-                                    <span class="sidebar-normal"> My Profile </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="sidebar-mini"> EP </span>
-                                    <span class="sidebar-normal"> Edit Profile </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="sidebar-mini"> S </span>
-                                    <span class="sidebar-normal"> Settings </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <ul class="nav">
-                <li class="nav-item active ">
-                    <a class="nav-link" href="../examples/dashboard.html">
-                        <i class="material-icons">dashboard</i>
-                        <i class="fa fa-confluence"></i>
-                        <p> Dashboard </p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#user">
-                        <i class="fa fa-user"></i>
-                        <p> 管理员
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="user">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 管理员列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 角 </span>
-                                    <span class="sidebar-normal"> 角色列表 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#product">
-                        <i class="fa fa-product-hunt"></i>
-                        <p> 商品管理
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="product">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 商 </span>
-                                    <span class="sidebar-normal"> 商品列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 类 </span>
-                                    <span class="sidebar-normal"> 商品分类 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 评 </span>
-                                    <span class="sidebar-normal"> 商品评价 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#order">
-                        <i class="fa fa-first-order"></i>
-                        <p> 订单管理
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="order">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 单 </span>
-                                    <span class="sidebar-normal"> 全部订单 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 发 </span>
-                                    <span class="sidebar-normal"> 待发货 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 收 </span>
-                                    <span class="sidebar-normal"> 待收货 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 付 </span>
-                                    <span class="sidebar-normal"> 待付款 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 完 </span>
-                                    <span class="sidebar-normal"> 已完成 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 消 </span>
-                                    <span class="sidebar-normal"> 已取消 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 后 </span>
-                                    <span class="sidebar-normal"> 售后管理 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#customer">
-                        <i class="fa fa-users">Pages</i>
-                        <p> 用户管理
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="customer">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 用户列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 等级管理 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 充值记录 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 余额明细 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                        <i class="material-icons">Pages</i>
-                        <p> 门店管理
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 门店列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 店员管理 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 订单核销记录 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                        <i class="material-icons">Pages</i>
-                        <p> 内容管理
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 管理员列表 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                        <i class="fa fa-line-chart"></i>
-                        <p> 营销管理
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 文章列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 文章分类 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 文件分组 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 文件列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 回收站 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                        <i class="fa fa-line-chart"></i>
-                        <p> 数据统计
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 优惠券列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 领取记录 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 充值套餐 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 充值设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 积分设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 积分明细 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 发送消息 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 活跃用户 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 满额包邮 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                        <i class="material-icons">Pages</i>
-                        <p> 小程序
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 页面设计 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 分类模板 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 页面链接 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 订阅消息 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 帮助中心 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 小程序设置 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-                        <i class="material-icons">apps</i>
-                        <p> 应用中心
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 应用中心 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 入驻申请 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 分销商用户 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 分销订单 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 提现申请 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 分销设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 分销海报 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 商品分类 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 商品列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 拼单管理 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 订单管理 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 售后管理 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 商品评价 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 拼团设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 活动列表 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 砍价记录 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 砍价设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 秒杀商品 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 活动会场 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 基础设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 商品收藏 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 订单信息 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 基础设置 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="collapse" href="#system">
-                        <i class="material-icons">settings</i>
-                        <p> 设置
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="system">
-                        <ul class="nav">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 商城设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 交易设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 运费模板 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 物流公司 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 短信通知 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 退货地址 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 上传设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 打印机管理 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 打印设置 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="../examples/pages/pricing.html">
-                                    <span class="sidebar-mini"> 管 </span>
-                                    <span class="sidebar-normal"> 清理缓存 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="../examples/calendar.html">
-                        <i class="material-icons">date_range</i>
-                        <p> Calendar </p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!-- Left Nav -->
+    {{ block "layouts/leftNav.html" . }}{{ end }}
+    <!-- End Left Nav -->
     <div class="main-panel">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-            <div class="container-fluid">
-                <div class="navbar-wrapper">
-                    <div class="navbar-minimize">
-                        <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
-                            <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
-                            <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
-                        </button>
-                    </div>
-                    <a class="navbar-brand" href="#pablo">Dashboard</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                    <span class="navbar-toggler-icon icon-bar"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end">
-                    <form class="navbar-form">
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                <i class="material-icons">search</i>
-                                <div class="ripple-container"></div>
-                            </button>
-                        </div>
-                    </form>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
-                                <i class="material-icons">dashboard</i>
-                                <p class="d-lg-none d-md-block">
-                                    Stats
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">notifications</i>
-                                <span class="notification">5</span>
-                                <p class="d-lg-none d-md-block">
-                                    Some Actions
-                                </p>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                                <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                                <a class="dropdown-item" href="#">Another Notification</a>
-                                <a class="dropdown-item" href="#">Another One</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">person</i>
-                                <p class="d-lg-none d-md-block">
-                                    Account
-                                </p>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/account/logout">Log out</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- End Navbar -->
+        <!-- Top -->
+        {{ block "layouts/top.html" . }}{{ end }}
+        <!-- End Top -->
         <div class="content">
             <div class="content">
                 <div class="container-fluid">
@@ -781,7 +88,8 @@
                     &copy;
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>, made with <i class="material-icons">favorite</i> by
+                    </script>
+                    , made with <i class="material-icons">favorite</i> by
                     <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
                 </div>
             </div>
@@ -921,8 +229,8 @@
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="/assets/demo/demo.js"></script>
 <script>
-    $(document).ready(function() {
-        $().ready(function() {
+    $(document).ready(function () {
+        $().ready(function () {
             $sidebar = $('.sidebar');
 
             $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -942,7 +250,7 @@
 
             }
 
-            $('.fixed-plugin a').click(function(event) {
+            $('.fixed-plugin a').click(function (event) {
                 // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
                 if ($(this).hasClass('switch-trigger')) {
                     if (event.stopPropagation) {
@@ -953,7 +261,7 @@
                 }
             });
 
-            $('.fixed-plugin .active-color span').click(function() {
+            $('.fixed-plugin .active-color span').click(function () {
                 $full_page_background = $('.full-page-background');
 
                 $(this).siblings().removeClass('active');
@@ -974,7 +282,7 @@
                 }
             });
 
-            $('.fixed-plugin .background-color .badge').click(function() {
+            $('.fixed-plugin .background-color .badge').click(function () {
                 $(this).siblings().removeClass('active');
                 $(this).addClass('active');
 
@@ -985,7 +293,7 @@
                 }
             });
 
-            $('.fixed-plugin .img-holder').click(function() {
+            $('.fixed-plugin .img-holder').click(function () {
                 $full_page_background = $('.full-page-background');
 
                 $(this).parent('li').siblings().removeClass('active');
@@ -995,7 +303,7 @@
                 var new_image = $(this).find("img").attr('src');
 
                 if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                    $sidebar_img_container.fadeOut('fast', function() {
+                    $sidebar_img_container.fadeOut('fast', function () {
                         $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
                         $sidebar_img_container.fadeIn('fast');
                     });
@@ -1004,7 +312,7 @@
                 if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
                     var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
 
-                    $full_page_background.fadeOut('fast', function() {
+                    $full_page_background.fadeOut('fast', function () {
                         $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
                         $full_page_background.fadeIn('fast');
                     });
@@ -1023,7 +331,7 @@
                 }
             });
 
-            $('.switch-sidebar-image input').change(function() {
+            $('.switch-sidebar-image input').change(function () {
                 $full_page_background = $('.full-page-background');
 
                 $input = $(this);
@@ -1055,7 +363,7 @@
                 }
             });
 
-            $('.switch-sidebar-mini input').change(function() {
+            $('.switch-sidebar-mini input').change(function () {
                 $body = $('body');
 
                 $input = $(this);
@@ -1070,7 +378,7 @@
 
                     $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('body').addClass('sidebar-mini');
 
                         md.misc.sidebar_mini_active = true;
@@ -1078,12 +386,12 @@
                 }
 
                 // we simulate the window Resize so the charts will get updated in realtime.
-                var simulateWindowResize = setInterval(function() {
+                var simulateWindowResize = setInterval(function () {
                     window.dispatchEvent(new Event('resize'));
                 }, 180);
 
                 // we stop the simulation of Window Resize after the animations are completed
-                setTimeout(function() {
+                setTimeout(function () {
                     clearInterval(simulateWindowResize);
                 }, 1000);
 
@@ -1092,7 +400,7 @@
     });
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Javascript method's body can be found in assets/js/demos.js
         md.initDashboardPageCharts();
 
