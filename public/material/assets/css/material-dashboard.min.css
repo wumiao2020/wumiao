@@ -23281,8 +23281,8 @@ select.bs-select-hidden, select.selectpicker {
     }
 
     .nav-open .main-panel, .nav-open .navbar .container, .nav-open .navbar .container .navbar-toggler, .nav-open .navbar .container .navbar-wrapper, .nav-open .wrapper-full-page {
-        left: 0;
-        transform: translate3d(-260px, 0, 0)
+        right: 0;
+        transform: translate3d(260px, 0, 0)
     }
 
     .nav-open .sidebar {
@@ -23335,7 +23335,7 @@ select.bs-select-hidden, select.selectpicker {
         top: 0;
         height: 100vh;
         width: 260px;
-        right: 0;
+        left: 0;
         left: auto;
         z-index: 1032;
         visibility: visible;
@@ -23345,7 +23345,7 @@ select.bs-select-hidden, select.selectpicker {
         text-align: left;
         padding-right: 0;
         padding-left: 0;
-        transform: translate3d(260px, 0, 0);
+        transform: translate3d(-260px, 0, 0);
         transition: all .33s cubic-bezier(.685, .0473, .346, 1)
     }
 

@@ -40,7 +40,6 @@ func BackendStart() {
 	app.OnErrorCode(iris.StatusNotFound, notFound)
 	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
 	app.RegisterView(tmpl)
-	// "/user" 基于mvc的应用程序.
 
 	hero.Register(sessManager.Start)
 
