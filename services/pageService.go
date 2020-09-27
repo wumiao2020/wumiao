@@ -56,13 +56,13 @@ func (p pageService) GetByUuid(string string) *models.Page {
 	}
 }
 func (p pageService) DeleteByID(id int64) error {
-	data := models.Page{Id: id, Status: 0}
+	data := models.Page{Id: id, IsActive: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
 	return err
 }
 func (p pageService) Get(string string) *models.Page {
 	data := &models.Page{Identifier: string}
-	ok, err := p.engine.Join("LEFT", "page_data", "page.id = page_data.page_id").Get(data)
+	ok, err := p.engine.Get(data)
 	if ok && err == nil {
 		return data
 	} else {

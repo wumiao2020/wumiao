@@ -57,10 +57,12 @@ func BackendStart() {
 		ctx.Next()
 	})
 
-	page := mvc.New(app.Party("/"))
+	//页面配置
+	cms := mvc.New(app.Party("/cms"))
 	pageService := services.NewPageService()
-	page.Register(pageService)
-	page.Handle(new(backend.PageController))
+	cms.Register(pageService)
+	cms.Handle(new(backend.PageController))
+
 	err := app.Run(
 		iris.Addr(":"+config.GetEnv("BACKEND_HOST_PORT", "8091")),
 		iris.WithoutBanner,
