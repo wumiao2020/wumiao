@@ -39,7 +39,7 @@ func (p pageService) GetList(parentId int) []models.Page {
 
 func (p pageService) GetAll() []models.Page {
 	datalist := make([]models.Page, 0)
-	err := p.engine.Where("status=?", 0).Find(&datalist)
+	err := p.engine.Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {
