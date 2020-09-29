@@ -71,7 +71,7 @@ func (p pageService) Get(string string) *models.Page {
 }
 
 func (p pageService) Update(data *models.Page, column []string) error {
-	_, err := p.engine.Id(data.Id).MustCols(column...).Update(data)
+	_, err := p.engine.Where("uuid=?", data.Uuid).MustCols(column...).Update(data)
 	return err
 }
 func (p pageService) Create(data *models.Page) error {
