@@ -21,6 +21,6 @@ type Page struct {
 	IsActive        int           `json:"is_active" xorm:"not null default 1 comment('Is Page Active') TINYINT(1)"`
 	SortOrder       int           `json:"sort_order" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`
 	Path            string        `json:"path" xorm:"default '1' comment('Tree Path') index VARCHAR(64)"`
-	CreatedAt       extend.Time   `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' comment('Page Creation Time') TIMESTAMP"`
-	UpdatedAt       extend.Time   `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' comment('Page Modification Time') TIMESTAMP"`
+	CreatedAt       extend.Time   `json:"created_at" xorm:"created"`
+	UpdatedAt       extend.Time   `json:"updated_at" xorm:"created"`
 }
