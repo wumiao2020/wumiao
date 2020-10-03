@@ -18,7 +18,7 @@ func (p *PageController) Get() mvc.Result {
 	return mvc.View{
 		Name: "page/index.html",
 		Data: iris.Map{
-			"title": "文章列表",
+			"title": "页面列表",
 			"data":  "data",
 		},
 	}
@@ -48,7 +48,7 @@ func (p *PageController) PostCreate() {
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "保存成功！！！", "uuid": data.Uuid})
 		} else {
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": err})
+			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
 		}
 	} else {
 		data.Uuid = postUuid
@@ -56,7 +56,7 @@ func (p *PageController) PostCreate() {
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Uuid})
 		} else {
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": err})
+			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
 		}
 	}
 
