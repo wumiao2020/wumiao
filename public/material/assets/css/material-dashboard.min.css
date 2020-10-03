@@ -21996,7 +21996,8 @@ select.bs-select-hidden, select.selectpicker {
     display: none !important
 }
 .dropdown.bootstrap-select {
-    margin-top: 5px;
+    /*margin-top: 5px;*/
+    margin-top: -2px;
 }
 
 .bootstrap-select > .dropdown-toggle {
@@ -22179,7 +22180,7 @@ select.bs-select-hidden, select.selectpicker {
 }
 
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
-    width: 220px
+    /*width: 220px*/
 }
 
 .bootstrap-select .dropdown-toggle:focus {

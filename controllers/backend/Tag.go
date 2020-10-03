@@ -1,7 +1,6 @@
 package backend
 
 import (
-	"github.com/google/uuid"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"html/template"
@@ -9,14 +8,14 @@ import (
 	"wumiao/services"
 )
 
-type PageController struct {
+type TagController struct {
 	Ctx     iris.Context
-	Service services.PageService
+	Service services.TagService
 }
 
-func (p *PageController) Get() mvc.Result {
+func (p *TagController) Get() mvc.Result {
 	return mvc.View{
-		Name: "page/index.html",
+		Name: "tag/index.html",
 		Data: iris.Map{
 			"title": "页面列表",
 			"data":  "data",
@@ -24,10 +23,10 @@ func (p *PageController) Get() mvc.Result {
 	}
 }
 
-func (p *PageController) GetCreate() mvc.Result {
+func (p *TagController) GetCreate() mvc.Result {
 	data := new(models.Page)
 	return mvc.View{
-		Name: "page/form.html",
+		Name: "tag/form.html",
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,
@@ -35,25 +34,22 @@ func (p *PageController) GetCreate() mvc.Result {
 	}
 }
 
-func (p *PageController) PostCreate() {
+func (p *TagController) PostCreate() {
 	postUuid := p.Ctx.PostValueDefault("uuid", "")
 	title := p.Ctx.PostValue("title")
-	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
 	content := p.Ctx.FormValue("content")
-	data := models.Page{Title: title, IsActive: isActive, Content: template.HTML(content)}
+	data := models.Tag{Title: title, Content: template.HTML(content)}
 	if postUuid == "" {
-		data.Uuid = uuid.New().String()
 		err := p.Service.Create(&data)
 		if err == nil {
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "保存成功！！！", "uuid": data.Uuid})
+			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "保存成功！！！"})
 		} else {
 			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
 		}
 	} else {
-		data.Uuid = postUuid
 		err := p.Service.Update(&data, []string{"title", "parent_id", "is_active", "content"})
 		if err == nil {
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Uuid})
+			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！"})
 		} else {
 			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
 		}
@@ -61,7 +57,7 @@ func (p *PageController) PostCreate() {
 
 }
 
-func (p *PageController) Post() {
+func (p *TagController) Post() {
 	data := p.Service.GetAll()
 	_, _ = p.Ctx.JSON(
 		iris.Map{
@@ -72,8 +68,8 @@ func (p *PageController) Post() {
 		})
 }
 
-func (p *PageController) GetBy(page string) mvc.Result {
-	data := p.Service.GetByUuid(page)
+func (p *TagController) GetBy(id int) mvc.Result {
+	data := p.Service.GetById(id)
 	if data == nil {
 		return mvc.View{
 			Code:   iris.StatusNotFound,
@@ -85,7 +81,7 @@ func (p *PageController) GetBy(page string) mvc.Result {
 		}
 	}
 	return mvc.View{
-		Name: "page/form.html",
+		Name: "tag/form.html",
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,

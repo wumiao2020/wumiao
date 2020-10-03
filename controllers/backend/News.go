@@ -4,19 +4,18 @@ import (
 	"github.com/google/uuid"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
-	"html/template"
 	"wumiao/models"
 	"wumiao/services"
 )
 
-type PageController struct {
+type NewsController struct {
 	Ctx     iris.Context
-	Service services.PageService
+	Service services.NewsService
 }
 
-func (p *PageController) Get() mvc.Result {
+func (p *NewsController) Get() mvc.Result {
 	return mvc.View{
-		Name: "page/index.html",
+		Name: "news/index.html",
 		Data: iris.Map{
 			"title": "页面列表",
 			"data":  "data",
@@ -24,10 +23,10 @@ func (p *PageController) Get() mvc.Result {
 	}
 }
 
-func (p *PageController) GetCreate() mvc.Result {
+func (p *NewsController) GetCreate() mvc.Result {
 	data := new(models.Page)
 	return mvc.View{
-		Name: "page/form.html",
+		Name: "news/form.html",
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,
@@ -35,12 +34,13 @@ func (p *PageController) GetCreate() mvc.Result {
 	}
 }
 
-func (p *PageController) PostCreate() {
+func (p *NewsController) PostCreate() {
 	postUuid := p.Ctx.PostValueDefault("uuid", "")
 	title := p.Ctx.PostValue("title")
 	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
-	content := p.Ctx.FormValue("content")
-	data := models.Page{Title: title, IsActive: isActive, Content: template.HTML(content)}
+	//content := p.Ctx.FormValue("content")
+	//data := models.News{Title: title,IsActive: isActive, Content: template.HTML(content)}
+	data := models.News{Title: title, IsActive: isActive}
 	if postUuid == "" {
 		data.Uuid = uuid.New().String()
 		err := p.Service.Create(&data)
@@ -61,7 +61,7 @@ func (p *PageController) PostCreate() {
 
 }
 
-func (p *PageController) Post() {
+func (p *NewsController) Post() {
 	data := p.Service.GetAll()
 	_, _ = p.Ctx.JSON(
 		iris.Map{
@@ -72,7 +72,7 @@ func (p *PageController) Post() {
 		})
 }
 
-func (p *PageController) GetBy(page string) mvc.Result {
+func (p *NewsController) GetBy(page string) mvc.Result {
 	data := p.Service.GetByUuid(page)
 	if data == nil {
 		return mvc.View{

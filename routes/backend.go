@@ -57,11 +57,21 @@ func BackendStart() {
 		ctx.Next()
 	})
 
-	//页面配置
-	cms := mvc.New(app.Party("/cms"))
+	//页面管理
+	page := mvc.New(app.Party("/page"))
 	pageService := services.NewPageService()
-	cms.Register(pageService)
-	cms.Handle(new(backend.PageController))
+	page.Register(pageService)
+	page.Handle(new(backend.PageController))
+	//文章管理
+	news := mvc.New(app.Party("/news"))
+	newsService := services.NewNewsService()
+	news.Register(newsService)
+	news.Handle(new(backend.NewsController))
+	//分类管理
+	tag := mvc.New(app.Party("/tag"))
+	tagService := services.NewTagService()
+	tag.Register(tagService)
+	tag.Handle(new(backend.TagController))
 
 	err := app.Run(
 		iris.Addr(":"+config.GetEnv("BACKEND_HOST_PORT", "8091")),
