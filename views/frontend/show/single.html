@@ -1,0 +1,89 @@
+<!-- breadcrumb start -->
+<div class="pa-breadcrumb">
+    <div class="container-fluid">
+        <div class="pa-breadcrumb-box">
+            <h1>{{ .title }}</h1>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li>产品类目</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end -->
+<!-- product single start -->
+<div class="pa-product-single spacer-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="pa-prod-thumb-img">
+                    <img src="{{ .data.Thumb }}" width="100%" alt="image" class="img-fluid"/>
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="pa-prod-content">
+                    <h2 class="pa-prod-title">{{ .data.Title }}</h2>
+                    <p class="pa-prod-price"><span>Price: <del>¥ {{ .data.TagPrice }}</del></span> ¥ {{ .data.Price }}
+{{/*                        <span class="pa-offer-price">50% 折扣</span>*/}}
+                    </p>
+{{/*                    <p class="pa-rating">*/}}
+{{/*                        <i class="fas fa-star"></i>*/}}
+{{/*                        <i class="fas fa-star"></i>*/}}
+{{/*                        <i class="fas fa-star"></i>*/}}
+{{/*                        <i class="fas fa-star"></i>*/}}
+{{/*                    </p>*/}}
+                    <ul>
+                        {{ .data.ContentHeading}}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="pa-prod-content">
+                    <div class="editorlightgallery">
+                        {{ .data.Content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- product start -->
+        <div class="pa-related-product">
+            <div class="container">
+                <div class="pa-heading">
+                    <h1>相关产品
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            {{ range $key, $product := .newProduct }}
+                            <div class="swiper-slide">
+                                <div class="pa-product-box">
+                                    <div class="pa-product-img">
+                                        <img src="{{ $product.Thumb }}" width="100%" alt="image" class="img-fluid"/>
+                                    </div>
+                                    <div class="pa-product-content">
+                                        <h4><a href="/shop/{{ $product.Uuid }}">{{ $product.Title }}</a></h4>
+                                        {{/*                        <p class="pa-product-rating">*/}}
+                                        {{/*                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i*/}}
+                                        {{/*                                    class="far fa-star"></i><i class="far fa-star"></i>*/}}
+                                        {{/*                        </p>*/}}
+                                        <p>
+                                            <del>¥ {{ $product.TagPrice }}</del>
+                                            ¥ {{ $product.Price }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ end }}
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- product end -->
+    </div>
+</div>
+<!-- product single end -->

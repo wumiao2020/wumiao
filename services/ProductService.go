@@ -9,6 +9,7 @@ import (
 type ProductService interface {
 	GetAll() []models.Product
 	GetList(limit int, start int) []models.Product
+	GetTopList(limit int, start int) []models.Product
 	Get(string string) *models.Product
 	GetByUuid(string string) *models.Product
 	DeleteByID(id int64) error
@@ -30,6 +31,16 @@ func NewProductService() ProductService {
 func (p productService) GetList(limit int, start int) []models.Product {
 	datalist := make([]models.Product, 0)
 	err := p.engine.Desc("id").Limit(limit, start).Find(&datalist)
+	if err != nil {
+		return datalist
+	} else {
+		return datalist
+	}
+}
+
+func (p productService) GetTopList(limit int, start int) []models.Product {
+	datalist := make([]models.Product, 0)
+	err := p.engine.Desc("position", "id").Limit(limit, start).Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {

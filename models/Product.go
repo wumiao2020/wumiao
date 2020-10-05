@@ -17,7 +17,7 @@ type Product struct {
 	MetaDescription string        `json:"meta_description" xorm:"comment('Page Meta Description') TEXT"`
 	Identifier      string        `json:"identifier" xorm:"comment('Page String Identifier') unique VARCHAR(64)"`
 	Uuid            string        `json:"uuid" xorm:"comment('Page Uuid') VARCHAR(36)"`
-	ContentHeading  string        `json:"content_heading" xorm:"comment('Page Content Heading') index VARCHAR(255)"`
+	ContentHeading  template.HTML `json:"content_heading" xorm:"comment('Page Content Heading') index VARCHAR(255)"`
 	Content         template.HTML `json:"content" xorm:"comment('Page Content') MEDIUMTEXT"`
 	IsActive        int           `json:"is_active" xorm:"not null default 1 comment('Is Page Active') index TINYINT(1)"`
 	Position        int           `json:"position" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`

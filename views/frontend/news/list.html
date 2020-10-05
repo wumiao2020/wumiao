@@ -1,0 +1,29 @@
+<div class="pa-breadcrumb">
+    <div class="container-fluid">
+        <div class="pa-breadcrumb-box">
+            <h1> 新闻资讯</h1>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li> 新闻资讯</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pa-product-shop spacer-top spacer-bottom">
+    <div class="container">
+
+        <div class="row">
+            {{ range $key, $news := .data }}
+                <div class="col-lg-4 col-md-6">
+                    <div class="pa-blog-box">
+                        <img src="{{ $news.Thumb }}" alt="image" class="img-fluid">
+                        <div class="pa-blog-title">
+                            <h2><a href="/news/{{ $news.Uuid }}"> {{ $news.Title }}</a></h2>
+                            <a href="/news/{{ $news.Uuid }}" class="pa-blog-date">{{ $news.CreatedAt }}</a>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+</div>

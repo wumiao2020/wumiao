@@ -39,7 +39,7 @@ func (p *ProductController) PostCreate() {
 	postUuid := p.Ctx.PostValueDefault("uuid", "")
 	title := p.Ctx.PostValue("title")
 	price, _ := p.Ctx.PostValueFloat64("price")
-	tagPrice, _ := p.Ctx.PostValueFloat64("price")
+	tagPrice, _ := p.Ctx.PostValueFloat64("tag_price")
 	position := p.Ctx.PostValueIntDefault("position", 0)
 	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
 	content := p.Ctx.FormValue("content")
@@ -49,7 +49,7 @@ func (p *ProductController) PostCreate() {
 	metaKeywords := p.Ctx.PostValue("meta_keywords")
 	metaDescription := p.Ctx.PostValue("meta_description")
 	thumb := p.Ctx.PostValue("thumb")
-	data := models.Product{Identifier: identifier, Price: price, TagPrice: tagPrice, Thumb: thumb, Position: position, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, IsActive: isActive, ContentHeading: contentHeading, Content: template.HTML(content)}
+	data := models.Product{Identifier: identifier, Price: price, TagPrice: tagPrice, Thumb: thumb, Position: position, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, IsActive: isActive, ContentHeading: template.HTML(contentHeading), Content: template.HTML(content)}
 	if postUuid == "" {
 		data.Uuid = uuid.New().String()
 		if data.Identifier == "" {

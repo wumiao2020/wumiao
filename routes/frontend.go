@@ -50,6 +50,16 @@ func FrontendStart() {
 	page.Register(pageService)
 	page.Handle(new(frontend.PageController))
 
+	news := mvc.New(app.Party("/news"))
+	newsService := services.NewNewsService()
+	news.Register(newsService)
+	news.Handle(new(frontend.NewsController))
+
+	shop := mvc.New(app.Party("/shop"))
+	shopService := services.NewProductService()
+	shop.Register(shopService)
+	shop.Handle(new(frontend.ProductController))
+
 	//app.Get("/login",controllers.Login)
 	//app.Get("/register",controllers.Register)
 	err := app.Run(
@@ -70,7 +80,7 @@ func internalServerError(ctx iris.Context) {
 	ctx.WriteString("Oups something went wrong, try again")
 }
 
-func Nav() []models.Page {
-	pageService := services.NewPageService()
+func Nav() []models.Menu {
+	pageService := services.NewMenuService()
 	return pageService.GetAll()
 }

@@ -38,7 +38,7 @@ func (p menuService) GetList(limit int, start int) []models.Menu {
 
 func (p menuService) GetAll() []models.Menu {
 	datalist := make([]models.Menu, 0)
-	err := p.engine.Desc("id").Find(&datalist)
+	err := p.engine.Where("is_active = 1").Desc("position", "id").Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {
