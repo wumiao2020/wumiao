@@ -40,9 +40,17 @@ func (p *PageController) PostCreate() {
 	title := p.Ctx.PostValue("title")
 	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
 	content := p.Ctx.FormValue("content")
-	data := models.Page{Title: title, IsActive: isActive, Content: template.HTML(content)}
+	identifier := p.Ctx.PostValueDefault("identifier", "")
+	metaTitle := p.Ctx.PostValue("meta_title")
+	metaKeywords := p.Ctx.PostValue("meta_keywords")
+	metaDescription := p.Ctx.PostValue("meta_description")
+	thumb := p.Ctx.PostValue("thumb")
+	data := models.Page{Identifier: identifier, Thumb: thumb, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, IsActive: isActive, Content: template.HTML(content)}
 	if postUuid == "" {
 		data.Uuid = uuid.New().String()
+		if data.Identifier == "" {
+			data.Identifier = data.Uuid
+		}
 		err := p.Service.Create(&data)
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "保存成功！！！", "uuid": data.Uuid})
@@ -51,7 +59,10 @@ func (p *PageController) PostCreate() {
 		}
 	} else {
 		data.Uuid = postUuid
-		err := p.Service.Update(&data, []string{"title", "parent_id", "is_active", "content"})
+		if data.Identifier == "" {
+			data.Identifier = postUuid
+		}
+		err := p.Service.Update(&data, []string{"title", "is_active", "thumb", "content", "identifier", "meta_title", "meta_keywords", "meta_description"})
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Uuid})
 		} else {
@@ -62,11 +73,16 @@ func (p *PageController) PostCreate() {
 }
 
 func (p *PageController) Post() {
-	data := p.Service.GetAll()
+
+	limit := p.Ctx.PostValueIntDefault("length", 10)
+	start := p.Ctx.PostValueIntDefault("start", 0)
+
+	dataAll := p.Service.GetAll()
+	data := p.Service.GetList(limit, start)
 	_, _ = p.Ctx.JSON(
 		iris.Map{
-			"recordsFiltered": 0,
-			"recordsTotal":    0,
+			"recordsFiltered": len(dataAll),
+			"recordsTotal":    len(dataAll),
 			"data":            data,
 			"start":           0,
 		})

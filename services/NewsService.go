@@ -8,7 +8,7 @@ import (
 
 type NewsService interface {
 	GetAll() []models.News
-	GetList(parentId int) []models.News
+	GetList(limit int, start int) []models.News
 	Get(string string) *models.News
 	GetByUuid(string string) *models.News
 	DeleteByID(id int64) error
@@ -27,9 +27,9 @@ func NewNewsService() NewsService {
 	}
 }
 
-func (p newsService) GetList(parentId int) []models.News {
+func (p newsService) GetList(limit int, start int) []models.News {
 	datalist := make([]models.News, 0)
-	err := p.engine.Where("parent_id=?", parentId).Desc("id").Find(&datalist)
+	err := p.engine.Desc("id").Limit(limit, start).Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {

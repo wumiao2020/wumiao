@@ -22,6 +22,7 @@ func BackendStart() {
 	app := iris.New()
 	app.Logger().SetLevel("debug")
 	app.HandleDir("/", "./public/material")
+	app.HandleDir("/upload", "./public/upload")
 	// 设置关注的视图目录，和文件后缀
 	tmpl := iris.HTML("./views/backend", ".html")
 	tmpl.Layout("layouts/layout.html")
@@ -72,6 +73,14 @@ func BackendStart() {
 	tagService := services.NewTagService()
 	tag.Register(tagService)
 	tag.Handle(new(backend.TagController))
+	//导航管理
+	menu := mvc.New(app.Party("/menu"))
+	menuService := services.NewMenuService()
+	menu.Register(menuService)
+	menu.Handle(new(backend.MenuController))
+	//上传管理
+	upload := mvc.New(app.Party("/upload"))
+	upload.Handle(new(backend.UploadController))
 
 	err := app.Run(
 		iris.Addr(":"+config.GetEnv("BACKEND_HOST_PORT", "8091")),

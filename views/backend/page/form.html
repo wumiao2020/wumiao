@@ -11,8 +11,8 @@
                     <div class="card-icon">
                         <i class="material-icons">content_paste</i>
                     </div>
-                    <h4 class="card-title">文章管理 -
-                        <small class="category">编辑文章-{{.title}}</small>
+                    <h4 class="card-title">页面管理 -
+                        <small class="category">编辑页面-{{.title}}</small>
                     </h4>
                     <a class="btn btn-rose float-right btn-sm" onclick="window.history.go(-1)"><i
                                 class="fa fa-plus-circle"></i> 返回 </a>
@@ -20,83 +20,84 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="bmd-label-floating">标题</label>
-                                <input id="title" value="{{.data.Title}}" name="title" type="text" class="form-control">
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">标题</label>
+                                        <input id="title" value="{{.data.Title}}" name="title" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group bmd-form-group is-filled">
+                                        <label class="bmd-label-floating">状态</label>
+                                        <select id="is_active" name="is_active" class="selectpicker" data-size="7"
+                                                data-style="select-with-transition">
+                                            <option value="1"> 启用</option>
+                                            <option value="0"> 禁用</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">识别码</label>
+                                        <input id="identifier" value="{{.data.Title}}" name="identifier" type="text"
+                                               class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">阅读量</label>
+                                        <input disabled name="hit" type="text" value="100" class="form-control">
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="upload" data-name="thumb" data-value="{{.data.Thumb}}" action='/upload/images' data-num='1' id='case1'></div>
+
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>文章内容
+                                <label>页面内容
                                 </label>
                                 <div class="form-group">
-                                    <textarea name="content" id="edit" class="form-control" rows="5">{{.data.Content}}</textarea>
+                                    <textarea name="content" id="edit" class="form-control"
+                                              rows="5">{{.data.Content}}</textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <select class="selectpicker" id="parent_id" name="parent_id" data-size="7" data-style="select-with-transition" title="请选选分类">
-                                        <option value="Afghanistan"> Afghanistan </option>
-                                        <option value="Albania"> Albania </option>
-                                        <option value="Algeria"> Algeria </option>
-                                        <option value="American Samoa"> American Samoa </option>
-                                        <option value="Andorra"> Andorra </option>
-                                        <option value="Angola"> Angola </option>
-                                        <option value="Anguilla"> Anguilla </option>
-                                        <option value="Antarctica"> Antarctica </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">虚拟阅读量</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">状态</label>
-                                        <input id="is_active" value="{{.data.IsActive}}" name="is_active" type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="bmd-label-floating">描述</label>
-                                    <textarea id="meta_description" name="meta_description" class="form-control" rows="6">{{.data.MetaDescription}}</textarea>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">SEO标题</label>
+                                <input id="meta_title" value="{{.data.MetaTitle}}" name="meta_title" type="text"
+                                       class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card card-profile">
-                                <div class="card-body">
-                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail">
-                                            <img src="../../assets/img/image_placeholder.jpg" alt="...">
-                                        </div>
-                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                        <div>
-                                              <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select image</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="file" name="..."/>
-                                              </span>
-                                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput">
-                                                <i class="fa fa-times"></i>
-                                                Remove
-                                            </a>
-                                        </div>
-                                    </div>
+                    </div>
 
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="bmd-label-floating">SEO关键字</label>
+                                <input id="meta_keywords" value="{{.data.MetaKeywords}}" name="meta_keywords"
+                                       type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="bmd-label-floating">SEO描述信息</label>
+                                <textarea id="meta_description" name="meta_description" class="form-control"
+                                          rows="6">{{.data.MetaDescription}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,7 @@
 </form>
 
 <script>
-    window.onload = function (){
+    window.onload = function () {
         const editorInstance = new FroalaEditor('#edit', {
             height: (document.body.clientHeight - 400) + 'px',
             language: 'zh_cn',
@@ -118,42 +119,51 @@
             requestHeaders: {
                 // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            imageUploadURL: '/',
-            videoUploadURL: '/',
+            imageUploadURL: '/upload/images',
+            videoUploadURL: '/upload/videos',
             placeholderText: null,
             imageManagerLoadURL: "",
             imageManagerDeleteURL: "",
             events: {
                 contentChanged: function () {
-                    ajax('/cms/create')
+                    ajax('/page/create')
                 }
             }
         })
 
-        $(".content input").blur(function(){
-            ajax('/cms/create')
+        $("input").blur(function () {
+            ajax('/page/create')
         });
 
-        function ajax(url,type='POST') {
+        $("textarea").blur(function () {
+            ajax('/page/create')
+        });
+        $("select").bind('change', function () {
+            ajax('/page/create')
+        });
+
+        function ajax(url, type = 'POST') {
             $.ajax({
                 cache: true,
                 type: type,
                 url: url,
-                data:$('#form').serialize(),
+                data: $('#form').serialize(),
                 dataType: 'json',
-                error: function (data,textStatus, errorThrown) {
+                error: function (data, textStatus, errorThrown) {
                     console.log(errorThrown)
                 },
                 success: function (data) {
-                    if (data.status === true){
+                    if (data.status === true) {
                         $("#uuid").val(data.uuid);
-                        md.showNotification(data.message,'success')
-                    }else {
-                        md.showNotification(data.message,'danger')
+                        md.showNotification(data.message, 'success')
+                    } else {
+                        md.showNotification(data.message.Message, 'danger')
                     }
                 }
             });
         }
+
+        $("#case1").upload();
 
     }
 </script>

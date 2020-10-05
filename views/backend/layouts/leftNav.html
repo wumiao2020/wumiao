@@ -65,38 +65,45 @@
                 </a>
                 <div class="collapse show" id="content">
                     <ul class="nav">
-                        <li class="nav-item ">
+                        <li class="nav-item {{if eq .navActive "/page" }} active {{ end }}">
+
                             <a class="nav-link" href="/page">
                                 <span class="sidebar-mini"> &nbsp;</span>
                                 <span class="sidebar-normal"> 页面管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/news">
+                        <li class="nav-item {{if eq .navActive "/news" }} active {{ end }}">
+                            <a class="nav-link " href="/news">
                                 <span class="sidebar-mini"> &nbsp;</span>
                                 <span class="sidebar-normal"> 文章管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/tag">
+                        <li class="nav-item {{if eq .navActive "/tag" }} active {{ end }}">
+                            <a class="nav-link " href="/tag">
                                 <span class="sidebar-mini"> &nbsp;</span>
                                 <span class="sidebar-normal"> 标签管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/cms/files">
+                        <li class="nav-item {{if eq .navActive "/menu" }} active {{ end }}">
+                            <a class="nav-link " href="/menu">
+                                <span class="sidebar-mini"> &nbsp;</span>
+                                <span class="sidebar-normal"> 菜单管理 </span>
+                            </a>
+                        </li>
+                        <li class="nav-item {{if eq .navActive "/cms/files" }} active {{ end }}">
+                            <a class="nav-link " href="/cms/files">
                                 <span class="sidebar-mini"> &nbsp;</span>
                                 <span class="sidebar-normal"> 文件分组 </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/cms/files">
+                        <li class="nav-item {{if eq .navActive "/cms/files" }} active {{ end }}">
+                            <a class="nav-link " href="/cms/files">
                                 <span class="sidebar-mini"> &nbsp;</span>
                                 <span class="sidebar-normal"> 文件列表 </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/cms">
+                        <li class="nav-item {{if eq .navActive "/cms" }} active {{ end }}">
+                            <a class="nav-link " href="/cms">
                                 <span class="sidebar-mini"> &nbsp;</span>
                                 <span class="sidebar-normal"> 回收站 </span>
                             </a>

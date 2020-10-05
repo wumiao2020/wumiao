@@ -8,10 +8,10 @@ import (
 
 type TagService interface {
 	GetAll() []models.Tag
-	GetList(parentId int) []models.Tag
+	GetList(limit int, start int) []models.Tag
 	Get(string string) *models.Tag
-	GetById(string int) *models.Tag
-	DeleteByID(id int) error
+	GetByUuid(string string) *models.Tag
+	DeleteByID(id int64) error
 	Update(data *models.Tag, columns []string) error
 	Create(data *models.Tag) error
 }
@@ -27,9 +27,9 @@ func NewTagService() TagService {
 	}
 }
 
-func (p tagService) GetList(parentId int) []models.Tag {
+func (p tagService) GetList(limit int, start int) []models.Tag {
 	datalist := make([]models.Tag, 0)
-	err := p.engine.Where("parent_id=?", parentId).Desc("id").Find(&datalist)
+	err := p.engine.Desc("id").Limit(limit, start).Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {
@@ -46,8 +46,8 @@ func (p tagService) GetAll() []models.Tag {
 		return datalist
 	}
 }
-func (p tagService) GetById(id int) *models.Tag {
-	data := &models.Tag{Id: id}
+func (p tagService) GetByUuid(string string) *models.Tag {
+	data := &models.Tag{Uuid: string}
 	ok, err := p.engine.Get(data)
 	if ok && err == nil {
 		return data
@@ -55,7 +55,7 @@ func (p tagService) GetById(id int) *models.Tag {
 		return nil
 	}
 }
-func (p tagService) DeleteByID(id int) error {
+func (p tagService) DeleteByID(id int64) error {
 	data := models.Tag{Id: id, IsActive: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
 	return err
@@ -71,7 +71,7 @@ func (p tagService) Get(string string) *models.Tag {
 }
 
 func (p tagService) Update(data *models.Tag, column []string) error {
-	_, err := p.engine.Where("id=?", data.Id).MustCols(column...).Update(data)
+	_, err := p.engine.Where("uuid=?", data.Uuid).MustCols(column...).Update(data)
 	return err
 }
 func (p tagService) Create(data *models.Tag) error {

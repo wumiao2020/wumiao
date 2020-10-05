@@ -3,7 +3,7 @@
 <link href="/assets/froala/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
 
 <form id="form" method="get" action="/" class="form-horizontal">
-    <input id="uuid" type="hidden" name="uuid" value="{{.data.Uuid}}">
+    <input id="uuid" type="hidden" name="id" value="{{.data.Id}}">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -11,8 +11,8 @@
                     <div class="card-icon">
                         <i class="material-icons">content_paste</i>
                     </div>
-                    <h4 class="card-title">标签管理 -
-                        <small class="category">编辑标签-{{.title}}</small>
+                    <h4 class="card-title">菜单管理 -
+                        <small class="category">编辑菜单-{{.title}}</small>
                     </h4>
                     <a class="btn btn-rose float-right btn-sm" onclick="window.history.go(-1)"><i
                                 class="fa fa-plus-circle"></i> 返回 </a>
@@ -20,7 +20,7 @@
                 <div class="card-body">
 
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
@@ -40,67 +40,22 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">识别码</label>
-                                        <input id="identifier" value="{{.data.Title}}" name="identifier" type="text"
+                                        <label class="bmd-label-floating">地址</label>
+                                        <input id="uri" value="{{.data.Uri}}" name="uri" type="text"
                                                class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">阅读量</label>
-                                        <input disabled name="hit" type="text" value="100" class="form-control">
+                                        <label class="bmd-label-floating">排序</label>
+                                        <input id="position" name="position" type="text" value="0" class="form-control">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="upload" data-name="thumb" data-value="{{.data.Thumb}}" action='/upload/images' data-num='1' id='case1'></div>
-
-                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>标签内容
-                                </label>
-                                <div class="form-group">
-                                    <textarea name="content" id="edit" class="form-control"
-                                              rows="5">{{.data.Content}}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="bmd-label-floating">SEO标题</label>
-                                <input id="meta_title" value="{{.data.MetaTitle}}" name="meta_title" type="text"
-                                       class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group bmd-form-group is-filled">
-                                <label class="bmd-label-floating">SEO关键字</label>
-                                <input id="meta_keywords" value="{{.data.MetaKeywords}}" name="meta_keywords"
-                                       type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group bmd-form-group is-filled">
-                                <label class="bmd-label-floating">SEO描述信息</label>
-                                <textarea id="meta_description" name="meta_description" class="form-control"
-                                          rows="6">{{.data.MetaDescription}}</textarea>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -126,20 +81,20 @@
             imageManagerDeleteURL: "",
             events: {
                 contentChanged: function () {
-                    ajax('/tag/create')
+                    ajax('/menu/create')
                 }
             }
         })
 
         $("input").blur(function () {
-            ajax('/tag/create')
+            ajax('/menu/create')
         });
 
         $("textarea").blur(function () {
-            ajax('/tag/create')
+            ajax('/menu/create')
         });
         $("select").bind('change', function () {
-            ajax('/tag/create')
+            ajax('/menu/create')
         });
 
         function ajax(url, type = 'POST') {

@@ -5,8 +5,8 @@
                 <div class="card-icon">
                     <i class="material-icons">assignment</i>
                 </div>
-                <h4 class="card-title">页面列表</h4>
-                <a class="btn btn-success float-right btn-sm" href="/page/create"><i class="fa fa-plus-circle"></i> 添加页面 </a>
+                <h4 class="card-title">标签列表</h4>
+                <a class="btn btn-success float-right btn-sm" href="/tag/create"><i class="fa fa-plus-circle"></i> 添加页面 </a>
             </div>
             <div class="card-body">
                 <div class="toolbar">
@@ -73,7 +73,7 @@
                 }
             },
             "ajax": {
-                "url": "/page",
+                "url": "/tag",
                 "type": "POST",
                 error: function (arg1) {
                     md.notification(arg1.statusText, 'rose');

@@ -8,7 +8,7 @@ import (
 
 type PageService interface {
 	GetAll() []models.Page
-	GetList(parentId int) []models.Page
+	GetList(limit int, start int) []models.Page
 	Get(string string) *models.Page
 	GetByUuid(string string) *models.Page
 	DeleteByID(id int64) error
@@ -27,9 +27,9 @@ func NewPageService() PageService {
 	}
 }
 
-func (p pageService) GetList(parentId int) []models.Page {
+func (p pageService) GetList(limit int, start int) []models.Page {
 	datalist := make([]models.Page, 0)
-	err := p.engine.Where("parent_id=?", parentId).Desc("id").Find(&datalist)
+	err := p.engine.Desc("id").Limit(limit, start).Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {
@@ -39,7 +39,7 @@ func (p pageService) GetList(parentId int) []models.Page {
 
 func (p pageService) GetAll() []models.Page {
 	datalist := make([]models.Page, 0)
-	err := p.engine.Find(&datalist)
+	err := p.engine.Desc("id").Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {

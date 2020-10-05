@@ -6,10 +6,11 @@ import (
 )
 
 type Tag struct {
-	Id              int           `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
+	Id              int64         `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
 	ParentId        int           `json:"parent_id" xorm:"default 0 comment('Parent Category ID') index INT(10)"`
 	Title           string        `json:"title" xorm:"comment('Page Title') index VARCHAR(255)"`
 	PageLayout      string        `json:"page_layout" xorm:"comment('Page Layout') VARCHAR(255)"`
+	Thumb           string        `json:"thumb" xorm:"comment('Page Meta Title') index VARCHAR(255)"`
 	MetaTitle       string        `json:"meta_title" xorm:"comment('Page Meta Title') index VARCHAR(255)"`
 	MetaKeywords    string        `json:"meta_keywords" xorm:"comment('Page Meta Keywords') TEXT"`
 	MetaDescription string        `json:"meta_description" xorm:"comment('Page Meta Description') TEXT"`
