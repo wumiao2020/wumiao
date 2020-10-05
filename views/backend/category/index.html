@@ -5,8 +5,8 @@
                 <div class="card-icon">
                     <i class="material-icons">assignment</i>
                 </div>
-                <h4 class="card-title">菜单列表</h4>
-                <a class="btn btn-success float-right btn-sm" href="/menu/create"><i class="fa fa-plus-circle"></i> 添加页面 </a>
+                <h4 class="card-title">分类列表</h4>
+                <a class="btn btn-success float-right btn-sm" href="/category/create"><i class="fa fa-plus-circle"></i> 添加分类 </a>
             </div>
             <div class="card-body">
                 <div class="toolbar">
@@ -19,7 +19,7 @@
                         <tr>
                             <th width="70">ID</th>
                             <th>名称</th>
-                            <th>地址</th>
+                            <th>UUID</th>
                             <th width="150">创建时间</th>
                             <th width="150">更新时间</th>
                             <th width="100">操作</th>
@@ -73,7 +73,7 @@
                 }
             },
             "ajax": {
-                "url": "/menu",
+                "url": "/category",
                 "type": "POST",
                 error: function (arg1) {
                     md.notification(arg1.statusText, 'rose');
@@ -88,7 +88,7 @@
             "columns": [
                 {"data": "id", "sClass": "text-center"},
                 {"data": "title"},
-                {"data": "uri", "sClass": "text-center"},
+                {"data": "uuid", "sClass": "text-center"},
                 {"data": "created_at", "sClass": "hidden-xs text-center"},
                 {"data": "updated_at", "sClass": "hidden-xs text-center"},
                 {"data": "action", "sClass": "text-center"}
@@ -102,11 +102,11 @@
 
                         //编辑
                         if (row_edit) {
-                            str += '<a class="X-Small btn-xs text-success " href="/menu/' + row['id'] + '" ><i class="material-icons">edit</i></a>';
+                            str += '<a class="X-Small btn-xs text-success " href="/category/' + row['uuid'] + '" ><i class="material-icons">edit</i></a>';
                         }
                         //删除
                         if (row_del) {
-                            str += '<a class="X-Small btn-xs text-rose " data-type="edit" data-title="删除：' + row['name'] + '" data-url="/menu/' + row['id'] + '" data-toggle="modal" data-target="#modalDel" ><i class="material-icons">close</i></a>';
+                            str += '<a class="X-Small btn-xs text-rose " data-type="edit" data-title="删除：' + row['name'] + '" data-url="/category/' + row['id'] + '" data-toggle="modal" data-target="#modalDel" ><i class="material-icons">close</i></a>';
                         }
 
                         return str;

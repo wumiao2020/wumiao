@@ -1,0 +1,205 @@
+<script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="/assets/froala/js/languages/zh_cn.js"></script>
+<link href="/assets/froala/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
+
+<form id="form" method="get" action="/" class="form-horizontal">
+    <input id="uuid" type="hidden" name="uuid" value="{{.data.Uuid}}">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-icon card-header-rose">
+                    <div class="card-icon">
+                        <i class="material-icons">content_paste</i>
+                    </div>
+                    <h4 class="card-title">产品管理 -
+                        <small class="category">编辑产品-{{.title}}</small>
+                    </h4>
+                    <a class="btn btn-rose float-right btn-sm" onclick="window.history.go(-1)"><i
+                                class="fa fa-plus-circle"></i> 返回 </a>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">标题</label>
+                                        <input id="title" value="{{.data.Title}}" name="title" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group bmd-form-group is-filled">
+                                        <label class="bmd-label-floating">状态</label>
+                                        <select id="is_active" name="is_active" class="selectpicker" data-size="7"
+                                                data-style="select-with-transition">
+                                            <option value="1"> 启用</option>
+                                            <option value="0"> 禁用</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">识别码</label>
+                                        <input id="identifier" value="{{.data.Title}}" name="identifier" type="text"
+                                               class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">排序</label>
+                                        <input name="position" type="text" value="{{.data.Position}}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group bmd-form-group is-filled">
+                                        <label class="bmd-label-floating">分类</label>
+                                        <select id="is_active" name="is_active" class="selectpicker" data-size="7" data-style="select-with-transition">
+                                            <option value="1"> 启用</option>
+                                            <option value="0"> 禁用</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group bmd-form-group is-filled">
+                                        <label class="bmd-label-floating">描述信息</label>
+                                        <textarea id="meta_description" name="content_heading" class="form-control"
+                                                  rows="4">{{.data.ContentHeading}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">吊牌价</label>
+                                                <input name="tag_price" type="text" value="{{.data.TagPrice}}" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">销售价</label>
+                                                <input name="price" type="text" value="{{.data.Price}}" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="upload" data-name="thumb" data-value="{{.data.Thumb}}" action='/upload/images' data-num='1' id='case1'></div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>产品内容
+                                </label>
+                                <div class="form-group">
+                                    <textarea name="content" id="edit" class="form-control"
+                                              rows="5">{{.data.Content}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">SEO标题</label>
+                                <input id="meta_title" value="{{.data.MetaTitle}}" name="meta_title" type="text"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="bmd-label-floating">SEO关键字</label>
+                                <input id="meta_keywords" value="{{.data.MetaKeywords}}" name="meta_keywords"
+                                       type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group bmd-form-group is-filled">
+                                <label class="bmd-label-floating">SEO描述信息</label>
+                                <textarea id="meta_description" name="meta_description" class="form-control"
+                                          rows="6">{{.data.MetaDescription}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    window.onload = function () {
+        const editorInstance = new FroalaEditor('#edit', {
+            height: (document.body.clientHeight - 400) + 'px',
+            language: 'zh_cn',
+            toolbarInline: false,
+            enter: FroalaEditor.ENTER_P,
+            imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
+
+            requestHeaders: {
+                // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            imageUploadURL: '/upload/images',
+            videoUploadURL: '/upload/videos',
+            placeholderText: null,
+            imageManagerLoadURL: "",
+            imageManagerDeleteURL: "",
+            events: {
+                contentChanged: function () {
+                    ajax('/product/create')
+                }
+            }
+        })
+
+        $("input").blur(function () {
+            ajax('/product/create')
+        });
+
+        $("textarea").blur(function () {
+            ajax('/product/create')
+        });
+        $("select").bind('change', function () {
+            ajax('/product/create')
+        });
+
+        function ajax(url, type = 'POST') {
+            $.ajax({
+                cache: true,
+                type: type,
+                url: url,
+                data: $('#form').serialize(),
+                dataType: 'json',
+                error: function (data, textStatus, errorThrown) {
+                    console.log(errorThrown)
+                },
+                success: function (data) {
+                    if (data.status === true) {
+                        $("#uuid").val(data.uuid);
+                        md.showNotification(data.message, 'success')
+                    } else {
+                        md.showNotification(data.message.Message, 'danger')
+                    }
+                }
+            });
+        }
+
+        $("#case1").upload();
+
+    }
+</script>

@@ -78,6 +78,16 @@ func BackendStart() {
 	menuService := services.NewMenuService()
 	menu.Register(menuService)
 	menu.Handle(new(backend.MenuController))
+	//产品管理
+	product := mvc.New(app.Party("/product"))
+	productService := services.NewProductService()
+	product.Register(productService)
+	product.Handle(new(backend.ProductController))
+	//分类管理
+	category := mvc.New(app.Party("/category"))
+	categoryService := services.NewCategoryService()
+	category.Register(categoryService)
+	category.Handle(new(backend.CategoryController))
 	//上传管理
 	upload := mvc.New(app.Party("/upload"))
 	upload.Handle(new(backend.UploadController))

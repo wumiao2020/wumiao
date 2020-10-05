@@ -9,7 +9,7 @@
             WM
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Wu Miao
+            CMF
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -20,7 +20,7 @@
             <div class="user-info">
                 <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Tania Andrew
+                Wu Miao
                 <b class="caret"></b>
               </span>
                 </a>
@@ -112,6 +112,36 @@
                 </div>
             </li>
             <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#product">
+                    <i class="fa fa-product-hunt"></i>
+                    <p> 商品管理
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="product">
+                    <ul class="nav">
+                        <li class="nav-item {{if eq .navActive "/product" }} active {{ end }}">
+                            <a class="nav-link" href="/product">
+                                <span class="sidebar-mini"> 商 </span>
+                                <span class="sidebar-normal"> 商品列表 </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/category">
+                                <span class="sidebar-mini"> 类 </span>
+                                <span class="sidebar-normal"> 商品分类 </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/examples/pages/pricing.html">
+                                <span class="sidebar-mini"> 评 </span>
+                                <span class="sidebar-normal"> 商品评价 </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item ">
                 <a class="nav-link" data-toggle="collapse" href="#user">
                     <i class="material-icons">perm_identity</i>
                     <p> 管理员
@@ -130,36 +160,6 @@
                             <a class="nav-link" href="/examples/pages/pricing.html">
                                 <span class="sidebar-mini"> 角 </span>
                                 <span class="sidebar-normal"> 角色列表 </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" data-toggle="collapse" href="#product">
-                    <i class="fa fa-product-hunt"></i>
-                    <p> 商品管理
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="product">
-                    <ul class="nav">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/examples/pages/pricing.html">
-                                <span class="sidebar-mini"> 商 </span>
-                                <span class="sidebar-normal"> 商品列表 </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/examples/pages/pricing.html">
-                                <span class="sidebar-mini"> 类 </span>
-                                <span class="sidebar-normal"> 商品分类 </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/examples/pages/pricing.html">
-                                <span class="sidebar-mini"> 评 </span>
-                                <span class="sidebar-normal"> 商品评价 </span>
                             </a>
                         </li>
                     </ul>

@@ -53,7 +53,7 @@ func FrontendStart() {
 	//app.Get("/login",controllers.Login)
 	//app.Get("/register",controllers.Register)
 	err := app.Run(
-		iris.Addr(":"+config.GetEnv("FRONTEND_HOST_PORT", "8090")),
+		iris.Addr(":"+config.GetEnv("FRONTEND_HOST_PORT", "8092")),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)

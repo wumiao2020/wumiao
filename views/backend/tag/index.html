@@ -102,11 +102,11 @@
 
                         //编辑
                         if (row_edit) {
-                            str += '<a class="X-Small btn-xs text-success " href="/page/' + row['uuid'] + '" ><i class="material-icons">edit</i></a>';
+                            str += '<a class="X-Small btn-xs text-success " href="/tag/' + row['uuid'] + '" ><i class="material-icons">edit</i></a>';
                         }
                         //删除
                         if (row_del) {
-                            str += '<a class="X-Small btn-xs text-rose " data-type="edit" data-title="删除：' + row['name'] + '" data-url="/page/' + row['id'] + '" data-toggle="modal" data-target="#modalDel" ><i class="material-icons">close</i></a>';
+                            str += '<a class="X-Small btn-xs text-rose " data-type="edit" data-title="删除：' + row['name'] + '" data-url="/tag/' + row['id'] + '" data-toggle="modal" data-target="#modalDel" ><i class="material-icons">close</i></a>';
                         }
 
                         return str;
