@@ -8,6 +8,7 @@ import (
 type Product struct {
 	Id              int64         `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
 	Title           string        `json:"title" xorm:"comment('Page Title') index VARCHAR(255)"`
+	ParentId        int           `json:"parent_id" xorm:"comment('Page Title') index VARCHAR(255)"`
 	Price           float64       `json:"price" xorm:"default 0.00 DECIMAL(20,2)"`
 	TagPrice        float64       `json:"tag_price" xorm:"default 0.00 DECIMAL(20,2)"`
 	Thumb           string        `json:"thumb" xorm:"comment('Page Content Heading') VARCHAR(255)"`

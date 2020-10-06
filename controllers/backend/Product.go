@@ -9,6 +9,8 @@ import (
 	"wumiao/services"
 )
 
+var cageroryService = services.NewCategoryService()
+
 type ProductController struct {
 	Ctx     iris.Context
 	Service services.ProductService
@@ -25,12 +27,14 @@ func (p *ProductController) Get() mvc.Result {
 }
 
 func (p *ProductController) GetCreate() mvc.Result {
+	categoryList := cageroryService.GetAll()
 	data := new(models.Product)
 	return mvc.View{
 		Name: "product/form.html",
 		Data: iris.Map{
-			"title": data.Title,
-			"data":  data,
+			"categoryList": categoryList,
+			"title":        data.Title,
+			"data":         data,
 		},
 	}
 }
@@ -41,6 +45,7 @@ func (p *ProductController) PostCreate() {
 	price, _ := p.Ctx.PostValueFloat64("price")
 	tagPrice, _ := p.Ctx.PostValueFloat64("tag_price")
 	position := p.Ctx.PostValueIntDefault("position", 0)
+	parentId := p.Ctx.PostValueIntDefault("parent_id", 0)
 	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
 	content := p.Ctx.FormValue("content")
 	contentHeading := p.Ctx.FormValue("content_heading")
@@ -49,7 +54,7 @@ func (p *ProductController) PostCreate() {
 	metaKeywords := p.Ctx.PostValue("meta_keywords")
 	metaDescription := p.Ctx.PostValue("meta_description")
 	thumb := p.Ctx.PostValue("thumb")
-	data := models.Product{Identifier: identifier, Price: price, TagPrice: tagPrice, Thumb: thumb, Position: position, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, IsActive: isActive, ContentHeading: template.HTML(contentHeading), Content: template.HTML(content)}
+	data := models.Product{ParentId: parentId, Identifier: identifier, Price: price, TagPrice: tagPrice, Thumb: thumb, Position: position, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, IsActive: isActive, ContentHeading: template.HTML(contentHeading), Content: template.HTML(content)}
 	if postUuid == "" {
 		data.Uuid = uuid.New().String()
 		if data.Identifier == "" {
@@ -66,7 +71,7 @@ func (p *ProductController) PostCreate() {
 		if data.Identifier == "" {
 			data.Identifier = postUuid
 		}
-		err := p.Service.Update(&data, []string{"title", "is_active", "tag_price", "price", "thumb", "position", "content", "content_heading", "identifier", "meta_title", "meta_keywords", "meta_description"})
+		err := p.Service.Update(&data, []string{"title", "is_active", "parent_id", "tag_price", "price", "thumb", "position", "content", "content_heading", "identifier", "meta_title", "meta_keywords", "meta_description"})
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Uuid})
 		} else {
@@ -104,11 +109,13 @@ func (p *ProductController) GetBy(product string) mvc.Result {
 			},
 		}
 	}
+	categoryList := cageroryService.GetAll()
 	return mvc.View{
 		Name: "product/form.html",
 		Data: iris.Map{
-			"title": data.Title,
-			"data":  data,
+			"categoryList": categoryList,
+			"title":        data.Title,
+			"data":         data,
 		},
 	}
 }

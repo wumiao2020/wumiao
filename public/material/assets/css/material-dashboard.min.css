@@ -10817,7 +10817,9 @@ textarea {
     resize: none;
     line-height: 1.428571 !important
 }
-
+.fr-box.fr-code-view textarea.fr-code{
+    height: 100% !important;
+}
 .form-group input[type=file] {
     opacity: 0;
     position: absolute;

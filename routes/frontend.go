@@ -72,7 +72,6 @@ func FrontendStart() {
 
 func notFound(ctx iris.Context) {
 	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
-	ctx.ViewLayout(iris.NoLayout)
 	ctx.View("errors/404.html")
 }
 

@@ -6,7 +6,7 @@ import (
 )
 
 type Category struct {
-	Id              int64         `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
+	Id              int           `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
 	ParentId        int           `json:"parent_id" xorm:"default 0 comment('Parent Category ID') index INT(10)"`
 	Title           string        `json:"title" xorm:"comment('Page Title') index VARCHAR(255)"`
 	PageLayout      string        `json:"page_layout" xorm:"comment('Page Layout') VARCHAR(255)"`
@@ -25,4 +25,36 @@ type Category struct {
 	AuthorId        int           `json:"author_id" xorm:"comment('Page Author Id') index INT(10)"`
 	CreatedAt       extend.Time   `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
 	UpdatedAt       extend.Time   `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
+}
+
+func (c Category) GetAll() []Category {
+	panic("implement me")
+}
+
+func (c Category) GetList(limit int, start int) []Category {
+	panic("implement me")
+}
+
+func (c Category) Get(string string) *Category {
+	panic("implement me")
+}
+
+func (c Category) GetByIdentifier(string string) *Category {
+	panic("implement me")
+}
+
+func (c Category) GetByUuid(string string) *Category {
+	panic("implement me")
+}
+
+func (c Category) DeleteByID(id int64) error {
+	panic("implement me")
+}
+
+func (c Category) Update(data *Category, columns []string) error {
+	panic("implement me")
+}
+
+func (c Category) Create(data *Category) error {
+	panic("implement me")
 }

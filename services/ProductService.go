@@ -9,6 +9,7 @@ import (
 type ProductService interface {
 	GetAll() []models.Product
 	GetList(limit int, start int) []models.Product
+	GetCategoryList(parentId int, limit int, start int) []models.Product
 	GetTopList(limit int, start int) []models.Product
 	Get(string string) *models.Product
 	GetByUuid(string string) *models.Product
@@ -25,6 +26,16 @@ func NewProductService() ProductService {
 	db := datasource.GetMysqlGroup()
 	return &productService{
 		engine: db,
+	}
+}
+
+func (p productService) GetCategoryList(parentId int, limit int, start int) []models.Product {
+	datalist := make([]models.Product, 0)
+	err := p.engine.Where("parent_id=?", parentId).Desc("id").Limit(limit, start).Find(&datalist)
+	if err != nil {
+		return datalist
+	} else {
+		return datalist
 	}
 }
 

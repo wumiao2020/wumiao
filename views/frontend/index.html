@@ -60,35 +60,7 @@
 
 </div>
 <!--/.Carousel Wrapper-->
-
-<!--Main layout-->
-
-<!-- banner end -->
-<!-- top medicine start -->
-<div class="pa-medicine spacer-top spacer-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="pa-medicine-box">
-                    <img src="/assets/img/1.jpg" alt="image" class="img-fluid"/>
-                    <h2><a href="#">  大道沧·晓景盛世</a></h2>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="pa-medicine-box">
-                    <img src="/assets/img/2.jpg" alt="image" class="img-fluid"/>
-                    <h2><a href="#">  大道沧·晓景盛世</a></h2>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="pa-medicine-box">
-                    <img src="/assets/img/3.jpg" alt="image" class="img-fluid"/>
-                    <h2><a href="#">  大道沧·晓景盛世</a></h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{ .data.Content }}
 <!-- top medicine end -->
 <div class="pa-why-pure spacer-top spacer-bottom">
     <div class="container">
@@ -258,7 +230,7 @@
                 <div class="pa-blog-box">
                     <img src="{{ $news.Thumb }}" alt="image" class="img-fluid">
                     <div class="pa-blog-title">
-                        <h2><a href="blog-single.html"> {{ $news.Title }}</a></h2>
+                        <h2><a href="/news/{{ $news.Uuid }}"> {{ $news.Title }}</a></h2>
                         <a href="#" class="pa-blog-date">{{ $news.CreatedAt }}</a>
                     </div>
                 </div>

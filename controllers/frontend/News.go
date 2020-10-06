@@ -26,9 +26,8 @@ func (p *NewsController) GetBy(news string) mvc.Result {
 	data := p.Service.GetByUuid(news)
 	if data == nil {
 		return mvc.View{
-			Code:   iris.StatusNotFound,
-			Name:   "errors/404.html",
-			Layout: iris.NoLayout,
+			Code: iris.StatusNotFound,
+			Name: "errors/404.html",
 			Data: iris.Map{
 				"title": "你很神，找到了不存在的页面",
 			},
