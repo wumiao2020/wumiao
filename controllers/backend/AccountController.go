@@ -37,7 +37,7 @@ func (a *AccountController) GetLogin() mvc.Result {
 	}
 }
 
-func (a *AccountController) PostLogin() {
+func (a *AccountController) PostLogin() mvc.Result {
 
 	username := a.Ctx.PostValue("username")
 	password := a.Ctx.PostValue("password")
@@ -51,8 +51,16 @@ func (a *AccountController) PostLogin() {
 			_, _ = a.Ctx.JSON(iris.Map{"status": false, "message": "用户名或密码不正确，请重新输入！！！"})
 		} else {
 			a.Session.Set(adminSessionId, admin.Id)
-			_, _ = a.Ctx.JSON(iris.Map{"status": true, "message": "登录成功！！！"})
+			return mvc.Response{
+				// 重定向.
+				Path: "/page",
+			}
+			//_, _ = a.Ctx.JSON(iris.Map{"status": true, "message": "登录成功！！！"})
 		}
+	}
+	return mvc.Response{
+		// 重定向
+		Path: "/account/login",
 	}
 }
 
