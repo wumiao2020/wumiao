@@ -99,3 +99,17 @@ func BackendStart() {
 	)
 	println(err)
 }
+
+func BackendHtml() {
+
+	app := iris.New()
+	app.Logger().SetLevel("debug")
+	app.HandleDir("/", "./public/walter")
+
+	err := app.Run(
+		iris.Addr(":8080"),
+		iris.WithoutBanner,
+		iris.WithoutServerError(iris.ErrServerClosed),
+	)
+	println(err)
+}
