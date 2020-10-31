@@ -21,7 +21,7 @@ func BackendStart() {
 
 	app := iris.New()
 	app.Logger().SetLevel("debug")
-	app.HandleDir("/", "./public/material")
+	app.HandleDir("/assets", "./public/admin/assets")
 	app.HandleDir("/upload", "./public/upload")
 	// 设置关注的视图目录，和文件后缀
 	tmpl := iris.HTML("./views/backend", ".html")
@@ -54,9 +54,17 @@ func BackendStart() {
 	app.Use(hero.Handler(middleware.Authentication))
 
 	app.Use(func(ctx iris.Context) {
+		path := ctx.Path()
+		ctx.ViewData("navActive", path)
 		ctx.ViewData("nav", Nav())
 		ctx.Next()
 	})
+
+	//页面管理
+	dashboard := mvc.New(app.Party("/"))
+	dashboardService := services.NewPageService()
+	dashboard.Register(dashboardService)
+	dashboard.Handle(new(backend.DashboardController))
 
 	//页面管理
 	page := mvc.New(app.Party("/page"))
@@ -104,7 +112,7 @@ func BackendHtml() {
 
 	app := iris.New()
 	app.Logger().SetLevel("debug")
-	app.HandleDir("/", "./public/walter")
+	app.HandleDir("/", "./public/admin")
 
 	err := app.Run(
 		iris.Addr(":8080"),

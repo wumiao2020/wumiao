@@ -53,7 +53,7 @@ func (a *AccountController) PostLogin() mvc.Result {
 			a.Session.Set(adminSessionId, admin.Id)
 			return mvc.Response{
 				// 重定向.
-				Path: "/page",
+				Path: "/",
 			}
 			//_, _ = a.Ctx.JSON(iris.Map{"status": true, "message": "登录成功！！！"})
 		}

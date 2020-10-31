@@ -10,7 +10,7 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 
 	path := ctx.Path()
 	userID := session.GetInt64Default("admin_session_id", 0)
-	if userID == 0 {
+	if userID == 0 && path != "/account/login" {
 		if ctx.IsAjax() {
 			_, _ = ctx.JSON(iris.Map{"status": false, "code": 401, "message": "请先登录"})
 
