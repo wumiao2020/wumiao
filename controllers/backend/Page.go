@@ -72,20 +72,18 @@ func (p *PageController) PostCreate() {
 
 }
 
-func (p *PageController) Post() {
-
+func (p *PageController) Post() mvc.Result {
 	limit := p.Ctx.PostValueIntDefault("length", 10)
 	start := p.Ctx.PostValueIntDefault("start", 0)
-
-	dataAll := p.Service.GetAll()
+	//dataAll := p.Service.GetAll()
 	data := p.Service.GetList(limit, start)
-	_, _ = p.Ctx.JSON(
-		iris.Map{
-			"recordsFiltered": len(dataAll),
-			"recordsTotal":    len(dataAll),
-			"data":            data,
-			"start":           0,
-		})
+	return mvc.View{
+		Layout: iris.NoLayout,
+		Name:   "page/list.html",
+		Data: iris.Map{
+			"data": data,
+		},
+	}
 }
 
 func (p *PageController) GetBy(page string) mvc.Result {

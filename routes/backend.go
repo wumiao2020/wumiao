@@ -20,7 +20,7 @@ var sessManager = sessions.New(sessions.Config{
 func BackendStart() {
 
 	app := iris.New()
-	app.Logger().SetLevel("debug")
+	//app.Logger().SetLevel("debug")
 	app.HandleDir("/assets", "./public/admin/assets")
 	app.HandleDir("/upload", "./public/upload")
 	// 设置关注的视图目录，和文件后缀
@@ -111,7 +111,7 @@ func BackendStart() {
 func BackendHtml() {
 
 	app := iris.New()
-	app.Logger().SetLevel("debug")
+	//app.Logger().SetLevel("debug")
 	app.HandleDir("/", "./public/admin")
 
 	err := app.Run(

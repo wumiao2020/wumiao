@@ -18,7 +18,7 @@ type Menu struct {
 func FrontendStart() {
 	app := iris.New()
 
-	app.Logger().SetLevel("debug")
+	//app.Logger().SetLevel("debug")
 	app.HandleDir("/", "./public")
 	// 设置关注的视图目录，和文件后缀
 	tmpl := iris.HTML("./views/frontend", ".html")
