@@ -65,43 +65,43 @@
                 </a>
                 <div class="collapse show" id="content">
                     <ul class="nav">
-                        <li class="nav-item {{if eq .navActive "/page" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "/page" }} active {{ end }}">
                             <a class="nav-link" href="/page">
                                 <span class="sidebar-mini">页</span>
                                 <span class="sidebar-normal"> 页面管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item {{if eq .navActive "/news" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "/news" }} active {{ end }}">
                             <a class="nav-link " href="/news">
                                 <span class="sidebar-mini">文</span>
                                 <span class="sidebar-normal"> 文章管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item {{if eq .navActive "/tag" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "/tag" }} active {{ end }}">
                             <a class="nav-link " href="/tag">
                                 <span class="sidebar-mini">标</span>
                                 <span class="sidebar-normal"> 标签管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item {{if eq .navActive "/menu" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "/menu" }} active {{ end }}">
                             <a class="nav-link " href="/menu">
                                 <span class="sidebar-mini">菜</span>
                                 <span class="sidebar-normal"> 菜单管理 </span>
                             </a>
                         </li>
-                        <li class="nav-item {{if eq .navActive "/cms/files" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "cmsfiles" }} active {{ end }}">
                             <a class="nav-link " href="/cms/files">
                                 <span class="sidebar-mini">文</span>
                                 <span class="sidebar-normal"> 文件分组 </span>
                             </a>
                         </li>
-                        <li class="nav-item {{if eq .navActive "/cms/files" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "cmsfiles" }} active {{ end }}">
                             <a class="nav-link " href="/cms/files">
                                 <span class="sidebar-mini">文</span>
                                 <span class="sidebar-normal"> 文件列表 </span>
                             </a>
                         </li>
-                        <li class="nav-item {{if eq .navActive "/cms" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "/cms" }} active {{ end }}">
                             <a class="nav-link " href="/cms">
                                 <span class="sidebar-mini">回</span>
                                 <span class="sidebar-normal"> 回收站 </span>
@@ -119,7 +119,7 @@
                 </a>
                 <div class="collapse" id="product">
                     <ul class="nav">
-                        <li class="nav-item {{if eq .navActive "/product" }} active {{ end }}">
+                        <li class="nav-item {{if isActionMenu .navActive "/product" }} active {{ end }}">
                             <a class="nav-link" href="/product">
                                 <span class="sidebar-mini"> 商 </span>
                                 <span class="sidebar-normal"> 商品列表 </span>

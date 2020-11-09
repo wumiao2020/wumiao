@@ -1,7 +1,4 @@
 <div class="content">
-    <script type="text/javascript" src="/assets/froala/js/froala_editor.pkgd.min.js"></script>
-    <script type="text/javascript" src="/assets/froala/js/languages/zh_cn.js"></script>
-    <link href="/assets/froala/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
 
     <form id="form" method="get" action="/" class="form-horizontal">
         <input id="uuid" type="hidden" name="uuid" value="{{.data.Uuid}}">
@@ -158,7 +155,7 @@
                             $("#uuid").val(data.uuid);
                             md.showNotification(data.message, 'success')
                         } else {
-                            md.showNotification(data.message.Message, 'danger')
+                            md.showNotification(data.message, 'danger')
                         }
                     }
                 });

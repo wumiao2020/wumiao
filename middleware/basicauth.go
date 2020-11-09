@@ -8,11 +8,12 @@ import (
 
 func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 
-	str := ctx.Application().GetRoutesReadOnly()
-	//str := ctx.GetCurrentRoute()
-	println(str)
-	//_ = iris.Application.GetRoutes()
-	path := ctx.RouteName()
+	//str := ctx.Application().GetRoutesReadOnly()
+	//fmt.Println(str)
+	path := ctx.GetCurrentRoute().ResolvePath()
+	//fmt.Println(path)
+
+	ctx.ViewData("navActive", path)
 	userID := session.GetInt64Default("admin_session_id", 0)
 	if userID == 0 && path != "/account/login" {
 		if ctx.IsAjax() {
@@ -24,8 +25,6 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 			Path: "/account/login",
 		}
 	}
-
-	ctx.ViewData("navActive", path)
 
 	ctx.Next() // execute the next handler, in this case the main one.
 	return nil

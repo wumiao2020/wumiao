@@ -30,15 +30,15 @@ func BackendStart() {
 	// 可以方便每次修改视图文件而无需停止服务
 	tmpl.Reload(true)
 
-	tmpl.AddFunc("greet", func(x int, y int) bool {
-		return (x+1)%y == 0
+	tmpl.AddFunc("isActionMenu", func(x string, y string) bool {
+		return x == y
 	})
 
 	tmpl.AddFunc("nowYear", func() int {
 		return time.Now().UTC().Year()
 	})
 
-	app.OnErrorCode(iris.StatusNotFound, notFound)
+	app.OnErrorCode(iris.StatusNotFound, backendNotFound)
 	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
 	app.RegisterView(tmpl)
 
@@ -106,6 +106,12 @@ func BackendStart() {
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
 	println(err)
+}
+
+func backendNotFound(ctx iris.Context) {
+	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
+	ctx.ViewLayout(iris.NoLayout)
+	ctx.View("errors/404.html")
 }
 
 func BackendHtml() {
