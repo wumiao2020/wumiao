@@ -66,6 +66,18 @@ func BackendStart() {
 	dashboard.Register(dashboardService)
 	dashboard.Handle(new(backend.DashboardController))
 
+	//权限管理
+	permission := mvc.New(app.Party("/permission"))
+	permissionService := services.NewPermissionService()
+	permission.Register(permissionService)
+	permission.Handle(new(backend.PermissionController))
+
+	//角色管理
+	role := mvc.New(app.Party("/role"))
+	roleService := services.NewRoleService()
+	role.Register(roleService)
+	role.Handle(new(backend.RolesController))
+
 	//页面管理
 	page := mvc.New(app.Party("/page"))
 	pageService := services.NewPageService()

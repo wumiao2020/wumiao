@@ -5,7 +5,7 @@ import (
 )
 
 type AdminPermissions struct {
-	Id          int       `json:"id" xorm:"not null pk autoincr INT(10)"`
+	Id          int64     `json:"id" xorm:"not null pk autoincr INT(10)"`
 	Name        string    `json:"name" xorm:"not null comment('权限名') VARCHAR(255)"`
 	Label       string    `json:"label" xorm:"comment('权限解释名称') VARCHAR(255)"`
 	Description string    `json:"description" xorm:"comment('描述与备注') VARCHAR(255)"`
