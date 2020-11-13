@@ -1,7 +1,6 @@
 package backend
 
 import (
-	"errors"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
@@ -21,13 +20,15 @@ type AccountController struct {
 
 func (a *AccountController) GetLogin() mvc.Result {
 	if a.isLoggedIn() {
-
 		return mvc.Response{
 			// 重定向.
-			Path: "/account",
+			Path: "/",
 		}
 
 	}
+
+	errors := a.Session.GetFlash("errors")
+	a.Ctx.ViewData("errors", errors)
 	return mvc.View{
 		Layout: "layouts/account.html",
 		Name:   "account/login.html",
@@ -45,21 +46,13 @@ func (a *AccountController) PostLogin() mvc.Result {
 
 	admin := a.Service.GetByEmail(username)
 	if admin == nil {
-		errs := errors.New("用户不存在，请先注册！！！")
-		return mvc.Response{
-			// 重定向.
-			Err:  errs,
-			Path: "/account/login",
-		}
+		strings := []string{"用户不存在，请先注册！！！"}
+		a.Session.SetFlash("errors", strings)
 	} else {
 		err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(password)) //验证（对比）
 		if err != nil {
-			errs := errors.New("用户名或密码不正确，请重新输入！！！")
-			return mvc.Response{
-				// 重定向.
-				Err:  errs,
-				Path: "/account/login",
-			}
+			strings := []string{"用户名或密码不正确，请重新输入！！！"}
+			a.Session.SetFlash("errors", strings)
 		} else {
 			a.Session.Set(adminSessionId, admin.Id)
 			requestUrl := a.Session.GetStringDefault("request_url", "/account")
@@ -72,6 +65,11 @@ func (a *AccountController) PostLogin() mvc.Result {
 			}
 			//_, _ = a.Ctx.JSON(iris.Map{"status": true, "message": "登录成功！！！"})
 		}
+	}
+
+	return mvc.Response{
+		// 重定向.
+		Path: "/account/login",
 	}
 }
 

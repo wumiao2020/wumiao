@@ -44,6 +44,13 @@ func BackendStart() {
 
 	hero.Register(sessManager.Start)
 
+	app.UseGlobal(func(ctx iris.Context) {
+		path := ctx.Path()
+		ctx.ViewData("navActive", path)
+		ctx.ViewData("nav", Nav())
+		ctx.Next()
+	})
+
 	account := mvc.New(app.Party("/account"))
 	adminService := services.NewAdminService()
 	account.Register(
@@ -52,13 +59,6 @@ func BackendStart() {
 	account.Handle(new(backend.AccountController))
 
 	app.Use(hero.Handler(middleware.Authentication))
-
-	app.Use(func(ctx iris.Context) {
-		path := ctx.Path()
-		ctx.ViewData("navActive", path)
-		ctx.ViewData("nav", Nav())
-		ctx.Next()
-	})
 
 	//页面管理
 	dashboard := mvc.New(app.Party("/"))

@@ -119,6 +119,10 @@
 <script src="/assets/demo/demo.js"></script>
 <script>
     $(document).ready(function() {
+        // "", "info", "danger", "success", "warning", "rose", "primary"
+        {{ range $v :=  .errors }}
+        md.showNotification("{{$v}}","danger")
+        {{ end }}
         md.checkFullPageBackgroundImage();
         setTimeout(function() {
             // after 1000 ms we add the class animated to the login/register card

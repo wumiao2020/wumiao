@@ -15,7 +15,7 @@ func (p *DashboardController) Get() mvc.Result {
 	return mvc.View{
 		Name: "dashboard/index.html",
 		Data: iris.Map{
-			"title": "页面列表",
+			"title": "仪表盘",
 			"data":  "data",
 		},
 	}

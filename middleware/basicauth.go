@@ -16,7 +16,8 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 	}
 	path := ctx.GetCurrentRoute().ResolvePath()
 	//fmt.Println(path)
-
+	errors := session.GetFlash("errors")
+	ctx.ViewData("errors", errors)
 	ctx.ViewData("navActive", path)
 	userID := session.GetInt64Default("admin_session_id", 0)
 	if userID == 0 && path != "/account/login" {
