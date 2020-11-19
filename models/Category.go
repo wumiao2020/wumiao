@@ -2,12 +2,12 @@ package models
 
 import (
 	"html/template"
-	"wumiao/extend"
+	"time"
 )
 
 type Category struct {
-	Id              int           `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
-	ParentId        int           `json:"parent_id" xorm:"default 0 comment('Parent Category ID') index INT(10)"`
+	Id              int64         `json:"id" xorm:"pk autoincr comment('Entity ID') BIGINT(20)"`
+	ParentId        int64         `json:"parent_id" xorm:"default 0 comment('Parent Category ID') index BIGINT(20)"`
 	Title           string        `json:"title" xorm:"comment('Page Title') index VARCHAR(255)"`
 	PageLayout      string        `json:"page_layout" xorm:"comment('Page Layout') VARCHAR(255)"`
 	Thumb           string        `json:"thumb" xorm:"VARCHAR(255)"`
@@ -22,39 +22,7 @@ type Category struct {
 	Position        int           `json:"position" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`
 	Path            string        `json:"path" xorm:"default '1' comment('Tree Path') VARCHAR(64)"`
 	Author          string        `json:"author" xorm:"comment('Author') VARCHAR(32)"`
-	AuthorId        int           `json:"author_id" xorm:"comment('Page Author Id') index INT(10)"`
-	CreatedAt       extend.Time   `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
-	UpdatedAt       extend.Time   `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
-}
-
-func (c Category) GetAll() []Category {
-	panic("implement me")
-}
-
-func (c Category) GetList(limit int, start int) []Category {
-	panic("implement me")
-}
-
-func (c Category) Get(string string) *Category {
-	panic("implement me")
-}
-
-func (c Category) GetByIdentifier(string string) *Category {
-	panic("implement me")
-}
-
-func (c Category) GetByUuid(string string) *Category {
-	panic("implement me")
-}
-
-func (c Category) DeleteByID(id int64) error {
-	panic("implement me")
-}
-
-func (c Category) Update(data *Category, columns []string) error {
-	panic("implement me")
-}
-
-func (c Category) Create(data *Category) error {
-	panic("implement me")
+	AuthorId        int64         `json:"author_id" xorm:"comment('Page Author Id') index BIGINT(20)"`
+	CreatedAt       time.Time     `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
+	UpdatedAt       time.Time     `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
 }

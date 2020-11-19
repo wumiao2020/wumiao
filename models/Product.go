@@ -2,13 +2,13 @@ package models
 
 import (
 	"html/template"
-	"wumiao/extend"
+	"time"
 )
 
 type Product struct {
-	Id              int64         `json:"id" xorm:"not null pk autoincr comment('Entity ID') INT(10)"`
+	Id              int64         `json:"id" xorm:"pk autoincr comment('Entity ID') BIGINT(20)"`
 	Title           string        `json:"title" xorm:"comment('Page Title') index VARCHAR(255)"`
-	ParentId        int           `json:"parent_id" xorm:"comment('Page Title') index VARCHAR(255)"`
+	ParentId        int           `json:"parent_id" xorm:"default 0 INT(10)"`
 	Price           float64       `json:"price" xorm:"default 0.00 DECIMAL(20,2)"`
 	TagPrice        float64       `json:"tag_price" xorm:"default 0.00 DECIMAL(20,2)"`
 	Thumb           string        `json:"thumb" xorm:"comment('Page Content Heading') VARCHAR(255)"`
@@ -24,7 +24,7 @@ type Product struct {
 	Position        int           `json:"position" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`
 	Path            string        `json:"path" xorm:"default '1' comment('Tree Path') VARCHAR(64)"`
 	Author          string        `json:"author" xorm:"comment('Author') VARCHAR(32)"`
-	AuthorId        int           `json:"author_id" xorm:"comment('Page Author Id') index INT(10)"`
-	CreatedAt       extend.Time   `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
-	UpdatedAt       extend.Time   `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
+	AuthorId        int64         `json:"author_id" xorm:"comment('Page Author Id') index BIGINT(20)"`
+	CreatedAt       time.Time     `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
+	UpdatedAt       time.Time     `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
 }

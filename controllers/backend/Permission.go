@@ -37,15 +37,9 @@ func (p *PermissionController) PostCreate() {
 
 }
 
-func (p *PermissionController) Post() mvc.Result {
+func (p *PermissionController) Post() {
 	data := p.Service.GetAll()
-	return mvc.View{
-		Layout: iris.NoLayout,
-		Name:   "permission/list.html",
-		Data: iris.Map{
-			"data": data,
-		},
-	}
+	_, _ = p.Ctx.JSON(data)
 }
 
 func (p *PermissionController) GetBy(uuid int64) mvc.Result {

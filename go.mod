@@ -10,6 +10,7 @@ require (
 	github.com/disintegration/imaging v1.6.2
 	github.com/etcd-io/bbolt v1.3.3 // indirect
 	github.com/gavv/httpexpect v2.0.0+incompatible // indirect
+	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/go-xorm/xorm v0.7.9
 	github.com/golang/protobuf v1.4.2 // indirect
@@ -20,6 +21,7 @@ require (
 	github.com/kataras/golog v0.1.2
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/klauspost/compress v1.10.11 // indirect
+	github.com/mattn/go-adodb v0.0.1
 	github.com/microcosm-cc/bluemonday v1.0.4 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect

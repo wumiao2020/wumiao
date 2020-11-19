@@ -12,7 +12,7 @@ type CategoryService interface {
 	Get(string string) *models.Category
 	GetByIdentifier(string string) *models.Category
 	GetByUuid(string string) *models.Category
-	DeleteByID(id int) error
+	DeleteByID(id int64) error
 	Update(data *models.Category, columns []string) error
 	Create(data *models.Category) error
 }
@@ -66,7 +66,7 @@ func (p categoryService) GetByIdentifier(string string) *models.Category {
 		return nil
 	}
 }
-func (p categoryService) DeleteByID(id int) error {
+func (p categoryService) DeleteByID(id int64) error {
 	data := models.Category{Id: id, IsActive: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
 	return err
