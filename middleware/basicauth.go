@@ -1,18 +1,22 @@
 package middleware
 
 import (
+	"fmt"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
+	"strings"
 )
 
 func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 
-	//str := ctx.Application().GetRoutesReadOnly()
-	//for _, only := range str {
-	//	p := fmt.Sprintf("%v %v", only.Method(), only.ResolvePath())
-	//	fmt.Println(p)
-	//}
+	str := ctx.Application().GetRoutesReadOnly()
+
+	for _, only := range str {
+		p := fmt.Sprintf("%v%v", strings.ToLower(only.Method()), strings.ToLower(only.ResolvePath()))
+		fmt.Println(strings.Replace(p, "/", ".", -1))
+	}
+
 	path := ctx.GetCurrentRoute().ResolvePath()
 	//fmt.Println(path)
 	errors := session.GetFlash("errors")

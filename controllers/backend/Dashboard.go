@@ -20,24 +20,3 @@ func (p *DashboardController) Get() mvc.Result {
 		},
 	}
 }
-
-func (p *DashboardController) GetBy(page string) mvc.Result {
-	data := p.Service.GetByUuid(page)
-	if data == nil {
-		return mvc.View{
-			Code:   iris.StatusNotFound,
-			Name:   "errors/404.html",
-			Layout: iris.NoLayout,
-			Data: iris.Map{
-				"title": "你很神，找到了不存在的页面",
-			},
-		}
-	}
-	return mvc.View{
-		Name: "page/form.html",
-		Data: iris.Map{
-			"title": data.Title,
-			"data":  data,
-		},
-	}
-}

@@ -115,11 +115,11 @@
                     align: "center",
                     valign: "top",
                     formatter: function (value, item, index) {
-                        if (item.menuType == 'M') {
+                        if (item.type == 'M') {
                             return '<span class="label label-success">目录</span>';
-                        } else if (item.menuType == 'C') {
+                        } else if (item.type == 'C') {
                             return '<span class="label label-primary">菜单</span>';
-                        } else if (item.menuType == 'F') {
+                        } else if (item.type == 'F') {
                             return '<span class="label label-warning">按钮</span>';
                         }
                     }

@@ -53,9 +53,7 @@ func BackendStart() {
 
 	account := mvc.New(app.Party("/account"))
 	adminService := services.NewAdminService()
-	account.Register(
-		adminService,
-	)
+	account.Register(adminService)
 	account.Handle(new(backend.AccountController))
 
 	app.Use(hero.Handler(middleware.Authentication))
