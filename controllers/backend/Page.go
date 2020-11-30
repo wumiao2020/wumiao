@@ -73,7 +73,7 @@ func (p *PageController) PostCreate() {
 }
 
 func (p *PageController) Post() mvc.Result {
-	limit := p.Ctx.PostValueIntDefault("length", 10)
+	limit := p.Ctx.PostValueIntDefault("length", 12)
 	start := p.Ctx.PostValueIntDefault("start", 0)
 	//dataAll := p.Service.GetAll()
 	data := p.Service.GetList(limit, start)

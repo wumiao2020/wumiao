@@ -22,6 +22,7 @@ func BackendStart() {
 	app := iris.New()
 	//app.Logger().SetLevel("debug")
 	app.HandleDir("/assets", "./public/admin/assets")
+	app.HandleDir("/book", "./public/book")
 	app.HandleDir("/upload", "./public/upload")
 	// 设置关注的视图目录，和文件后缀
 	tmpl := iris.HTML("./views/backend", ".html")

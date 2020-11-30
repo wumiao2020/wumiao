@@ -14,7 +14,8 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 
 	for _, only := range str {
 		p := fmt.Sprintf("%v%v", strings.ToLower(only.Method()), strings.ToLower(only.ResolvePath()))
-		fmt.Println(strings.Replace(p, "/", ".", -1))
+		fmt.Println(p)
+		//fmt.Println(strings.Replace(p, "/", ".", -1))
 	}
 
 	path := ctx.GetCurrentRoute().ResolvePath()

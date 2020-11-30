@@ -9,7 +9,7 @@
         getList();
         var range = 50;             //距下边界长度/单位px
         var elemt = 500;           //插入元素高度/单位px
-        var maxnum = 20;            //设置加载最多次数
+        var maxnum = 0;            //设置加载最多次数
         var num = 1;
         var totalheight = 0;
         var main = $(".main-panel>.content");                     //主体元素
@@ -32,7 +32,13 @@
             },
             dataType: 'html',
             success:function (data) {
-                $(".main-panel>.content>.lists").append(data);
+                if (data.code === undefined){
+                    $(".main-panel>.content>.lists").append(data);
+                }else if (data.code === 401){
+                    window.location.reload();
+                }else {
+                    md.showNotification(data.message, 'danger')
+                }
             },
             error:function (data) {
                 // console.log(data)
