@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/main.css" crossorigin="anonymous">
+    <title>Walter Admin</title>
+    <style type="text/css">
+        .top-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            flex: 1 1 auto;
+            height: 50px;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, .1);
+            flex-direction: row;
+        }
+        .top-navigation .system-bar{
+            height: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            align-items: center;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding: 0 16px;
+            -webkit-box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+            box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+        }
+        .top-navigation .system-bar > div {
+            display: flex;
+            flex:1;
+        }
+
+        .top-navigation .system-bar .system-bar-left {
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-flex: 0;
+            -ms-flex-positive: 0;
+            flex-grow: 0;
+            -ms-flex-negative: 1;
+            flex-shrink: 1;
+            -ms-flex-preferred-size: calc(50vw - 156px);
+            flex-basis: calc(50vw - 156px);
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            z-index: 5;
+            padding-right: 16px;
+        }
+        .tb-navigation-icon svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<header class="top-navigation">
+    <div class="system-bar">
+        <div class="system-bar-left">
+            <span class="tb-navigation-icon">
+                <svg id="dev-ninedot" viewBox="0 0 1024 1024"><path d="M261.12 435.2h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-25.6-20.48-51.2-51.2-51.2zM261.12 168.96h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-30.72-20.48-51.2-51.2-51.2zM261.12 706.56h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-30.72-20.48-51.2-51.2-51.2zM527.36 706.56h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-30.72-20.48-51.2-51.2-51.2zM798.72 435.2h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-25.6-20.48-51.2-51.2-51.2zM527.36 435.2h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-25.6-20.48-51.2-51.2-51.2zM798.72 706.56h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-30.72-20.48-51.2-51.2-51.2zM803.84 168.96h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-30.72-20.48-51.2-51.2-51.2zM527.36 168.96h-40.96c-30.72 0-51.2 20.48-51.2 51.2v40.96c0 30.72 20.48 51.2 51.2 51.2h40.96c30.72 0 51.2-20.48 51.2-51.2v-40.96c0-30.72-20.48-51.2-51.2-51.2z"></path></svg>
+            </span>
+        </div>
+        <div class="system-bar-middle">2</div>
+        <div class="system-bar-right">3</div>
+    </div>
+</header>
+
+<script src="/assets/js/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="/assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="/assets/js/main.js" crossorigin="anonymous"></script>
+</body>
+</html>
