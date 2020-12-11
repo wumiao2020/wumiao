@@ -9,6 +9,7 @@ import (
 	"wumiao/config"
 	"wumiao/controllers/backend"
 	"wumiao/middleware"
+	"wumiao/models"
 	"wumiao/services"
 )
 
@@ -81,31 +82,37 @@ func BackendStart() {
 	pageService := services.NewPageService()
 	page.Register(pageService)
 	page.Handle(new(backend.PageController))
+
 	//文章管理
 	news := mvc.New(app.Party("/news"))
 	newsService := services.NewNewsService()
 	news.Register(newsService)
 	news.Handle(new(backend.NewsController))
-	//分类管理
+
+	//标签管理
 	tag := mvc.New(app.Party("/tag"))
 	tagService := services.NewTagService()
 	tag.Register(tagService)
 	tag.Handle(new(backend.TagController))
+
 	//导航管理
 	menu := mvc.New(app.Party("/menu"))
 	menuService := services.NewMenuService()
 	menu.Register(menuService)
 	menu.Handle(new(backend.MenuController))
+
 	//产品管理
 	product := mvc.New(app.Party("/product"))
 	productService := services.NewProductService()
 	product.Register(productService)
 	product.Handle(new(backend.ProductController))
+
 	//分类管理
 	category := mvc.New(app.Party("/category"))
 	categoryService := services.NewCategoryService()
 	category.Register(categoryService)
 	category.Handle(new(backend.CategoryController))
+
 	//上传管理
 	upload := mvc.New(app.Party("/upload"))
 	upload.Handle(new(backend.UploadController))
@@ -120,7 +127,8 @@ func BackendStart() {
 
 func backendNotFound(ctx iris.Context) {
 	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
-	ctx.ViewLayout(iris.NoLayout)
+	ctx.ViewLayout("layouts/account.html")
+	ctx.ViewData("data", "")
 	ctx.View("errors/404.html")
 }
 
@@ -136,4 +144,13 @@ func BackendHtml() {
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
 	println(err)
+}
+
+func internalServerError(ctx iris.Context) {
+	ctx.WriteString("Oups something went wrong, try again")
+}
+
+func Nav() []models.Menu {
+	pageService := services.NewMenuService()
+	return pageService.GetAll()
 }
