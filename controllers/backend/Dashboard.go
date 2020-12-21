@@ -20,3 +20,13 @@ func (p *DashboardController) Get() mvc.Result {
 		},
 	}
 }
+
+func (p *DashboardController) GetAlternative() mvc.Result {
+	return mvc.View{
+		Name: "dashboard/alternative.html",
+		Data: iris.Map{
+			"title": "仪表盘",
+			"data":  "data",
+		},
+	}
+}
