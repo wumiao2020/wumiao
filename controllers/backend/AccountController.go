@@ -33,7 +33,7 @@ func (a *AccountController) GetLogin() mvc.Result {
 		Layout: "layouts/account.html",
 		Name:   "account/login.html",
 		Data: iris.Map{
-			"title": "登录",
+			"title": a.Ctx.Tr("Login"),
 			"data":  "login",
 		},
 	}

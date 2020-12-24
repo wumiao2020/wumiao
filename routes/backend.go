@@ -21,6 +21,10 @@ var sessManager = sessions.New(sessions.Config{
 func BackendStart() {
 
 	app := iris.New()
+
+	err := app.I18n.Load("./locales/*/*.ini", "en-US", "el-GR", "zh-CN")
+	app.I18n.SetDefault("zh-CN")
+	println(err)
 	//app.Logger().SetLevel("debug")
 	app.HandleDir("/assets", "./public/argon/assets")
 	app.HandleDir("/upload", "./public/upload")
@@ -49,6 +53,7 @@ func BackendStart() {
 		path := ctx.Path()
 		ctx.ViewData("navActive", path)
 		ctx.ViewData("nav", Nav())
+		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
 	})
 
@@ -117,7 +122,7 @@ func BackendStart() {
 	upload := mvc.New(app.Party("/upload"))
 	upload.Handle(new(backend.UploadController))
 
-	err := app.Run(
+	err = app.Run(
 		iris.Addr(":"+config.GetEnv("BACKEND_HOST_PORT", "8091")),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
