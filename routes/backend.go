@@ -52,7 +52,7 @@ func BackendStart() {
 	app.UseGlobal(func(ctx iris.Context) {
 		path := ctx.Path()
 		ctx.ViewData("navActive", path)
-		ctx.ViewData("nav", Nav())
+		ctx.ViewData("menuList", MenuList())
 		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
 	})
@@ -155,7 +155,7 @@ func internalServerError(ctx iris.Context) {
 	ctx.WriteString("Oups something went wrong, try again")
 }
 
-func Nav() []models.Menu {
-	pageService := services.NewMenuService()
-	return pageService.GetAll()
+func MenuList() []models.AdminPermissions {
+	permissionService := services.NewPermissionService()
+	return permissionService.GetMenuList()
 }

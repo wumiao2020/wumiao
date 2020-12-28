@@ -8,6 +8,7 @@ import (
 
 type PermissionService interface {
 	GetAll() []models.AdminPermissions
+	GetMenuList() []models.AdminPermissions
 	Get(id int64) *models.AdminPermissions
 	Update(data *models.AdminPermissions, columns []string) error
 	Create(data *models.AdminPermissions) error
@@ -26,8 +27,9 @@ func NewPermissionService() PermissionService {
 
 func (p permissionService) GetAll() []models.AdminPermissions {
 	datalist := make([]models.AdminPermissions, 0)
-	err := p.engine.Desc("id").Find(&datalist)
+	err := p.engine.Asc("id").Find(&datalist)
 	if err != nil {
+		println(err)
 		return datalist
 	} else {
 		return datalist
@@ -51,4 +53,20 @@ func (p permissionService) Update(data *models.AdminPermissions, column []string
 func (p permissionService) Create(data *models.AdminPermissions) error {
 	_, err := p.engine.Insert(data)
 	return err
+}
+
+func (p permissionService) GetMenuList() []models.AdminPermissions {
+	return RecursionMenuList(p.GetAll(), 0, 1)
+}
+
+//递归函数
+func RecursionMenuList(data []models.AdminPermissions, pid int64, level int64) []models.AdminPermissions {
+	var listTree []models.AdminPermissions
+	for _, value := range data {
+		if value.ParentId == pid {
+			value.Children = RecursionMenuList(data, value.Id, level+1)
+			listTree = append(listTree, value)
+		}
+	}
+	return listTree
 }

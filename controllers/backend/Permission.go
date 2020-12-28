@@ -13,11 +13,13 @@ type PermissionController struct {
 }
 
 func (p *PermissionController) Get() mvc.Result {
+	data := p.Service.GetAll()
+
 	return mvc.View{
 		Name: "permission/index.html",
 		Data: iris.Map{
 			"title": "页面列表",
-			"data":  "data",
+			"data":  data,
 		},
 	}
 }
