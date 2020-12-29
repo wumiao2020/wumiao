@@ -8,7 +8,7 @@ import (
 
 type AdminService interface {
 	GetAll() []models.Admins
-	GetList() []models.Admins
+	GetList(limit int, start int) []models.Admins
 	GetById(Id int64) *models.Admins
 	GetByEmail(email string) *models.Admins
 	DeleteByID(id int64) error
@@ -27,7 +27,7 @@ func NewAdminService() AdminService {
 	}
 }
 
-func (a adminService) GetList() []models.Admins {
+func (a adminService) GetList(limit int, start int) []models.Admins {
 	datalist := make([]models.Admins, 0)
 	err := a.engine.Desc("id").Find(&datalist)
 	if err != nil {

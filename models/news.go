@@ -2,7 +2,7 @@ package models
 
 import (
 	"html/template"
-	"time"
+	"wumiao/extend"
 )
 
 type News struct {
@@ -21,6 +21,6 @@ type News struct {
 	Position        int           `json:"position" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`
 	Author          string        `json:"author" xorm:"comment('Author') VARCHAR(32)"`
 	AuthorId        int64         `json:"author_id" xorm:"comment('Page Author Id') BIGINT(20)"`
-	CreatedAt       time.Time     `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
-	UpdatedAt       time.Time     `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
+	CreatedAt       extend.Time   `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('Page Creation Time') TIMESTAMP"`
+	UpdatedAt       extend.Time   `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('Page Updated Time') TIMESTAMP"`
 }

@@ -27,31 +27,31 @@
                         {{ if eq $v.Type "C"}}
                     <li class="nav-item">
                         <a href="{{ $v.Url }}" class="nav-link active">
-                            <i class="ni ni-shop text-primary"></i>
-                            <span class="nav-link-text">{{ $v.Name }}</span>
+                            <i class="ni ni-{{ $v.Icon}} text-primary"></i>
+                            <span class="nav-link-text">{{ call $.tr $v.Name }}</span>
                         </a>
                     </li>
                         {{ else }}
                     <li class="nav-item">
                         <a class="nav-link" href="#multilevel-{{ $v.Id }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-forms">
-                            <i class="ni ni-single-copy-04 text-pink"></i>
-                            <span class="nav-link-text">{{ $v.Name }}</span>
+                            <i class="ni ni-{{ $v.Icon}} text-pink"></i>
+                            <span class="nav-link-text">{{ call $.tr $v.Name }}</span>
                         </a>
                         <div class="collapse" id="multilevel-{{ $v.Id }}">
                             <ul class="nav nav-sm flex-column">
                                 {{ range $i, $c := $v.Children }}
                                     {{ if eq $c.Type "C"}}
                                         <li class="nav-item">
-                                            <a href="{{ $c.Url }}" class="nav-link active"> {{ $c.Name }} </a>
+                                            <a href="{{ $c.Url }}" class="nav-link active"> {{ call $.tr $c.Name }} </a>
                                         </li>
                                     {{ else }}
                                 <li class="nav-item">
-                                    <a href="#multilevel-{{ $c.Id }}" class="nav-link" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="promotions">{{ $c.Name }}</a>
+                                    <a href="#multilevel-{{ $c.Id }}" class="nav-link" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="promotions">{{ call $.tr $c.Name }}</a>
                                     <div class="collapse show" id="multilevel-{{ $c.Id }}" style="">
                                         <ul class="nav nav-sm flex-column">
                                             {{ range $i, $d := $c.Children }}
                                             <li class="nav-item">
-                                                <a href="#!" class="nav-link ">{{ $d.Name }}</a>
+                                                <a href="#!" class="nav-link ">{{ call $.tr $d.Name }}</a>
                                             </li>
                                             {{ end }}
                                         </ul>

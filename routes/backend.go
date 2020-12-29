@@ -22,8 +22,37 @@ func BackendStart() {
 
 	app := iris.New()
 
-	err := app.I18n.Load("./locales/*/*.ini", "en-US", "el-GR", "zh-CN")
+	err := app.I18n.Load("./locales/*/*.ini", "en-US", "zh-TW", "zh-CN")
+
 	app.I18n.SetDefault("zh-CN")
+	//
+	//app.I18n.URLParameter = "l"
+	//app.I18n.ExtractFunc = func(ctx iris.Context) string {
+	//
+	//	language := ctx.URLParam("l")
+	//	if len(language) > 0 {
+	//		ctx.RemoveCookie("language")
+	//		ctx.SetCookieKV("language",language)
+	//	}else {
+	//		language = ctx.GetCookie("language")
+	//	}
+	//
+	//	println(language)
+	//
+	//	switch language {
+	//	case "tw":
+	//		language = "zh-TW"
+	//	case "en":
+	//		language = "en-US"
+	//	case "cn":
+	//		language = "zh-CN"
+	//	default :
+	//		language = "zh-CN"
+	//	}
+	//
+	//
+	//	return language // if empty then it will continue with the rest.
+	//}
 	println(err)
 	//app.Logger().SetLevel("debug")
 	app.HandleDir("/assets", "./public/argon/assets")
@@ -58,8 +87,8 @@ func BackendStart() {
 	})
 
 	account := mvc.New(app.Party("/account"))
-	adminService := services.NewAdminService()
-	account.Register(adminService)
+	accountService := services.NewAdminService()
+	account.Register(accountService)
 	account.Handle(new(backend.AccountController))
 
 	app.Use(hero.Handler(middleware.Authentication))
@@ -75,6 +104,12 @@ func BackendStart() {
 	permissionService := services.NewPermissionService()
 	permission.Register(permissionService)
 	permission.Handle(new(backend.PermissionController))
+
+	//管理员管理
+	admin := mvc.New(app.Party("/admin"))
+	adminService := services.NewAdminService()
+	admin.Register(adminService)
+	admin.Handle(new(backend.AdminController))
 
 	//角色管理
 	role := mvc.New(app.Party("/role"))
