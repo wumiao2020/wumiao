@@ -25,7 +25,8 @@ func (p *AdminController) Get() mvc.Result {
 func (p *AdminController) GetCreate() mvc.Result {
 	data := new(models.Admins)
 	return mvc.View{
-		Name: "admin/form.html",
+		Name:   "admin/form.html",
+		Layout: iris.NoLayout,
 		Data: iris.Map{
 			"title": data.Name,
 			"data":  data,
@@ -81,5 +82,15 @@ func (p *AdminController) GetBy(id int64) mvc.Result {
 			"title": data.Name,
 			"data":  data,
 		},
+	}
+}
+
+func (p *AdminController) DeleteBy(id int64) {
+	err := p.Service.DeleteByID(id)
+
+	if err == nil {
+		_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": p.Ctx.Tr("Save success !!!")})
+	} else {
+		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
 	}
 }

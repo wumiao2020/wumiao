@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="../../assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="../../assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+    <link rel="stylesheet" href="../assets/vendor/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../../assets/css/argon.css?v=1.1.0" type="text/css">
 </head>
@@ -32,33 +34,44 @@
     <!-- Topnav -->
     {{ block "layouts/topnav.html" . }}{{ end }}
     <!-- Header -->
-    {{if ne .navActive "/account" }}
-    <!-- Header -->
-    <div class="header bg-primary pb-6">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center py-4">
-                    <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
-                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Default</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral">New</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+    {{if ne .breadcrumb.Perms "get.account" }}
+        <!-- Header -->
+        <div class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            {{ $num := (len .breadcrumbs ) }}
+                            <h6 class="h2 text-white d-inline-block mb-0">{{ call .tr .breadcrumb.Name }}</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+{{/*                                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>*/}}
+                                    {{ range $i, $b := .breadcrumbs }}
+                                        {{ if ne $.breadcrumb.Id $b.Id }}
+                                    <li class="breadcrumb-item"><a href="{{ $b.Url }}">{{ call $.tr $b.Name }}</a></li>
+                                        {{ else }}
+                                    <li class="breadcrumb-item active" aria-current="page">{{ call $.tr $b.Name }}</li>
+                                    {{ end }}
+                                    {{ end }}
+
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+                            <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-url="{{ .breadcrumb.Url }}/create" data-target="#modal-default">New</a>
+
+{{/*                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>*/}}
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {{ end }}
     <!-- Page content -->
     {{ yield }}
+
+    {{ block "layouts/modal.html" . }}{{ end }}
 </div>
 <!-- Argon Scripts -->
 <!-- Core -->
@@ -80,6 +93,10 @@
 <script src="../../assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
 <script src="../../assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="../../assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
+<script src="../assets/vendor/moment/min/moment.min.js"></script>
+<script src="../assets/vendor/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 
 <!-- Argon JS -->
 <script src="../../assets/js/argon.js?v=1.1.0"></script>

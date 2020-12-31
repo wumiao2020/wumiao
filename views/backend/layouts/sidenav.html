@@ -26,32 +26,32 @@
                     {{ range $i, $v := .menuList }}
                         {{ if eq $v.Type "C"}}
                     <li class="nav-item">
-                        <a href="{{ $v.Url }}" class="nav-link active">
+                        <a href="{{ $v.Url }}" class="nav-link{{ if isAction $v.Id $.breadcrumbs}} active{{ end}}">
                             <i class="ni ni-{{ $v.Icon}} text-primary"></i>
                             <span class="nav-link-text">{{ call $.tr $v.Name }}</span>
                         </a>
                     </li>
                         {{ else }}
                     <li class="nav-item">
-                        <a class="nav-link" href="#multilevel-{{ $v.Id }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-forms">
+                        <a class="nav-link {{ if isAction $v.Id $.breadcrumbs}} active{{ end}}" href="#multilevel-{{ $v.Id }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-forms">
                             <i class="ni ni-{{ $v.Icon}} text-pink"></i>
                             <span class="nav-link-text">{{ call $.tr $v.Name }}</span>
                         </a>
-                        <div class="collapse" id="multilevel-{{ $v.Id }}">
+                        <div class="collapse {{ if isAction $v.Id $.breadcrumbs}} show{{ end}}" id="multilevel-{{ $v.Id }}">
                             <ul class="nav nav-sm flex-column">
                                 {{ range $i, $c := $v.Children }}
                                     {{ if eq $c.Type "C"}}
-                                        <li class="nav-item">
-                                            <a href="{{ $c.Url }}" class="nav-link active"> {{ call $.tr $c.Name }} </a>
+                                        <li class="nav-item ">
+                                            <a href="{{ $c.Url }} {{ if isAction $c.Id $.breadcrumbs}} active{{ end}}" class="nav-link active"> {{ call $.tr $c.Name }} </a>
                                         </li>
                                     {{ else }}
                                 <li class="nav-item">
-                                    <a href="#multilevel-{{ $c.Id }}" class="nav-link" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="promotions">{{ call $.tr $c.Name }}</a>
-                                    <div class="collapse show" id="multilevel-{{ $c.Id }}" style="">
+                                    <a href="#multilevel-{{ $c.Id }}" class="nav-link {{ if isAction $c.Id $.breadcrumbs}} active{{ end}}" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="promotions">{{ call $.tr $c.Name }}</a>
+                                    <div class="collapse {{ if isAction $c.Id $.breadcrumbs}} show{{ end}}" id="multilevel-{{ $c.Id }}" style="">
                                         <ul class="nav nav-sm flex-column">
                                             {{ range $i, $d := $c.Children }}
                                             <li class="nav-item">
-                                                <a href="#!" class="nav-link ">{{ call $.tr $d.Name }}</a>
+                                                <a href="{{ $d.Url }}" class="nav-link {{ if isAction $d.Id $.breadcrumbs}} active{{ end}}">{{ call $.tr $d.Name }}</a>
                                             </li>
                                             {{ end }}
                                         </ul>

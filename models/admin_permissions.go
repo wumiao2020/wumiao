@@ -13,6 +13,7 @@ type AdminPermissions struct {
 	Target    string             `json:"target" xorm:"comment('打开方式（menuItem页签 menuBlank新窗口）') VARCHAR(20)"`
 	Type      string             `json:"type" xorm:"default '' comment('菜单类型（M目录 C菜单 F按钮）') CHAR(1)"`
 	Visible   string             `json:"visible" xorm:"default '0' comment('菜单状态（0显示 1隐藏）') CHAR(1)"`
+	Perms     string             `json:"icon" xorm:"default '' comment('权限标识') VARCHAR(100)"`
 	Icon      string             `json:"icon" xorm:"default '#' comment('菜单图标') VARCHAR(100)"`
 	CreatedAt extend.Time        `json:"created_at" xorm:"not null default 'CURRENT_TIMESTAMP' created comment('创建时间') TIMESTAMP"`
 	UpdatedAt extend.Time        `json:"updated_at" xorm:"not null default 'CURRENT_TIMESTAMP' updated comment('更新时间') TIMESTAMP"`

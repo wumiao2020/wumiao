@@ -1,4 +1,6 @@
 <!-- Page content -->
+
+
 <div class="container-fluid mt--6">
     <!-- Table -->
     <div class="row">
@@ -9,11 +11,11 @@
                         <thead class="thead-light">
                         <tr>
                             <th width="70">ID</th>
-                            <th>名称</th>
-                            <th width="50">状态</th>
-                            <th width="150">创建时间</th>
-                            <th width="150">更新时间</th>
-                            <th width="100">操作</th>
+                            <th></th>
+                            <th width="50"></th>
+                            <th width="150"></th>
+                            <th width="150"></th>
+                            <th width="100"></th>
                         </tr>
                         </thead>
                         <tbody></tbody>
@@ -136,7 +138,7 @@
                         }
                         //删除
                         if (row_del) {
-                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product"><i class="fas fa-trash"></i></a>';
+                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/admin/' + row['id'] + '" data-calendar="delete"><i class="fas fa-trash"></i></a>';
                         }
 
                         return str;
@@ -145,19 +147,76 @@
             ]
         });
 
-        var table = $('#datatable').DataTable();
-        // Edit record
-        table.on('click', '.edit', function () {
-            $tr = $(this).closest('tr');
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        //Update/Delete an Event
+        $('body').on('click', '[data-calendar]', function() {
+            var calendarAction = $(this).data('calendar');
+            var currentUrl = $(this).data('current-url');
+            var currentId = $(this).data('current-id');
+            var currentName = $(this).data('current-name');
+            //Delete
+            if (calendarAction === 'delete') {
+                // Show confirm dialog
+                setTimeout(function() {
+                    swal({
+                        title: '{{ call .tr "Are you sure delete?"}}',
+                        text: currentName,
+                        type: 'warning',
+                        showCancelButton: true,
+                        buttonsStyling: false,
+                        confirmButtonClass: 'btn btn-danger',
+                        confirmButtonText: '{{ call .tr "Yes, delete it!"}}',
+                        cancelButtonClass: 'btn btn-secondary',
+                        cancelButtonText:'{{ call .tr "Cancel" }}'
+                    }).then((result) => {
+                        if (result.value) {
+                            // run ajax
+                            $.ajax({
+                                cache: true,
+                                type: "DELETE",
+                                url: currentUrl,
+                                //data:$('#yourformid').serialize(),// 你的formid
+                                async: false,
+                                error: function (request) {
+                                    swal({
+                                        title: '{{ call .tr "Deleted fail!" }}',
+                                        text: 'Connection error.',
+                                        type: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                },
+                                success: function (data) {
+                                    if (data.status === true) {
+                                        swal({
+                                            title: '{{ call .tr "Deleted success!" }}',
+                                            text: data.message,
+                                            type: 'success',
+                                            buttonsStyling: false,
+                                            confirmButtonText: '{{ call .tr "OK" }}',
+                                            confirmButtonClass: 'btn btn-primary'
+                                        });
+                                    } else {
+                                        swal({
+                                            title: '{{ call .tr "Deleted fail!" }}',
+                                            text: '',
+                                            type: 'error',
+                                            buttonsStyling: false,
+                                            confirmButtonText: '{{ call .tr "OK" }}',
+                                            confirmButtonClass: 'btn btn-primary'
+                                        });
+                                    }
+                                }
+                            });
+                            // Show confirmation
+
+                        }
+                    })
+                }, 200);
+            }
         });
 
-        // Delete a record
-        table.on('click', '.remove', function (e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
-        });
+
+
     };
 </script>

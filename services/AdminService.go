@@ -69,7 +69,7 @@ func (a adminService) GetByEmail(email string) *models.Admins {
 
 func (a adminService) DeleteByID(id int64) error {
 	data := models.Admins{Id: id, Status: 0}
-	_, err := a.engine.Id(data.Id).Update(data)
+	_, err := a.engine.Id(data.Id).Delete(data)
 	return err
 }
 

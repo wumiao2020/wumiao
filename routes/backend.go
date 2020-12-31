@@ -1,10 +1,12 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/hero"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
+	"strings"
 	"time"
 	"wumiao/config"
 	"wumiao/controllers/backend"
@@ -64,26 +66,39 @@ func BackendStart() {
 	// 可以方便每次修改视图文件而无需停止服务
 	tmpl.Reload(true)
 
-	tmpl.AddFunc("isActionMenu", func(x string, y string) bool {
-		return x == y
-	})
-
-	tmpl.AddFunc("nowYear", func() int {
-		return time.Now().UTC().Year()
-	})
-
 	app.OnErrorCode(iris.StatusNotFound, backendNotFound)
 	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
 	app.RegisterView(tmpl)
 
 	hero.Register(sessManager.Start)
 
-	app.UseGlobal(func(ctx iris.Context) {
-		path := ctx.Path()
-		ctx.ViewData("navActive", path)
+	app.Use(func(ctx iris.Context) {
+		path := ctx.GetCurrentRoute()
+		p := fmt.Sprintf("%v%v", strings.ToLower(path.Method()), strings.ToLower(path.ResolvePath()))
+		fmt.Println(strings.Replace(p, "/", ".", -1))
+		breadcrumbs := Breadcrumbs(strings.Replace(p, "/", ".", -1))
+		if len(breadcrumbs) > 0 {
+			ctx.ViewData("breadcrumb", breadcrumbs[len(breadcrumbs)-1])
+		} else {
+			ctx.ViewData("breadcrumb", models.AdminPermissions{})
+		}
+		ctx.ViewData("breadcrumbs", breadcrumbs)
 		ctx.ViewData("menuList", MenuList())
 		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
+	})
+
+	tmpl.AddFunc("isAction", func(id int64, breadcrumbs []models.AdminPermissions) bool {
+		for _, breadcrumb := range breadcrumbs {
+			if breadcrumb.Id == id {
+				return true
+			}
+		}
+		return false
+	})
+
+	tmpl.AddFunc("nowYear", func() int {
+		return time.Now().UTC().Year()
 	})
 
 	account := mvc.New(app.Party("/account"))
@@ -193,4 +208,9 @@ func internalServerError(ctx iris.Context) {
 func MenuList() []models.AdminPermissions {
 	permissionService := services.NewPermissionService()
 	return permissionService.GetMenuList()
+}
+
+func Breadcrumbs(path string) []models.AdminPermissions {
+	permissionService := services.NewPermissionService()
+	return permissionService.GetBreadcrumbs(path)
 }

@@ -22401,7 +22401,7 @@ textarea[resize='horizontal']
 
 .sidenav
 {
-    z-index: 1050;
+    z-index: 1030;
 
     transition: all .15s ease;
 }
