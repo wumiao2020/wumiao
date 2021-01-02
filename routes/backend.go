@@ -6,6 +6,7 @@ import (
 	"github.com/kataras/iris/v12/hero"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
+	"reflect"
 	"strings"
 	"time"
 	"wumiao/config"
@@ -86,6 +87,14 @@ func BackendStart() {
 		ctx.ViewData("menuList", MenuList())
 		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
+	})
+
+	tmpl.AddFunc("reflect", func(i interface{}) string {
+		t := reflect.TypeOf(i)
+		if t == nil {
+			return "111"
+		}
+		return t.String()
 	})
 
 	tmpl.AddFunc("isAction", func(id int64, breadcrumbs []models.AdminPermissions) bool {

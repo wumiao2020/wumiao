@@ -58,7 +58,8 @@
                             </nav>
                         </div>
                         <div class="col-lg-6 col-5 text-right">
-                            <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-url="{{ .breadcrumb.Url }}/create" data-target="#modal-default">New</a>
+                            {{ $name := call .tr .breadcrumb.Name }}
+                            <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-title="{{ call .tr "New" $name }}" data-url="{{ .breadcrumb.Url }}/create" data-target="#modal-default">New</a>
 
 {{/*                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>*/}}
 
@@ -101,7 +102,7 @@
 <!-- Argon JS -->
 <script src="../../assets/js/argon.js?v=1.1.0"></script>
 <!-- Demo JS - remove this in your project -->
-<script src="../../assets/js/demo.min.js"></script>
+<script src="../../assets/js/admin.js"></script>
 </body>
 
 </html>

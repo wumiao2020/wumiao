@@ -23,7 +23,7 @@ func (p *AdminController) Get() mvc.Result {
 }
 
 func (p *AdminController) GetCreate() mvc.Result {
-	data := new(models.Admins)
+	data := models.Admins{Status: 1}
 	return mvc.View{
 		Name:   "admin/form.html",
 		Layout: iris.NoLayout,
@@ -77,7 +77,8 @@ func (p *AdminController) GetBy(id int64) mvc.Result {
 		}
 	}
 	return mvc.View{
-		Name: "admin/form.html",
+		Name:   "admin/form.html",
+		Layout: iris.NoLayout,
 		Data: iris.Map{
 			"title": data.Name,
 			"data":  data,
