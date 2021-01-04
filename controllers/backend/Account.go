@@ -5,6 +5,8 @@ import (
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
 	"golang.org/x/crypto/bcrypt"
+	"time"
+	"wumiao/extend"
 	"wumiao/models"
 	"wumiao/services"
 )
@@ -38,7 +40,6 @@ func (a *AccountController) GetLogin() mvc.Result {
 		},
 	}
 }
-
 func (a *AccountController) PostLogin() mvc.Result {
 
 	username := a.Ctx.PostValue("username")
@@ -50,8 +51,8 @@ func (a *AccountController) PostLogin() mvc.Result {
 		a.Session.SetFlash("errors", strings)
 	} else {
 		err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(password)) //验证（对比）
-		if err != nil {
-			strings := []string{"用户名或密码不正确，请重新输入！！！"}
+		if admin.LockExpires.String() > time.Now().Format(extend.TimeFormant) || err != nil {
+			strings := []string{a.Ctx.Tr("The username or password is incorrect or the account is locked, please re-enter! ! !")}
 			a.Session.SetFlash("errors", strings)
 		} else {
 			a.Session.Set(adminSessionId, admin.Id)

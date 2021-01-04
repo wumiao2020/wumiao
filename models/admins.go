@@ -12,6 +12,7 @@ type Admins struct {
 	Password        string      `json:"password" xorm:"not null VARCHAR(255)"`
 	Status          int         `json:"status" xorm:"not null default 0 TINYINT(1)"`
 	RememberToken   string      `json:"remember_token" xorm:"VARCHAR(100)"`
+	LockExpires     extend.Time `json:"lock_expires" xorm:"lock_expires TIMESTAMP"`
 	CreatedAt       extend.Time `json:"created_at" xorm:"created TIMESTAMP"`
 	UpdatedAt       extend.Time `json:"updated_at" xorm:"updated TIMESTAMP"`
 }

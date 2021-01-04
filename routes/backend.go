@@ -6,7 +6,6 @@ import (
 	"github.com/kataras/iris/v12/hero"
 	"github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/sessions"
-	"reflect"
 	"strings"
 	"time"
 	"wumiao/config"
@@ -87,14 +86,6 @@ func BackendStart() {
 		ctx.ViewData("menuList", MenuList())
 		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
-	})
-
-	tmpl.AddFunc("reflect", func(i interface{}) string {
-		t := reflect.TypeOf(i)
-		if t == nil {
-			return "111"
-		}
-		return t.String()
 	})
 
 	tmpl.AddFunc("isAction", func(id int64, breadcrumbs []models.AdminPermissions) bool {
@@ -204,6 +195,24 @@ func BackendHtml() {
 
 	err := app.Run(
 		iris.Addr(":8080"),
+		iris.WithoutBanner,
+		iris.WithoutServerError(iris.ErrServerClosed),
+	)
+	println(err)
+}
+
+func Api() {
+
+	app := iris.New()
+	//app.Logger().SetLevel("debug")
+	//页面管理
+	api := mvc.New(app.Party("/api"))
+	apiService := services.NewApiService()
+	api.Register(apiService)
+	api.Handle(new(backend.ApiController))
+
+	err := app.Run(
+		iris.Addr(":8888"),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
