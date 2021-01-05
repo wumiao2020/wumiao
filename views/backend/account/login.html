@@ -5,8 +5,6 @@
         <div class="header-body text-center mb-7">
             <div class="row justify-content-center">
                 <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                    <button class="btn btn-default" data-toggle="notify" data-placement="top" data-align="center" data-type="default" data-icon="ni ni-bell-55">Default</button>
-
                     <h1 class="text-white">{{call .tr "Welcome!"}}</h1>
                     <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
                 </div>
@@ -82,7 +80,6 @@
     </div>
 </div>
 <script>
-
     window.onload = function () {
         {{ if .errors }}
         walter.notification({{ .errors }});
