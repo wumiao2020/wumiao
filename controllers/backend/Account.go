@@ -51,7 +51,7 @@ func (a *AccountController) PostLogin() mvc.Result {
 		a.Session.SetFlash("errors", strings)
 	} else {
 		err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(password)) //验证（对比）
-		if admin.LockExpires.String() > time.Now().Format(extend.TimeFormant) || err != nil {
+		if admin.Status == 0 || admin.LockExpires.String() > time.Now().Format(extend.TimeFormant) || err != nil {
 			strings := []string{a.Ctx.Tr("The username or password is incorrect or the account is locked, please re-enter! ! !")}
 			a.Session.SetFlash("errors", strings)
 		} else {

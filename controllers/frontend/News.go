@@ -29,7 +29,7 @@ func (p *NewsController) GetBy(news string) mvc.Result {
 			Code: iris.StatusNotFound,
 			Name: "errors/404.html",
 			Data: iris.Map{
-				"title": "你很神，找到了不存在的页面",
+				"title": p.Ctx.Tr("You are very god, found a page that does not exist"),
 			},
 		}
 	}

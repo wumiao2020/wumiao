@@ -12,7 +12,7 @@ type AdminService interface {
 	GetById(Id int64) *models.Admins
 	GetByEmail(email string) *models.Admins
 	DeleteByID(id int64) error
-	Update(data *models.Admins, columns []string) error
+	Update(data *models.Admins) error
 	Create(data *models.Admins) error
 }
 
@@ -29,7 +29,7 @@ func NewAdminService() AdminService {
 
 func (a adminService) GetList(limit int, start int) []models.Admins {
 	datalist := make([]models.Admins, 0)
-	err := a.engine.Desc("id").Find(&datalist)
+	err := a.engine.Desc("id").Limit(limit, start).Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {
@@ -39,7 +39,7 @@ func (a adminService) GetList(limit int, start int) []models.Admins {
 
 func (a adminService) GetAll() []models.Admins {
 	datalist := make([]models.Admins, 0)
-	err := a.engine.Where("status=?", 0).Find(&datalist)
+	err := a.engine.Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {
@@ -73,7 +73,8 @@ func (a adminService) DeleteByID(id int64) error {
 	return err
 }
 
-func (a adminService) Update(data *models.Admins, column []string) error {
+func (a adminService) Update(data *models.Admins) error {
+	column := []string{"status"}
 	_, err := a.engine.Id(data.Id).MustCols(column...).Update(data)
 	return err
 }

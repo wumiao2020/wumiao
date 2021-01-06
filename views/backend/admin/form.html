@@ -1,4 +1,5 @@
-<form class="needs-validation" novalidate>
+<form class="needs-validation" novalidate method="post" action="/admin/save">
+    <input name="id" value="{{ .data.Id }}" type="hidden">
     <div class="form-group row">
         <label for="example-text-input" class="col-md-2 col-form-label form-control-label"
                for="name">{{ call .tr "Name"}}</label>

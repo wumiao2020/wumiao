@@ -19,15 +19,14 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 	//}
 
 	path := ctx.GetCurrentRoute().ResolvePath()
-	//fmt.Println(path)
 	errors := session.GetFlash("errors")
 	ctx.ViewData("errors", errors)
 	userID := session.GetInt64Default("admin_session_id", 0)
 	if userID == 0 && path != "/account/login" {
 		if ctx.IsAjax() {
-			_, _ = ctx.JSON(iris.Map{"status": false, "code": 401, "message": "请先登录"})
+			_, _ = ctx.JSON(iris.Map{"status": false, "code": 401, "message": ctx.Tr("You have not signed in or your login has expired. Please sign in again")})
 		}
-		requestUrl := ctx.GetCurrentRoute().Path()
+		requestUrl := ctx.Request().URL.Path
 		session.Set("request_url", requestUrl)
 		return mvc.Response{
 			// 重定向.

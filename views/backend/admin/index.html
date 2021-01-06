@@ -60,8 +60,8 @@
             order: [[1, "desc"]],
             "pagingType": "full_numbers",
             "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
+                [2,10, 25, 50, -1],
+                [2,10, 25, 50, "All"]
             ],
             "processing": true,
             "serverSide": true,
@@ -93,15 +93,15 @@
                 "url": "/admin",
                 "type": "POST",
                 error: function (arg1) {
-                    md.notification(arg1.statusText, 'rose');
-                }
+                    walter.notification(arg1.statusText, 'rose');
+                },
 
             },
             //dom: 'Bfrtip',
             buttons: [
                 'csv', 'excel', 'pdf', 'print'
             ],
-            sort:false,
+            sort: false,
             "columns": [
                 {"data": "id", "sClass": "text-center"},
                 {"data": "name"},
@@ -114,7 +114,7 @@
                 {
                     'targets': 1, "render": function (data, type, row) {
 
-                        return '<img src="../../assets/img/theme/team-1.jpg" class="avatar rounded-circle mr-3"><b>' + data +'</b>';
+                        return '<img src="../../assets/img/theme/team-1.jpg" class="avatar rounded-circle mr-3"><b>' + data + '</b>';
                     }
                 },
                 {
@@ -123,7 +123,7 @@
                         if (data) {
                             checked = 'checked';
                         }
-                        return '<label class="custom-toggle"><input type="checkbox" ' + checked + '><span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span></label>';
+                        return '<label class="custom-toggle"  data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/admin/' + row['id'] + '" data-current-action="status"><input type="checkbox" ' + checked + '><span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span></label>';
                     }
                 },
                 {
@@ -134,11 +134,11 @@
 
                         //编辑
                         if (row_edit) {
-                            str += '<a href="#!" class="table-action" data-toggle="tooltip" data-original-title="Edit product"> <i class="fas fa-user-edit"></i> </a>';
+                            str += '<a href="#!" class="table-action"  data-toggle="modal" data-title="' + row['name'] + '" data-url="/admin/' + row['id'] + '" data-target="#modal-default" data-original-title="Edit product"> <i class="fas fa-user-edit"></i> </a>';
                         }
                         //删除
                         if (row_del) {
-                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/admin/' + row['id'] + '" data-calendar="delete"><i class="fas fa-trash"></i></a>';
+                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/admin/' + row['id'] + '" data-current-action="delete"><i class="fas fa-trash"></i></a>';
                         }
 
                         return str;
@@ -146,77 +146,5 @@
                 }
             ]
         });
-
-        //Update/Delete an Event
-        $('body').on('click', '[data-calendar]', function() {
-            var calendarAction = $(this).data('calendar');
-            var currentUrl = $(this).data('current-url');
-            var currentId = $(this).data('current-id');
-            var currentName = $(this).data('current-name');
-            //Delete
-            if (calendarAction === 'delete') {
-                // Show confirm dialog
-                setTimeout(function() {
-                    swal({
-                        title: '{{ call .tr "Are you sure delete?"}}',
-                        text: currentName,
-                        type: 'warning',
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        confirmButtonClass: 'btn btn-danger',
-                        confirmButtonText: '{{ call .tr "Yes, delete it!"}}',
-                        cancelButtonClass: 'btn btn-secondary',
-                        cancelButtonText:'{{ call .tr "Cancel" }}'
-                    }).then((result) => {
-                        if (result.value) {
-                            // run ajax
-                            $.ajax({
-                                cache: true,
-                                type: "DELETE",
-                                url: currentUrl,
-                                //data:$('#yourformid').serialize(),// 你的formid
-                                async: false,
-                                error: function (request) {
-                                    swal({
-                                        title: '{{ call .tr "Deleted fail!" }}',
-                                        text: 'Connection error.',
-                                        type: 'error',
-                                        buttonsStyling: false,
-                                        confirmButtonText: '{{ call .tr "OK" }}',
-                                        confirmButtonClass: 'btn btn-primary'
-                                    });
-                                },
-                                success: function (data) {
-                                    if (data.status === true) {
-                                        swal({
-                                            title: '{{ call .tr "Deleted success!" }}',
-                                            text: data.message,
-                                            type: 'success',
-                                            buttonsStyling: false,
-                                            confirmButtonText: '{{ call .tr "OK" }}',
-                                            confirmButtonClass: 'btn btn-primary'
-                                        });
-                                    } else {
-                                        swal({
-                                            title: '{{ call .tr "Deleted fail!" }}',
-                                            text: '',
-                                            type: 'error',
-                                            buttonsStyling: false,
-                                            confirmButtonText: '{{ call .tr "OK" }}',
-                                            confirmButtonClass: 'btn btn-primary'
-                                        });
-                                    }
-                                }
-                            });
-                            // Show confirmation
-
-                        }
-                    })
-                }, 200);
-            }
-        });
-
-
-
     };
 </script>

@@ -1,6 +1,33 @@
+(function ($) {
+    $.fn.serializeJson = function () {
+        var serializeObj = {};
+        var array = this.serializeArray();
+        $(array).each(function () {
+
+            if (this.value === 'true') {
+                this.value = true;
+            } else if (this.value === 'false') {
+                this.value = false;
+            } else if (!isNaN(this.value)) {
+                this.value = parseInt(this.value);
+            }
+
+            if (serializeObj[this.name]) {
+                if ($.isArray(serializeObj[this.name])) {
+                    serializeObj[this.name].push(this.value);
+                } else {
+                    serializeObj[this.name] = [serializeObj[this.name], this.value];
+                }
+            } else {
+                serializeObj[this.name] = this.value;
+            }
+        });
+        return serializeObj;
+    };
+})(jQuery);
 
 walter = {
-    notification: function (message = "",type = 'success',align= 'right', from= 'top',  icon = "ni ni-bell-55"){
+    notification: function (message = "", type = 'success', align = 'right', from = 'top', icon = "ni ni-bell-55") {
         $.notify({
             icon: icon,
             // title: title,
@@ -37,6 +64,35 @@ walter = {
                 '<button type="button" class="close" data-notify="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                 '</div>'
         });
+    },
+    //判断是否为对象（仅为对象，不是数组也不是null）
+    isObject: function (exp) {
+        return Object.prototype.toString.call(exp) == '[object Object]'
+    },
+
+//判断是否为数组（仅为数组，不是对象也不是null）
+    isArray: function (exp) {
+        return Object.prototype.toString.call(exp) == '[object Array]'
+    },
+
+//判断是否为字符串
+    isString: function (exp) {
+        return Object.prototype.toString.call(exp) == '[object String]'
+    },
+
+//判断是否为数字（包括整数和实数）
+    isNumber: function (exp) {
+        return Object.prototype.toString.call(exp) == '[object Number]'
+    },
+
+//判断是否为null
+    isNull: function (exp) {
+        return Object.prototype.toString.call(exp) == '[object Null]'
+    },
+
+//判断是否为undefined
+    isUndefined: function (exp) {
+        return Object.prototype.toString.call(exp) == '[object Undefined]'
     }
 };
 $(function () {
@@ -54,12 +110,12 @@ $(function () {
             //data:$('#yourformid').serialize(),// 你的formid
             async: false,
             error: function (request) {
-                setTimeout(md.notification('Connection error', 'rose'), 500);
+                setTimeout(walter.notification('Connection error', 'rose'), 500);
             },
             success: function (data) {
-                console.log(data)
-                if (data.code === 401){
-                    window.location.reload()
+                if (data.code === 401) {
+                    setTimeout(walter.notification('Login time out', 'rose'), 500);
+                    setTimeout(window.location.reload(), 1500);
                 }
                 modal.find('.card-header h3').text(title);
                 modal.find('.card-body').html(data);
@@ -74,33 +130,38 @@ $(function () {
             cache: true,
             type: $('#modal-default form').attr('method'),
             url: url,
-            data: $('#modal-default form').serialize(),
+            data: JSON.stringify($('#modal-default form').serializeJson()),
             async: false,
             dataType: 'json',
+            contentType: 'application/json;charset=UTF-8',
             error: function (data) {
                 if (data.status !== 'true') {
-
+                    walter.notification(data.message,'rose')
                 } else {
-                    setTimeout(md.notification('Connection error', 'rose'), 500);
+                    walter.notification('Connection error', 'rose')
                 }
             },
             success: function (data) {
                 modal.find('.modal-body').html(data);
-                if (data.status == true) {
-                    setTimeout(md.notification(data.message), 500);
+                if (data.status === true) {
+                    walter.notification(data.message)
+                    $('#datatable').DataTable().ajax.reload( null, false );
                     $('#modal-default').modal('hide')
                 } else {
-                    $.each(data.responseJSON.errors, function (i, mes) {
-                        $.each(mes, function (v, item) {
-                            if (item) {
-                                setTimeout(md.notification(item, 'rose'), (v + 1) * 500);
-                            }
-                        })
-                    });
+                    if (walter.isObject(data.message)){
+                        walter.notification(data.message.Message,'rose')
+                    }
+                    walter.notification(data.message,'rose')
                 }
-
             }
         });
     });
-
+    $('#datatable').on('xhr.dt', function ( e, settings, json, xhr ) {
+            if (json.code === 401) {
+                walter.notification(json.message, 'rose')
+                setTimeout(function () {
+                    window.location.reload()
+                }, 3500);
+            }
+        } )
 });

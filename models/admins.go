@@ -10,7 +10,8 @@ type Admins struct {
 	Email           string      `json:"email" xorm:"not null unique VARCHAR(255)"`
 	EmailVerifiedAt extend.Time `json:"email_verified_at" xorm:"TIMESTAMP"`
 	Password        string      `json:"password" xorm:"not null VARCHAR(255)"`
-	Status          int         `json:"status" xorm:"not null default 0 TINYINT(1)"`
+	PasswordConfirm string      `json:"password_confirm" xorm:"-"`
+	Status          int         `json:"status" xorm:"not null default 0 INT(1)"`
 	RememberToken   string      `json:"remember_token" xorm:"VARCHAR(100)"`
 	LockExpires     extend.Time `json:"lock_expires" xorm:"lock_expires TIMESTAMP"`
 	CreatedAt       extend.Time `json:"created_at" xorm:"created TIMESTAMP"`

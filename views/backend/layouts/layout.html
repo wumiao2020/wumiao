@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../../assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
     <link rel="stylesheet" href="../assets/vendor/fullcalendar/dist/fullcalendar.min.css">
     <link rel="stylesheet" href="../assets/vendor/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/animate.css/animate.min.css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="../../assets/css/argon.css?v=1.1.0" type="text/css">
 </head>
@@ -94,7 +95,7 @@
 <script src="../../assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
 <script src="../../assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="../../assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-
+<script src="../../assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="../assets/vendor/moment/min/moment.min.js"></script>
 <script src="../assets/vendor/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="../assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
@@ -103,6 +104,7 @@
 <script src="../../assets/js/argon.js?v=1.1.0"></script>
 <!-- Demo JS - remove this in your project -->
 <script src="../../assets/js/admin.js"></script>
+{{ block "layouts/js.html" . }}{{ end }}
 </body>
 
 </html>

@@ -1,8 +1,10 @@
 package backend
 
 import (
+	"fmt"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
+	"golang.org/x/crypto/bcrypt"
 	"wumiao/models"
 	"wumiao/services"
 )
@@ -34,18 +36,53 @@ func (p *AdminController) GetCreate() mvc.Result {
 	}
 }
 
-func (p *AdminController) PostCreate() {
-	name := p.Ctx.PostValue("name")
-	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
-	data := models.Admins{Name: name, Status: isActive}
-	err := p.Service.Create(&data)
+func (p *AdminController) PostSave() {
+	data := new(models.Admins)
+	err := p.Ctx.ReadJSON(&data)
+	fmt.Println(err)
+	if len(data.Password) != 0 && len(data.Password) < 6 {
+		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": p.Ctx.Tr("The password length cannot be less than 6 digits")})
+		return
+	}
+	if data.Password != data.PasswordConfirm {
+		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": p.Ctx.Tr("The password and confirmation password do not match")})
+		return
+	}
+	if len(data.Password) > 5 {
+		hash, _ := bcrypt.GenerateFromPassword([]byte(data.Password), bcrypt.DefaultCost) //加密处理
+		data.Password = string(hash)
+	}
+	if data.Id == 0 {
+		err = p.Service.Create(data)
+	} else {
+		err = p.Service.Update(data)
+	}
 
 	if err == nil {
-		_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "保存成功！！！", "uuid": data.Id})
+		_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": p.Ctx.Tr("Save success !!!"), "id": data.Id})
 	} else {
 		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
 	}
+	return
+}
 
+func (p *AdminController) PostBy(id int64) {
+	dataInfo := p.Service.GetById(id)
+	data := new(models.Admins)
+	status := 1
+	if dataInfo.Status == 1 {
+		status = 0
+	}
+	data.Status = status
+	data.Id = id
+	err := p.Service.Update(data)
+	fmt.Println(err)
+	if err == nil {
+		_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": p.Ctx.Tr("Save success !!!"), "id": data.Id})
+	} else {
+		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
+	}
+	return
 }
 
 func (p *AdminController) Post() {
@@ -57,6 +94,8 @@ func (p *AdminController) Post() {
 	data := p.Service.GetList(limit, start)
 	_, _ = p.Ctx.JSON(
 		iris.Map{
+			"status":          false,
+			"code":            200,
 			"recordsFiltered": len(dataAll),
 			"recordsTotal":    len(dataAll),
 			"data":            data,
@@ -72,7 +111,7 @@ func (p *AdminController) GetBy(id int64) mvc.Result {
 			Name:   "errors/404.html",
 			Layout: iris.NoLayout,
 			Data: iris.Map{
-				"title": "你很神，找到了不存在的页面",
+				"title": p.Ctx.Tr("You are very god, found a page that does not exist"),
 			},
 		}
 	}
@@ -80,8 +119,7 @@ func (p *AdminController) GetBy(id int64) mvc.Result {
 		Name:   "admin/form.html",
 		Layout: iris.NoLayout,
 		Data: iris.Map{
-			"title": data.Name,
-			"data":  data,
+			"data": data,
 		},
 	}
 }
