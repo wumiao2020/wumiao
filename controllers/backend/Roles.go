@@ -16,7 +16,7 @@ func (p *RolesController) Get() mvc.Result {
 	return mvc.View{
 		Name: "page/index.html",
 		Data: iris.Map{
-			"title": "页面列表",
+			"title": p.Ctx.Tr("List page"),
 			"data":  "data",
 		},
 	}

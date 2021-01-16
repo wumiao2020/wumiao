@@ -2,13 +2,16 @@ package services
 
 import (
 	"github.com/go-xorm/xorm"
+	"time"
 	"wumiao/datasource"
+	"wumiao/extend"
 	"wumiao/models"
 )
 
 type AdminService interface {
 	GetAll() []models.Admins
 	GetList(limit int, start int) []models.Admins
+	GetLockList(limit int, start int) []models.Admins
 	GetById(Id int64) *models.Admins
 	GetByEmail(email string) *models.Admins
 	DeleteByID(id int64) error
@@ -30,6 +33,17 @@ func NewAdminService() AdminService {
 func (a adminService) GetList(limit int, start int) []models.Admins {
 	datalist := make([]models.Admins, 0)
 	err := a.engine.Desc("id").Limit(limit, start).Find(&datalist)
+	if err != nil {
+		return datalist
+	} else {
+		return datalist
+	}
+}
+
+func (a adminService) GetLockList(limit int, start int) []models.Admins {
+	datalist := make([]models.Admins, 0)
+
+	err := a.engine.Desc("id").Where("lock_expires > ?", time.Now().Format(extend.TimeFormant)).Limit(limit, start).Find(&datalist)
 	if err != nil {
 		return datalist
 	} else {

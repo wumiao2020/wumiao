@@ -75,7 +75,7 @@ func BackendStart() {
 	app.Use(func(ctx iris.Context) {
 		path := ctx.GetCurrentRoute()
 		p := fmt.Sprintf("%v%v", strings.ToLower(path.Method()), strings.ToLower(path.ResolvePath()))
-		fmt.Println(strings.Replace(p, "/", ".", -1))
+		//fmt.Println(strings.Replace(p, "/", ".", -1))
 		breadcrumbs := Breadcrumbs(strings.Replace(p, "/", ".", -1))
 		if len(breadcrumbs) > 0 {
 			ctx.ViewData("breadcrumb", breadcrumbs[len(breadcrumbs)-1])

@@ -18,7 +18,17 @@ func (p *AdminController) Get() mvc.Result {
 	return mvc.View{
 		Name: "admin/index.html",
 		Data: iris.Map{
-			"title": "页面列表",
+			"title": p.Ctx.Tr("List page"),
+			"data":  "data",
+		},
+	}
+}
+
+func (p *AdminController) GetLock() mvc.Result {
+	return mvc.View{
+		Name: "admin/lock.html",
+		Data: iris.Map{
+			"title": p.Ctx.Tr("List page"),
 			"data":  "data",
 		},
 	}
@@ -97,6 +107,24 @@ func (p *AdminController) Post() {
 			"status":          false,
 			"code":            200,
 			"recordsFiltered": len(dataAll),
+			"recordsTotal":    len(dataAll),
+			"data":            data,
+			"start":           0,
+		})
+}
+
+func (p *AdminController) PostLock() {
+
+	limit := p.Ctx.PostValueIntDefault("length", 10)
+	start := p.Ctx.PostValueIntDefault("start", 0)
+
+	dataAll := p.Service.GetAll()
+	data := p.Service.GetLockList(limit, start)
+	_, _ = p.Ctx.JSON(
+		iris.Map{
+			"status":          false,
+			"code":            200,
+			"recordsFiltered": len(data),
 			"recordsTotal":    len(dataAll),
 			"data":            data,
 			"start":           0,

@@ -20,7 +20,7 @@ func (p *ProductController) Get() mvc.Result {
 	return mvc.View{
 		Name: "product/index.html",
 		Data: iris.Map{
-			"title": "页面列表",
+			"title": p.Ctx.Tr("List page"),
 			"data":  "data",
 		},
 	}
