@@ -35,7 +35,7 @@
     <!-- Topnav -->
     {{ block "layouts/topnav.html" . }}{{ end }}
     <!-- Header -->
-    {{if ne .breadcrumb.Perms "get.account" }}
+    {{if ne .perms "get.account" }}
         <!-- Header -->
         <div class="header bg-primary pb-6">
             <div class="container-fluid">
@@ -59,11 +59,12 @@
                             </nav>
                         </div>
                         <div class="col-lg-6 col-5 text-right">
-                            {{ $name := call .tr .breadcrumb.Name }}
-                            <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-title="{{ call .tr "New" $name }}" data-url="{{ .breadcrumb.Url }}/create" data-target="#modal-default">New</a>
-
-{{/*                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>*/}}
-
+                            {{ if eq .breadcrumbBut.Type "F" }}
+                            {{ $name := call .tr .breadcrumbBut.Name }}
+                            <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-title="{{ $name }}" data-url="{{ .breadcrumbBut.Url }}" data-target="#modal-default">{{ $name }}</a>
+                            {{ else if eq .breadcrumbBut.Type "C" }}
+                            <a href="#" class="btn btn-sm btn-neutral">{{ call .tr .breadcrumbBut.Name }}</a>
+                            {{ end }}
                         </div>
                     </div>
                 </div>

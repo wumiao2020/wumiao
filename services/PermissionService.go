@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"github.com/go-xorm/xorm"
 	"wumiao/datasource"
 	"wumiao/models"
@@ -10,6 +11,7 @@ type PermissionService interface {
 	GetAll() []models.AdminPermissions
 	GetMenuList() []models.AdminPermissions
 	Get(id int64) *models.AdminPermissions
+	GetBreadcrumbBut(perms string) *models.AdminPermissions
 	GetBreadcrumbs(url string) []models.AdminPermissions
 	Update(data *models.AdminPermissions, columns []string) error
 	Create(data *models.AdminPermissions) error
@@ -30,7 +32,7 @@ func (p permissionService) GetAll() []models.AdminPermissions {
 	datalist := make([]models.AdminPermissions, 0)
 	err := p.engine.Asc("id").Find(&datalist)
 	if err != nil {
-		println(err)
+		fmt.Println(err)
 		return datalist
 	} else {
 		return datalist
@@ -47,13 +49,13 @@ func (p permissionService) Get(id int64) *models.AdminPermissions {
 	}
 }
 
-func (p permissionService) get(id int64) *models.AdminPermissions {
-	data := &models.AdminPermissions{Id: id}
+func (p permissionService) GetBreadcrumbBut(perms string) *models.AdminPermissions {
+	data := &models.AdminPermissions{Perms: perms}
 	ok, err := p.engine.Get(data)
 	if ok && err == nil {
 		return data
 	} else {
-		return nil
+		return data
 	}
 }
 

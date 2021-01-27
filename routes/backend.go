@@ -55,7 +55,7 @@ func BackendStart() {
 	//
 	//	return language // if empty then it will continue with the rest.
 	//}
-	println(err)
+	fmt.Println(err)
 	//app.Logger().SetLevel("debug")
 	app.HandleDir("/assets", "./public/argon/assets")
 	app.HandleDir("/upload", "./public/upload")
@@ -73,16 +73,20 @@ func BackendStart() {
 	hero.Register(sessManager.Start)
 
 	app.Use(func(ctx iris.Context) {
-		path := ctx.GetCurrentRoute()
-		p := fmt.Sprintf("%v%v", strings.ToLower(path.Method()), strings.ToLower(path.ResolvePath()))
-		//fmt.Println(strings.Replace(p, "/", ".", -1))
-		breadcrumbs := Breadcrumbs(strings.Replace(p, "/", ".", -1))
+		perms := strings.Replace(strings.ToLower(ctx.GetCurrentRoute().Name()), "/", ".", -1)
+		breadcrumbs := Breadcrumbs(perms)
+		Ap := new(models.AdminPermissions)
 		if len(breadcrumbs) > 0 {
-			ctx.ViewData("breadcrumb", breadcrumbs[len(breadcrumbs)-1])
+			breadcrumbBut := breadcrumbBut(perms + ".create")
+			breadcrumb := breadcrumbs[len(breadcrumbs)-1]
+			ctx.ViewData("breadcrumbBut", breadcrumbBut)
+			ctx.ViewData("breadcrumb", breadcrumb)
 		} else {
-			ctx.ViewData("breadcrumb", models.AdminPermissions{})
+			ctx.ViewData("breadcrumbBut", Ap)
+			ctx.ViewData("breadcrumb", Ap)
 		}
 		ctx.ViewData("breadcrumbs", breadcrumbs)
+		ctx.ViewData("perms", perms)
 		ctx.ViewData("menuList", MenuList())
 		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
@@ -177,14 +181,14 @@ func BackendStart() {
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
-	println(err)
+	fmt.Println(err)
 }
 
 func backendNotFound(ctx iris.Context) {
 	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
 	ctx.ViewLayout("layouts/account.html")
 	ctx.ViewData("data", "")
-	ctx.View("errors/404.html")
+	_ = ctx.View("errors/404.html")
 }
 
 func BackendHtml() {
@@ -198,7 +202,7 @@ func BackendHtml() {
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
-	println(err)
+	fmt.Println(err)
 }
 
 func Api() {
@@ -216,11 +220,11 @@ func Api() {
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
-	println(err)
+	fmt.Println(err)
 }
 
 func internalServerError(ctx iris.Context) {
-	ctx.WriteString("Oups something went wrong, try again")
+	_, _ = ctx.WriteString("Oups something went wrong, try again")
 }
 
 func MenuList() []models.AdminPermissions {
@@ -231,4 +235,9 @@ func MenuList() []models.AdminPermissions {
 func Breadcrumbs(path string) []models.AdminPermissions {
 	permissionService := services.NewPermissionService()
 	return permissionService.GetBreadcrumbs(path)
+}
+
+func breadcrumbBut(perms string) *models.AdminPermissions {
+	permissionService := services.NewPermissionService()
+	return permissionService.GetBreadcrumbBut(perms)
 }
