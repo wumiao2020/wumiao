@@ -1,0 +1,203 @@
+<script>
+
+    //Update/Delete an Event
+    $('body').on('click', '[data-current-action]', function() {
+        var currentAction = $(this).data('current-action');
+        var currentUrl = $(this).data('current-url');
+        var currentName = $(this).data('current-name');
+        //Delete
+        if (currentAction === 'delete') {
+            // Show confirm dialog
+            setTimeout(function() {
+                swal({
+                    title: '{{ call .tr "Are you sure delete?"}}',
+                    text: currentName,
+                    type: 'warning',
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-danger',
+                    confirmButtonText: '{{ call .tr "Yes, I'm sure!"}}',
+                    cancelButtonClass: 'btn btn-secondary',
+                    cancelButtonText:'{{ call .tr "Cancel" }}'
+                }).then((result) => {
+                    if (result.value) {
+                        // run ajax
+                        $.ajax({
+                            cache: true,
+                            type: "DELETE",
+                            url: currentUrl,
+                            //data:$('#yourformid').serialize(),// 你的formid
+                            async: false,
+                            error: function (request) {
+                                swal({
+                                    title: '{{ call .tr "Deleted fail!" }}',
+                                    text: 'Connection error.',
+                                    type: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: '{{ call .tr "OK" }}',
+                                    confirmButtonClass: 'btn btn-primary'
+                                });
+                            },
+                            success: function (data) {
+                                if (data.status === true) {
+                                    swal({
+                                        title: '{{ call .tr "Deleted success!" }}',
+                                        text: data.message,
+                                        type: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                } else {
+                                    swal({
+                                        title: '{{ call .tr "Deleted fail!" }}',
+                                        text: '',
+                                        type: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                }
+                            }
+                        });
+                        // Show confirmation
+                        $('#datatable').DataTable().ajax.reload( null, false );
+                    }else {
+                        $('#datatable').DataTable().ajax.reload( null, false );
+                    }
+                })
+            }, 200);
+            $('#datatable').DataTable().ajax.reload( null, false );
+
+        }
+        //Delete
+        if (currentAction === 'unlock') {
+            // Show confirm dialog
+            setTimeout(function() {
+                swal({
+                    title: '{{ call .tr "Are you sure unlock?"}}',
+                    text: currentName,
+                    type: 'warning',
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-danger',
+                    confirmButtonText: '{{ call .tr "Yes, I'm sure!"}}',
+                    cancelButtonClass: 'btn btn-secondary',
+                    cancelButtonText:'{{ call .tr "Cancel" }}'
+                }).then((result) => {
+                    if (result.value) {
+                        // run ajax
+                        $.ajax({
+                            cache: true,
+                            type: "PUT",
+                            url: currentUrl,
+                            //data:$('#yourformid').serialize(),// 你的formid
+                            async: false,
+                            error: function (request) {
+                                swal({
+                                    title: '{{ call .tr "Unlock fail!" }}',
+                                    text: 'Connection error.',
+                                    type: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: '{{ call .tr "OK" }}',
+                                    confirmButtonClass: 'btn btn-primary'
+                                });
+                            },
+                            success: function (data) {
+                                if (data.status === true) {
+                                    swal({
+                                        title: '{{ call .tr "Unlock success!" }}',
+                                        text: data.message,
+                                        type: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                } else {
+                                    swal({
+                                        title: '{{ call .tr "Unlock fail!" }}',
+                                        text: '',
+                                        type: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                }
+                            }
+                        });
+                        // Show confirmation
+                        $('#datatable').DataTable().ajax.reload( null, false );
+                    }else {
+                        $('#datatable').DataTable().ajax.reload( null, false );
+                    }
+                })
+            }, 200);
+            $('#datatable').DataTable().ajax.reload( null, false );
+
+        }
+        //Delete
+        if (currentAction === 'status') {
+            // Show confirm dialog
+            setTimeout(function() {
+                swal({
+                    title: '{{ call .tr "Are you sure update status?"}}',
+                    text: currentName,
+                    type: 'warning',
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-danger',
+                    confirmButtonText: '{{ call .tr "Yes, I'm sure!"}}',
+                    cancelButtonClass: 'btn btn-secondary',
+                    cancelButtonText:'{{ call .tr "Cancel" }}'
+                }).then((result) => {
+                    if (result.value) {
+                        // run ajax
+                        $.ajax({
+                            cache: true,
+                            type: "POST",
+                            url: currentUrl,
+                            //data:$('#yourformid').serialize(),// 你的formid
+                            async: false,
+                            error: function (request) {
+                                swal({
+                                    title: '{{ call .tr "Deleted fail!" }}',
+                                    text: 'Connection error.',
+                                    type: 'error',
+                                    buttonsStyling: false,
+                                    confirmButtonText: '{{ call .tr "OK" }}',
+                                    confirmButtonClass: 'btn btn-primary'
+                                });
+                            },
+                            success: function (data) {
+                                if (data.status === true) {
+                                    swal({
+                                        title: '{{ call .tr "Deleted success!" }}',
+                                        text: data.message,
+                                        type: 'success',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                } else {
+                                    swal({
+                                        title: '{{ call .tr "Deleted fail!" }}',
+                                        text: '',
+                                        type: 'error',
+                                        buttonsStyling: false,
+                                        confirmButtonText: '{{ call .tr "OK" }}',
+                                        confirmButtonClass: 'btn btn-primary'
+                                    });
+                                }
+                            }
+                        });
+                        // Show confirmation
+                        $('#datatable').DataTable().ajax.reload( null, false );
+
+                    }else {
+                        $('#datatable').DataTable().ajax.reload( null, false );
+                    }
+                });
+            }, 200);
+        }
+    });
+</script>
