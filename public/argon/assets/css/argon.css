@@ -1,4 +1,4 @@
-@charset 'UTF-8';
+@charset "UTF-8";
 /*!
 
 =========================================================
@@ -20413,7 +20413,7 @@ textarea[resize='horizontal']
 }
 .icon-lg + .icon-text
 {
-    width: calc(100% - $icon-size-lg - 1);
+    width: calc(100% - 4rem - 1);
 }
 
 .icon-sm
@@ -20428,7 +20428,7 @@ textarea[resize='horizontal']
 }
 .icon-sm + .icon-text
 {
-    width: calc(100% - $icon-size-sm - 1);
+    width: calc(100% - 2rem - 1);
 }
 
 .icon-xs
@@ -20443,7 +20443,7 @@ textarea[resize='horizontal']
 }
 .icon-xs + .icon-text
 {
-    width: calc(100% - $icon-size-xs - 1);
+    width: calc(100% - 1.25rem - 1);
 }
 
 .icon-actions > a
@@ -20722,7 +20722,7 @@ textarea[resize='horizontal']
 
 .checklist-item-danger:before
 {
-    background-color: #f5365c;
+    background-color: #0e0d0d;
 }
 
 .checklist-item-light:before
@@ -27571,7 +27571,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 {
     padding-left: 25px; 
 
-    transform: translate(0, -50%, 0);
+    transform: translate(0, -50%);
 }
 
 .noUi-rtl .noUi-value-vertical
