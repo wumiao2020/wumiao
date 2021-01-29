@@ -29316,7 +29316,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 .scrollbar-inner
 {
-    height: 100%;
+    height: calc(100vh - 78px);
 }
 .scrollbar-inner:not(:hover) .scroll-element
 {

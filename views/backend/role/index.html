@@ -1,0 +1,150 @@
+<!-- Page content -->
+
+
+<div class="container-fluid mt--6">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="table-responsive py-4">
+                    <table class="table align-items-center table-flush" id="datatable" style="width:100%">
+                        <thead class="thead-light">
+                        <tr>
+                            <th width="50">ID</th>
+                            <th>{{ call .tr "Name"}}</th>
+                            <th width="50">{{ call .tr "Status"}}</th>
+                            <th width="150">{{ call .tr "Created"}}</th>
+                            <th width="150">{{ call .tr "Updated"}}</th>
+                            <th width="100">{{ call .tr "Action"}}</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6">
+                <div class="copyright text-center text-lg-left text-muted">
+                    &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
+                        Tim</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                    <li class="nav-item">
+                        <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About
+                            Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript">
+    window.onload = function () {
+        $('#datatable').DataTable({
+            order: [[1, "desc"]],
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [2,10, 25, 50, -1],
+                [2,10, 25, 50, "All"]
+            ],
+            "processing": true,
+            "serverSide": true,
+            language: {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+                "oAria": {
+                    "sSortAscending": ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            },
+            "ajax": {
+                "url": "/role",
+                "type": "POST",
+                error: function (arg1) {
+                    walter.notification(arg1.statusText, 'rose');
+                },
+
+            },
+            //dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ],
+            sort: false,
+            "columns": [
+                {"data": "id", "sClass": "text-center"},
+                {"data": "name"},
+                {"data": "status"},
+                {"data": "created_at", "sClass": "hidden-xs text-center"},
+                {"data": "updated_at", "sClass": "hidden-xs text-center"},
+                {"data": "action", "sClass": "text-center"}
+            ],
+            columnDefs: [
+                {
+                    'targets': 1, "render": function (data, type, row) {
+
+                        return '<b>' + data + '</b>';
+                    }
+                },
+                {
+                    'targets': 2, "render": function (data, type, row) {
+                        var checked = '';
+                        if (data) {
+                            checked = 'checked';
+                        }
+                        return '<label class="custom-toggle"  data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/role/' + row['id'] + '" data-current-action="status"><input type="checkbox" ' + checked + '><span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span></label>';
+                    }
+                },
+                {
+                    'targets': -1, "render": function (data, type, row) {
+                        var row_edit = true;
+                        var row_del = true;
+                        var str = '';
+
+                        //编辑
+                        if (row_edit) {
+                            str += '<a href="#!" class="table-action"  data-toggle="modal" data-title="' + row['name'] + '" data-url="/role/' + row['id'] + '" data-target="#modal-default" data-original-title="Edit product"> <i class="fas fa-user-edit"></i> </a>';
+                        }
+                        //删除
+                        if (row_del) {
+                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/role/' + row['id'] + '" data-current-action="delete"><i class="fas fa-trash"></i></a>';
+                        }
+
+                        return str;
+                    }
+                }
+            ]
+        });
+    };
+</script>

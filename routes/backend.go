@@ -132,9 +132,9 @@ func BackendStart() {
 
 	//角色管理
 	role := mvc.New(app.Party("/role"))
-	roleService := services.NewRoleService()
+	roleService := services.NewAdminRolesService()
 	role.Register(roleService)
-	role.Handle(new(backend.RolesController))
+	role.Handle(new(backend.AdminRoleController))
 
 	//页面管理
 	page := mvc.New(app.Party("/page"))

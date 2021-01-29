@@ -1,4 +1,4 @@
-<form class="needs-validation" novalidate method="post" action="/admin/save">
+<form class="needs-validation" novalidate method="post" action="/role/save">
     <input name="id" value="{{ .data.Id }}" type="hidden">
     <div class="form-group row">
         <label class="col-md-2 col-form-label form-control-label"
@@ -18,23 +18,9 @@
     </div>
     <div class="form-group row">
         <label class="col-md-2 col-form-label form-control-label"
-               for="email">{{ call .tr "Email"}}</label>
+               for="description">{{ call .tr "Description"}}</label>
         <div class="col-md-10">
-            <input class="form-control" name="email" type="email" value="{{ .data.Email }}" id="Email">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-md-2 col-form-label form-control-label"
-               for="password">{{ call .tr "Password"}}</label>
-        <div class="col-md-10">
-            <input class="form-control" name="password" type="password" value="" id="Password">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-md-2 col-form-label form-control-label"
-               for="password_confirm">{{ call .tr "Password confirm"}}</label>
-        <div class="col-md-10">
-            <input class="form-control" name="password_confirm" type="password" value="" id="password_confirm">
+            <textarea class="form-control" name="description" id="description">{{ .data.Description }}</textarea>
         </div>
     </div>
 </form>

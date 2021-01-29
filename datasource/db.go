@@ -29,8 +29,8 @@ func init() {
 	//engine.SetTZLocation(conf.SysTimeLocation)
 
 	// 性能优化的时候才考虑，加上本机的SQL缓存
-	cache := xorm.NewLRUCacher(xorm.NewMemoryStore(), 1000)
-	engine.SetDefaultCacher(cache)
+	//cache := xorm.NewLRUCacher(xorm.NewMemoryStore(), 1000)
+	//engine.SetDefaultCacher(cache)
 	Db = engine
 }
 
