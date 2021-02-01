@@ -21724,6 +21724,7 @@ textarea[resize='horizontal']
     max-width: 62px;
     padding-right: 0; 
     padding-left: 0;
+    z-index: 1041;
 }
 .navbar-vertical.navbar-expand-xs .navbar-inner
 {

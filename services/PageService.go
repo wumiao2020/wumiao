@@ -11,8 +11,9 @@ type PageService interface {
 	GetList(limit int, start int) []models.Page
 	Get(string string) *models.Page
 	GetByUuid(string string) *models.Page
+	GetById(id int64) *models.Page
 	DeleteByID(id int64) error
-	Update(data *models.Page, columns []string) error
+	Update(data *models.Page) error
 	Create(data *models.Page) error
 }
 
@@ -55,9 +56,19 @@ func (p pageService) GetByUuid(string string) *models.Page {
 		return nil
 	}
 }
+
+func (p pageService) GetById(id int64) *models.Page {
+	data := &models.Page{Id: id}
+	ok, err := p.engine.Get(data)
+	if ok && err == nil {
+		return data
+	} else {
+		return nil
+	}
+}
 func (p pageService) DeleteByID(id int64) error {
-	data := models.Page{Id: id, IsActive: 0}
-	_, err := p.engine.Id(data.Id).Update(data)
+	data := models.Page{Id: id}
+	_, err := p.engine.Id(data.Id).Delete(data)
 	return err
 }
 func (p pageService) Get(string string) *models.Page {
@@ -70,8 +81,9 @@ func (p pageService) Get(string string) *models.Page {
 	}
 }
 
-func (p pageService) Update(data *models.Page, column []string) error {
-	_, err := p.engine.Where("uuid=?", data.Uuid).MustCols(column...).Update(data)
+func (p pageService) Update(data *models.Page) error {
+	column := []string{"status"}
+	_, err := p.engine.Where("id=?", data.Id).MustCols(column...).Update(data)
 	return err
 }
 func (p pageService) Create(data *models.Page) error {
