@@ -33,7 +33,7 @@
             dataType: 'html',
             success:function (data) {
                 if (data.code === undefined){
-                    $(".main-panel>.content>.lists").append(data);
+                    $("#panel>.content>.lists").append(data);
                 }else if (data.code === 401){
                     window.location.reload();
                 }else {
