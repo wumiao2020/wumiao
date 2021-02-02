@@ -11,7 +11,7 @@ import (
 	"wumiao/services"
 )
 
-const adminSessionId = "admin_session_id"
+const adminSession = "admin_session"
 
 type AccountController struct {
 	Ctx     iris.Context
@@ -21,7 +21,8 @@ type AccountController struct {
 }
 
 func (a *AccountController) GetLogin() mvc.Result {
-	if a.isLoggedIn() {
+	user := a.getCurrentUser()
+	if user != nil {
 		return mvc.Response{
 			// 重定向.
 			Path: "/",
@@ -55,11 +56,8 @@ func (a *AccountController) PostLogin() mvc.Result {
 			strings := []string{a.Ctx.Tr("The username or password is incorrect or the account is locked, please re-enter! ! !")}
 			a.Session.SetFlash("errors", strings)
 		} else {
-			a.Session.Set(adminSessionId, admin.Id)
-			requestUrl := a.Session.GetStringDefault("request_url", "/account")
-			if requestUrl == "/account/login" {
-				requestUrl = "/account"
-			}
+			a.Session.Set(adminSession, admin)
+			requestUrl := a.Session.GetStringDefault("request_url", "/")
 			return mvc.Response{
 				// 重定向.
 				Path: requestUrl,
@@ -76,19 +74,19 @@ func (a *AccountController) PostLogin() mvc.Result {
 
 func (a *AccountController) Get() mvc.Result {
 
-	if !a.isLoggedIn() {
+	user := a.getCurrentUser()
+	if user == nil {
 		return mvc.Response{
 			// 重定向
 			Path: "/account/login",
 		}
 	}
-	u := a.Service.GetById(a.getCurrentUserID())
 	return mvc.View{
 		Layout: "layouts/layout.html",
 		Name:   "account/profile.html",
 		Data: iris.Map{
 			"title": "个人资料",
-			"data":  u,
+			"data":  user,
 		},
 	}
 }
@@ -114,7 +112,7 @@ func (a *AccountController) PostRegister() mvc.Result {
 		hash, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost) //加密处理
 		data := models.Admins{Name: username, Email: username, Password: string(hash)}
 		_ = a.Service.Create(&data)
-		a.Session.Set(adminSessionId, data.Id)
+		a.Session.Set(adminSession, data)
 		return mvc.Response{
 			Path: "/account",
 		}
@@ -126,18 +124,15 @@ func (a *AccountController) PostRegister() mvc.Result {
 }
 
 func (a *AccountController) AnyLogout() {
-	if a.isLoggedIn() {
+	user := a.getCurrentUser()
+	if user != nil {
 		a.Session.Destroy()
 	}
 
 	a.Ctx.Redirect("/account/login")
 }
 
-func (a *AccountController) isLoggedIn() bool {
-	return a.getCurrentUserID() > 0
-}
-
-func (a *AccountController) getCurrentUserID() int64 {
-	userID := a.Session.GetInt64Default(adminSessionId, 0)
-	return userID
+func (a *AccountController) getCurrentUser() interface{} {
+	user := a.Session.Get(adminSession)
+	return user
 }

@@ -21,8 +21,9 @@ func Authentication(ctx iris.Context, session *sessions.Session) mvc.Result {
 	path := ctx.GetCurrentRoute().ResolvePath()
 	errors := session.GetFlash("errors")
 	ctx.ViewData("errors", errors)
-	userID := session.GetInt64Default("admin_session_id", 0)
-	if userID == 0 && path != "/account/login" {
+	user := session.Get("admin_session")
+	ctx.ViewData("user", user)
+	if user == nil && path != "/account/login" {
 		if ctx.IsAjax() {
 			_, _ = ctx.JSON(iris.Map{"status": false, "code": 401, "message": ctx.Tr("You have not signed in or your login has expired. Please sign in again")})
 		}

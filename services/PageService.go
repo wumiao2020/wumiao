@@ -82,8 +82,8 @@ func (p pageService) Get(string string) *models.Page {
 }
 
 func (p pageService) Update(data *models.Page) error {
-	column := []string{"status"}
-	_, err := p.engine.Where("id=?", data.Id).MustCols(column...).Update(data)
+	//column := []string{"status"}
+	_, err := p.engine.Where("id=?", data.Id).AllCols().Update(data)
 	return err
 }
 func (p pageService) Create(data *models.Page) error {

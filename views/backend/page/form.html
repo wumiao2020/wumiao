@@ -1,7 +1,7 @@
 <div class="content">
 
-    <form id="form" method="get" action="/" class="form-horizontal">
-        <input id="uuid" type="hidden" name="uuid" value="{{.data.Uuid}}">
+    <form id="form" method="post" action="/page/save" class="form-horizontal">
+        <input id="uuid" type="hidden" name="id" value="{{.data.Id}}">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -29,7 +29,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group bmd-form-group is-filled">
                                             <label class="bmd-label-floating">状态</label>
-                                            <select id="is_active" name="is_active" class="selectpicker" data-size="7"
+                                            <select id="status" name="status" class="selectpicker" data-size="7"
                                                     data-style="select-with-transition">
                                                 <option value="1"> 启用</option>
                                                 <option value="0"> 禁用</option>
@@ -39,7 +39,7 @@
                                     <div class="col-md-10">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">识别码</label>
-                                            <input id="identifier" value="{{.data.Title}}" name="identifier" type="text"
+                                            <input id="identifier" value="{{.data.Identifier}}" name="identifier" type="text"
                                                    class="form-control">
                                         </div>
                                     </div>
