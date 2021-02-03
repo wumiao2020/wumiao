@@ -7,8 +7,8 @@ import (
 )
 
 type PageService interface {
-	GetAll() []models.Page
-	GetList(limit int, start int) []models.Page
+	GetAll(search string) []models.Page
+	GetList(limit int, start int, search string) []models.Page
 	Get(string string) *models.Page
 	GetByUuid(string string) *models.Page
 	GetById(id int64) *models.Page
@@ -28,9 +28,14 @@ func NewPageService() PageService {
 	}
 }
 
-func (p pageService) GetList(limit int, start int) []models.Page {
+func (p pageService) GetList(limit int, start int, search string) []models.Page {
 	datalist := make([]models.Page, 0)
-	err := p.engine.Desc("id").Limit(limit, start).Find(&datalist)
+	var err error
+	if len(search) > 0 {
+		err = p.engine.Desc("id").Where("title like ?", "%"+search+"%").Limit(limit, start).Find(&datalist)
+	} else {
+		err = p.engine.Desc("id").Limit(limit, start).Find(&datalist)
+	}
 	if err != nil {
 		return datalist
 	} else {
@@ -38,9 +43,14 @@ func (p pageService) GetList(limit int, start int) []models.Page {
 	}
 }
 
-func (p pageService) GetAll() []models.Page {
+func (p pageService) GetAll(search string) []models.Page {
 	datalist := make([]models.Page, 0)
-	err := p.engine.Desc("id").Find(&datalist)
+	var err error
+	if len(search) > 0 {
+		err = p.engine.Desc("id").Where("title like ?", "%"+search+"%").Find(&datalist)
+	} else {
+		err = p.engine.Desc("id").Find(&datalist)
+	}
 	if err != nil {
 		return datalist
 	} else {
@@ -82,7 +92,6 @@ func (p pageService) Get(string string) *models.Page {
 }
 
 func (p pageService) Update(data *models.Page) error {
-	//column := []string{"status"}
 	_, err := p.engine.Where("id=?", data.Id).AllCols().Update(data)
 	return err
 }

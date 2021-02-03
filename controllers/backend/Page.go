@@ -41,6 +41,9 @@ func (p *PageController) PostSave() {
 	if len(data.Uuid) == 0 {
 		data.Uuid = uuid.NewString()
 	}
+	if len(data.Identifier) == 0 {
+		data.Identifier = data.Uuid
+	}
 	if data.Id == 0 {
 		err = p.Service.Create(data)
 	} else {
@@ -75,10 +78,11 @@ func (p *PageController) PostBy(id int64) {
 func (p *PageController) Post() {
 
 	limit := p.Ctx.PostValueIntDefault("length", 10)
+	search := p.Ctx.PostValue("search[value]")
 	start := p.Ctx.PostValueIntDefault("start", 0)
 
-	dataAll := p.Service.GetAll()
-	data := p.Service.GetList(limit, start)
+	dataAll := p.Service.GetAll(search)
+	data := p.Service.GetList(limit, start, search)
 	_, _ = p.Ctx.JSON(
 		iris.Map{
 			"status":          false,
