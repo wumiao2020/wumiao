@@ -57,6 +57,7 @@ func BackendStart() {
 	//}
 	fmt.Println(err)
 	//app.Logger().SetLevel("debug")
+	app.HandleDir("/argon", "./public/argon")
 	app.HandleDir("/assets", "./public/argon/assets")
 	app.HandleDir("/upload", "./public/upload")
 	// 设置关注的视图目录，和文件后缀
@@ -195,28 +196,10 @@ func BackendHtml() {
 
 	app := iris.New()
 	//app.Logger().SetLevel("debug")
-	app.HandleDir("/", "./public/argon")
+	app.HandleDir("/", "./public/freedom")
 
 	err := app.Run(
 		iris.Addr(":8080"),
-		iris.WithoutBanner,
-		iris.WithoutServerError(iris.ErrServerClosed),
-	)
-	fmt.Println(err)
-}
-
-func Api() {
-
-	app := iris.New()
-	//app.Logger().SetLevel("debug")
-	//页面管理
-	api := mvc.New(app.Party("/api"))
-	apiService := services.NewApiService()
-	api.Register(apiService)
-	api.Handle(new(backend.ApiController))
-
-	err := app.Run(
-		iris.Addr(":8888"),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
