@@ -206,6 +206,20 @@ func BackendHtml() {
 	fmt.Println(err)
 }
 
+func FrontendHtml() {
+
+	app := iris.New()
+	//app.Logger().SetLevel("debug")
+	app.HandleDir("/", "./public/argon")
+
+	err := app.Run(
+		iris.Addr(":8082"),
+		iris.WithoutBanner,
+		iris.WithoutServerError(iris.ErrServerClosed),
+	)
+	fmt.Println(err)
+}
+
 func internalServerError(ctx iris.Context) {
 	_, _ = ctx.WriteString("Oups something went wrong, try again")
 }

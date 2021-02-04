@@ -7,5 +7,6 @@ import (
 
 func main() {
 	go routes.BackendHtml()
+	go routes.FrontendHtml()
 	routes.BackendStart()
 }
