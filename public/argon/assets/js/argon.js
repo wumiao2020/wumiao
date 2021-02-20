@@ -1,26 +1,68 @@
+function uploadImageInst() {
 
-/*!
+	var $dropzone = $('[data-toggle="dropzone"]');
+	var $dropzonePreview = $('.dz-preview');
 
-=========================================================
-* Argon Dashboard PRO - v1.1.0
-=========================================================
+	//
+	// Methods
+	//
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+	function init($this) {
+		var multiple = ($this.data('dropzone-multiple') !== undefined) ? true : false;
+		var preview = $this.find($dropzonePreview);
+		var currentFile = undefined;
 
-* Coded by www.creative-tim.com
+		// Init options
+		var options = {
+			url: "/upload/images",
+			thumbnailWidth: null,
+			thumbnailHeight: null,
+			previewsContainer: preview.get(0),
+			previewTemplate: preview.html(),
+			maxFiles: (!multiple) ? 1 : null,
+			acceptedFiles: (!multiple) ? 'image/*' : null,
+			init: function() {
+				this.on("addedfile", function(file) {
+					if (!multiple && currentFile) {
+						this.removeFile(currentFile);
+					}
+					currentFile = file;
+				});
+				this.on('success', function (files, response) {
+					$("#thumb").val(response.url)
+				});
+				var mockFile = { name: "", size: "", type: 'image/jpeg' };
+				this.emit("addedfile",mockFile);
+			}
+		}
 
-=========================================================
+		// Clear preview html
+		preview.html('');
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+		// Init dropzone
+		$this.dropzone(options)
+	}
 
-*/
+	function globalOptions() {
+		Dropzone.autoDiscover = false;
+	}
 
 
+	//
+	// Events
+	//
 
-//
-// Layout
-//
+	if ($dropzone.length) {
+
+		// Set global options
+		globalOptions();
+
+		// Init dropzones
+		$dropzone.each(function() {
+			init($(this));
+		});
+	}
+}
 
 'use strict';
 

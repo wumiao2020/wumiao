@@ -26,11 +26,36 @@
                       rows="5">{{.data.Content}}</textarea>
         </div>
     </div>
+
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label form-control-label"
+               for="meta_keywords">{{ call .tr "Upload Images"}}</label>
+        <div class="col-md-10">
+            <input class="form-control" name="thumb" type="hidden" value="{{ .data.Thumb }}" id="thumb">
+            <div class="dropzone dropzone-single mb-3 {{if ne .data.Thumb ""}} dz-max-files-reached {{end}}" data-toggle="dropzone">
+                <div class="fallback">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="projectCoverUploads">
+                        <label class="custom-file-label" for="projectCoverUploads">Choose file</label>
+                    </div>
+                </div>
+                <div class="dz-preview dz-preview-single">
+                    <div class="dz-preview-cover">
+                        <img class="dz-preview-img" src="{{ .data.Thumb }}" alt="{{ .data.Thumb }}" data-dz-thumbnail>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="form-group row">
         <label class="col-md-2 col-form-label form-control-label"
                for="meta_keywords">{{ call .tr "Meta keywords"}}</label>
         <div class="col-md-10">
-            <input class="form-control" name="meta_keywords" type="text" value="{{.data.MetaKeywords}}" id="meta_keywords">
+            <input class="form-control" name="meta_keywords" type="text" value="{{.data.MetaKeywords}}"
+                   id="meta_keywords">
         </div>
     </div>
     <div class="form-group row">
@@ -50,20 +75,20 @@
     </div>
 </form>
 
-    <script>
-            new FroalaEditor('#edit', {
-                height: (window.innerHeight - 200) + 'px',
-                language: 'zh_cn',
-                toolbarInline: false,
-                enter: FroalaEditor.ENTER_P,
-                imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
-                imageUploadURL: '/upload/images',
-                videoUploadURL: '/upload/videos',
-                placeholderText: null,
-                imageManagerLoadURL: "",
-                imageManagerDeleteURL: "",
-            })
+<script>
+    new FroalaEditor('#edit', {
+        height: (window.innerHeight - 200) + 'px',
+        language: 'zh_cn',
+        toolbarInline: false,
+        enter: FroalaEditor.ENTER_P,
+        imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
+        imageUploadURL: '/upload/images',
+        videoUploadURL: '/upload/videos',
+        placeholderText: null,
+        imageManagerLoadURL: "",
+        imageManagerDeleteURL: "",
+    })
 
-            // $("#case1").upload();
-
-    </script>
+    uploadImageInst()
+    // $("#case1").upload();
+</script>
