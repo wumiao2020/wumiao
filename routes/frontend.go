@@ -5,7 +5,6 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/hero"
 	"github.com/kataras/iris/v12/mvc"
-	"github.com/kataras/iris/v12/sessions"
 	"strings"
 	"time"
 	"wumiao/config"
@@ -15,59 +14,25 @@ import (
 	"wumiao/services"
 )
 
-var sessManager = sessions.New(sessions.Config{
-	Cookie:  "sessioncookiename",
-	Expires: 1 * time.Hour,
-})
-
-func Backend() {
+func Frontend() {
 
 	app := iris.New()
 
 	err := app.I18n.Load("./locales/*/*.ini", "en-US", "zh-TW", "zh-CN")
 
 	app.I18n.SetDefault("zh-CN")
-	//
-	//app.I18n.URLParameter = "l"
-	//app.I18n.ExtractFunc = func(ctx iris.Context) string {
-	//
-	//	language := ctx.URLParam("l")
-	//	if len(language) > 0 {
-	//		ctx.RemoveCookie("language")
-	//		ctx.SetCookieKV("language",language)
-	//	}else {
-	//		language = ctx.GetCookie("language")
-	//	}
-	//
-	//	println(language)
-	//
-	//	switch language {
-	//	case "tw":
-	//		language = "zh-TW"
-	//	case "en":
-	//		language = "en-US"
-	//	case "cn":
-	//		language = "zh-CN"
-	//	default :
-	//		language = "zh-CN"
-	//	}
-	//
-	//
-	//	return language // if empty then it will continue with the rest.
-	//}
 	fmt.Println(err)
 	//app.Logger().SetLevel("debug")
-	app.HandleDir("/argon", "./public/argon")
-	app.HandleDir("/assets", "./public/argon/assets")
+	app.HandleDir("/assets", "./public/frontend/assets")
 	app.HandleDir("/upload", "./public/upload")
 	// 设置关注的视图目录，和文件后缀
-	tmpl := iris.HTML("./views/backend", ".html")
+	tmpl := iris.HTML("./views/frontend", ".html")
 	tmpl.Layout("layouts/layout.html")
 	// 是否每次请求都重新加载文件，这个在开发期间设置为true，在发布时设置为false
 	// 可以方便每次修改视图文件而无需停止服务
 	tmpl.Reload(true)
 
-	app.OnErrorCode(iris.StatusNotFound, backendNotFound)
+	app.OnErrorCode(iris.StatusNotFound, frontendNotFound)
 	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
 	app.RegisterView(tmpl)
 
@@ -178,49 +143,30 @@ func Backend() {
 	upload.Handle(new(backend.UploadController))
 
 	err = app.Run(
-		iris.Addr(":"+config.GetEnv("BACKEND_HOST_PORT", "8090")),
+		iris.Addr(":"+config.GetEnv("FRONTEND_HOST_PORT", "8080")),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
 	fmt.Println(err)
 }
 
-func backendNotFound(ctx iris.Context) {
+func frontendNotFound(ctx iris.Context) {
 	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
 	ctx.ViewLayout("layouts/account.html")
 	ctx.ViewData("data", "")
 	_ = ctx.View("errors/404.html")
 }
 
-func BackendHtml() {
+func FrontendHtml() {
 
 	app := iris.New()
 	//app.Logger().SetLevel("debug")
-	app.HandleDir("/", "./public/freedom")
+	app.HandleDir("/", "./public/argon")
 
 	err := app.Run(
-		iris.Addr(":8091"),
+		iris.Addr(":8081"),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)
 	fmt.Println(err)
-}
-
-func internalServerError(ctx iris.Context) {
-	_, _ = ctx.WriteString("Oups something went wrong, try again")
-}
-
-func MenuList() []models.AdminPermissions {
-	permissionService := services.NewPermissionService()
-	return permissionService.GetMenuList()
-}
-
-func Breadcrumbs(path string) []models.AdminPermissions {
-	permissionService := services.NewPermissionService()
-	return permissionService.GetBreadcrumbs(path)
-}
-
-func breadcrumbBut(perms string) *models.AdminPermissions {
-	permissionService := services.NewPermissionService()
-	return permissionService.GetBreadcrumbBut(perms)
 }
