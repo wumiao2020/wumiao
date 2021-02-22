@@ -9,7 +9,7 @@ import (
 	"time"
 	"wumiao/config"
 	"wumiao/controllers/backend"
-	"wumiao/middleware"
+	"wumiao/controllers/frontend"
 	"wumiao/models"
 	"wumiao/services"
 )
@@ -18,7 +18,7 @@ func Frontend() {
 
 	app := iris.New()
 
-	err := app.I18n.Load("./locales/*/*.ini", "en-US", "zh-TW", "zh-CN")
+	err := app.I18n.Load("./locales/frontend/*/*.ini", "en-US", "zh-TW", "zh-CN")
 
 	app.I18n.SetDefault("zh-CN")
 	fmt.Println(err)
@@ -71,72 +71,20 @@ func Frontend() {
 		return time.Now().UTC().Year()
 	})
 
-	account := mvc.New(app.Party("/account"))
-	accountService := services.NewAdminService()
-	account.Register(accountService)
-	account.Handle(new(backend.AccountController))
-
-	app.Use(hero.Handler(middleware.Authentication))
-
-	//页面管理
-	dashboard := mvc.New(app.Party("/"))
-	dashboardService := services.NewPageService()
-	dashboard.Register(dashboardService)
-	dashboard.Handle(new(backend.DashboardController))
-
-	//权限管理
-	permission := mvc.New(app.Party("/permission"))
-	permissionService := services.NewPermissionService()
-	permission.Register(permissionService)
-	permission.Handle(new(backend.PermissionController))
-
-	//管理员管理
-	admin := mvc.New(app.Party("/admin"))
-	adminService := services.NewAdminService()
-	admin.Register(adminService)
-	admin.Handle(new(backend.AdminController))
-
-	//角色管理
-	role := mvc.New(app.Party("/role"))
-	roleService := services.NewAdminRolesService()
-	role.Register(roleService)
-	role.Handle(new(backend.AdminRoleController))
-
-	//页面管理
-	page := mvc.New(app.Party("/page"))
+	page := mvc.New(app.Party("/"))
 	pageService := services.NewPageService()
 	page.Register(pageService)
-	page.Handle(new(backend.PageController))
+	page.Handle(new(frontend.PageController))
 
-	//文章管理
 	news := mvc.New(app.Party("/news"))
 	newsService := services.NewNewsService()
 	news.Register(newsService)
-	news.Handle(new(backend.NewsController))
+	news.Handle(new(frontend.NewsController))
 
-	//标签管理
-	tag := mvc.New(app.Party("/tag"))
-	tagService := services.NewTagService()
-	tag.Register(tagService)
-	tag.Handle(new(backend.TagController))
-
-	//导航管理
-	menu := mvc.New(app.Party("/menu"))
-	menuService := services.NewMenuService()
-	menu.Register(menuService)
-	menu.Handle(new(backend.MenuController))
-
-	//产品管理
-	product := mvc.New(app.Party("/product"))
-	productService := services.NewProductService()
-	product.Register(productService)
-	product.Handle(new(backend.ProductController))
-
-	//分类管理
-	category := mvc.New(app.Party("/category"))
-	categoryService := services.NewCategoryService()
-	category.Register(categoryService)
-	category.Handle(new(backend.CategoryController))
+	shop := mvc.New(app.Party("/shop"))
+	shopService := services.NewProductService()
+	shop.Register(shopService)
+	shop.Handle(new(frontend.ProductController))
 
 	//上传管理
 	upload := mvc.New(app.Party("/upload"))
@@ -152,7 +100,7 @@ func Frontend() {
 
 func frontendNotFound(ctx iris.Context) {
 	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
-	ctx.ViewLayout("layouts/account.html")
+	ctx.ViewLayout(iris.NoLayout)
 	ctx.ViewData("data", "")
 	_ = ctx.View("errors/404.html")
 }
@@ -161,7 +109,7 @@ func FrontendHtml() {
 
 	app := iris.New()
 	//app.Logger().SetLevel("debug")
-	app.HandleDir("/", "./public/argon")
+	app.HandleDir("/", "./public/frontend")
 
 	err := app.Run(
 		iris.Addr(":8081"),

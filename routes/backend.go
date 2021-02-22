@@ -24,7 +24,7 @@ func Backend() {
 
 	app := iris.New()
 
-	err := app.I18n.Load("./locales/*/*.ini", "en-US", "zh-TW", "zh-CN")
+	err := app.I18n.Load("./locales/backend/*/*.ini", "en-US", "zh-TW", "zh-CN")
 
 	app.I18n.SetDefault("zh-CN")
 	//
