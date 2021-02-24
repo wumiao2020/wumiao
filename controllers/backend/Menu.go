@@ -37,9 +37,9 @@ func (p *MenuController) PostCreate() {
 	id := p.Ctx.PostValueInt64Default("id", 0)
 	title := p.Ctx.PostValue("title")
 	uri := p.Ctx.PostValue("uri")
-	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
+	status := p.Ctx.PostValueIntDefault("status", 0)
 	position := p.Ctx.PostValueIntDefault("position", 0)
-	data := models.Menu{Title: title, IsActive: isActive, Position: position, Uri: uri}
+	data := models.Menu{Title: title, Status: status, Position: position, Uri: uri}
 	if id == 0 {
 		err := p.Service.Create(&data)
 		if err == nil {
@@ -49,7 +49,7 @@ func (p *MenuController) PostCreate() {
 		}
 	} else {
 		data.Id = id
-		err := p.Service.Update(&data, []string{"title", "position", "uri", "is_active", "thumb", "identifier"})
+		err := p.Service.Update(&data, []string{"title", "position", "uri", "status", "thumb", "identifier"})
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Id})
 		} else {

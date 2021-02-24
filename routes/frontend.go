@@ -5,6 +5,7 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/hero"
 	"github.com/kataras/iris/v12/mvc"
+	"html/template"
 	"strings"
 	"time"
 	"wumiao/config"
@@ -32,12 +33,6 @@ func Frontend() {
 	// 可以方便每次修改视图文件而无需停止服务
 	tmpl.Reload(true)
 
-	app.OnErrorCode(iris.StatusNotFound, frontendNotFound)
-	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
-	app.RegisterView(tmpl)
-
-	hero.Register(sessManager.Start)
-
 	app.Use(func(ctx iris.Context) {
 		perms := strings.Replace(strings.ToLower(ctx.GetCurrentRoute().Name()), "/", ".", -1)
 		breadcrumbs := Breadcrumbs(perms)
@@ -57,6 +52,11 @@ func Frontend() {
 		ctx.ViewData("tr", ctx.Tr)
 		ctx.Next()
 	})
+	app.OnErrorCode(iris.StatusNotFound, frontendNotFound)
+	app.OnErrorCode(iris.StatusInternalServerError, internalServerError)
+	app.RegisterView(tmpl)
+
+	hero.Register(sessManager.Start)
 
 	tmpl.AddFunc("isAction", func(id int64, breadcrumbs []models.AdminPermissions) bool {
 		for _, breadcrumb := range breadcrumbs {
@@ -71,15 +71,21 @@ func Frontend() {
 		return time.Now().UTC().Year()
 	})
 
+	tmpl.AddFunc("blockFunc", func(identifier string) template.HTML {
+		blockService := services.NewBlockService()
+		block := blockService.GetByIdentifier(identifier)
+		return block.Content
+	})
+
 	page := mvc.New(app.Party("/"))
 	pageService := services.NewPageService()
 	page.Register(pageService)
 	page.Handle(new(frontend.PageController))
 
-	news := mvc.New(app.Party("/news"))
-	newsService := services.NewNewsService()
-	news.Register(newsService)
-	news.Handle(new(frontend.NewsController))
+	blogs := mvc.New(app.Party("/blog"))
+	blogsService := services.NewBlogService()
+	blogs.Register(blogsService)
+	blogs.Handle(new(frontend.BlogController))
 
 	shop := mvc.New(app.Party("/shop"))
 	shopService := services.NewProductService()
@@ -102,6 +108,7 @@ func frontendNotFound(ctx iris.Context) {
 	// 出现 404 的时候，就跳转到 $views_dir/errors/404.html 模板
 	ctx.ViewLayout(iris.NoLayout)
 	ctx.ViewData("data", "")
+	ctx.ViewData("tr", ctx.Tr)
 	_ = ctx.View("errors/404.html")
 }
 

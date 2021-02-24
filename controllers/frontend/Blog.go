@@ -6,12 +6,12 @@ import (
 	"wumiao/services"
 )
 
-type NewsController struct {
+type BlogController struct {
 	Ctx     iris.Context
-	Service services.NewsService
+	Service services.BlogService
 }
 
-func (p *NewsController) Get() mvc.Result {
+func (p *BlogController) Get() mvc.Result {
 	data := p.Service.GetAll()
 	return mvc.View{
 		Name: "news/list.html",
@@ -22,7 +22,7 @@ func (p *NewsController) Get() mvc.Result {
 	}
 }
 
-func (p *NewsController) GetBy(news string) mvc.Result {
+func (p *BlogController) GetBy(news string) mvc.Result {
 	data := p.Service.GetByUuid(news)
 	if data == nil {
 		return mvc.View{

@@ -10,7 +10,7 @@ type Menu struct {
 	Title     string      `json:"title" xorm:"comment('Menu Title') index VARCHAR(255)"`
 	Thumb     string      `json:"thumb" xorm:"comment('Menu Content Heading') VARCHAR(255)"`
 	Uri       string      `json:"uri" xorm:"comment('Menu String Identifier') VARCHAR(64)"`
-	IsActive  int         `json:"is_active" xorm:"not null default 1 comment('Is Menu Active') index TINYINT(1)"`
+	Status    int         `json:"status" xorm:"not null default 1 comment('Is Menu Active') index TINYINT(1)"`
 	Position  int         `json:"position" xorm:"not null default 0 comment('Menu Sort Order') SMALLINT(6)"`
 	Author    string      `json:"author" xorm:"comment('Menu Author') VARCHAR(32)"`
 	AuthorId  int64       `json:"author_id" xorm:"comment('Menu Author Id') index BIGINT(20)"`

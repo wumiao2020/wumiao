@@ -78,7 +78,7 @@ func (p productService) GetByUuid(string string) *models.Product {
 	}
 }
 func (p productService) DeleteByID(id int64) error {
-	data := models.Product{Id: id, IsActive: 0}
+	data := models.Product{Id: id, Status: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
 	return err
 }

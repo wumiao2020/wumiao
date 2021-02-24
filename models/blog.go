@@ -5,7 +5,7 @@ import (
 	"wumiao/extend"
 )
 
-type News struct {
+type Blog struct {
 	Id              int64         `json:"id" xorm:"pk autoincr comment('Entity ID') BIGINT(20)"`
 	Title           string        `json:"title" xorm:"comment('Page Title') index VARCHAR(255)"`
 	Thumb           string        `json:"thumb" xorm:"VARCHAR(255)"`
@@ -17,7 +17,7 @@ type News struct {
 	Uuid            string        `json:"uuid" xorm:"comment('Page Uuid') unique VARCHAR(36)"`
 	ContentHeading  string        `json:"content_heading" xorm:"comment('Page Content Heading') index VARCHAR(255)"`
 	Content         template.HTML `json:"content" xorm:"comment('Page Content') MEDIUMTEXT"`
-	IsActive        int           `json:"is_active" xorm:"not null default 1 comment('Is Page Active') index TINYINT(1)"`
+	Status          int           `json:"status" xorm:"not null default 1 comment('Is Page Active') index TINYINT(1)"`
 	Position        int           `json:"position" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`
 	Author          string        `json:"author" xorm:"comment('Author') VARCHAR(32)"`
 	AuthorId        int64         `json:"author_id" xorm:"comment('Page Author Id') BIGINT(20)"`

@@ -134,7 +134,7 @@ func add() {
 			href, _ := s.Find("a.post-thumbnail ").Attr("href")
 
 			uuid := uuid.New().String()
-			_, err = tx.Exec("INSERT INTO page (title ,thumb ,meta_title ,identifier ,uuid ,is_active) values(?,?,?,?,?,?)", title, img, title, href, uuid, 1)
+			_, err = tx.Exec("INSERT INTO page (title ,thumb ,meta_title ,identifier ,uuid ,status) values(?,?,?,?,?,?)", title, img, title, href, uuid, 1)
 
 		})
 
@@ -299,7 +299,7 @@ func update() {
 			href, _ := s.Find("a").Attr("href")
 
 			if update {
-				ContentResult, err = tx.Exec("INSERT INTO book_contents(book_id,is_active,title,url) values(?,?,?,?)", bookId, 1, band, href)
+				ContentResult, err = tx.Exec("INSERT INTO book_contents(book_id,status,title,url) values(?,?,?,?)", bookId, 1, band, href)
 				if err != nil {
 					fmt.Printf("insert data error: %d %s %s \n", bookId, band, href)
 					return

@@ -20,7 +20,7 @@ type Product struct {
 	Uuid            string        `json:"uuid" xorm:"comment('Page Uuid') VARCHAR(36)"`
 	ContentHeading  template.HTML `json:"content_heading" xorm:"comment('Page Content Heading') index VARCHAR(255)"`
 	Content         template.HTML `json:"content" xorm:"comment('Page Content') MEDIUMTEXT"`
-	IsActive        int           `json:"is_active" xorm:"not null default 1 comment('Is Page Active') index TINYINT(1)"`
+	Status          int           `json:"status" xorm:"not null default 1 comment('Is Page Active') index TINYINT(1)"`
 	Position        int           `json:"position" xorm:"not null default 0 comment('Page Sort Order') SMALLINT(6)"`
 	Path            string        `json:"path" xorm:"default '1' comment('Tree Path') VARCHAR(64)"`
 	Author          string        `json:"author" xorm:"comment('Author') VARCHAR(32)"`

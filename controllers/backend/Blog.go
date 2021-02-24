@@ -9,14 +9,14 @@ import (
 	"wumiao/services"
 )
 
-type PageController struct {
+type BlogController struct {
 	Ctx     iris.Context
-	Service services.PageService
+	Service services.BlogService
 }
 
-func (p *PageController) Get() mvc.Result {
+func (p *BlogController) Get() mvc.Result {
 	return mvc.View{
-		Name: "page/index.html",
+		Name: "blog/index.html",
 		Data: iris.Map{
 			"title": p.Ctx.Tr("List page"),
 			"data":  "data",
@@ -24,10 +24,10 @@ func (p *PageController) Get() mvc.Result {
 	}
 }
 
-func (p *PageController) GetCreate() mvc.Result {
-	data := new(models.Page)
+func (p *BlogController) GetCreate() mvc.Result {
+	data := new(models.Blog)
 	return mvc.View{
-		Name: "page/form.html",
+		Name: "blog/form.html",
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,
@@ -35,17 +35,17 @@ func (p *PageController) GetCreate() mvc.Result {
 	}
 }
 
-func (p *PageController) PostCreate() {
+func (p *BlogController) PostCreate() {
 	postUuid := p.Ctx.PostValueDefault("uuid", "")
 	title := p.Ctx.PostValue("title")
-	isActive := p.Ctx.PostValueIntDefault("is_active", 0)
+	status := p.Ctx.PostValueIntDefault("status", 0)
 	content := p.Ctx.FormValue("content")
 	identifier := p.Ctx.PostValueDefault("identifier", "")
 	metaTitle := p.Ctx.PostValue("meta_title")
 	metaKeywords := p.Ctx.PostValue("meta_keywords")
 	metaDescription := p.Ctx.PostValue("meta_description")
 	thumb := p.Ctx.PostValue("thumb")
-	data := models.Page{Identifier: identifier, Thumb: thumb, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, Status: isActive, Content: template.HTML(content)}
+	data := models.Blog{Identifier: identifier, Thumb: thumb, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, Status: status, Content: template.HTML(content)}
 	if postUuid == "" {
 		data.Uuid = uuid.New().String()
 		if data.Identifier == "" {
@@ -62,7 +62,7 @@ func (p *PageController) PostCreate() {
 		if data.Identifier == "" {
 			data.Identifier = postUuid
 		}
-		err := p.Service.Update(&data)
+		err := p.Service.Update(&data, []string{"title", "status", "thumb", "content", "identifier", "meta_title", "meta_keywords", "meta_description"})
 		if err == nil {
 			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Uuid})
 		} else {
@@ -72,17 +72,15 @@ func (p *PageController) PostCreate() {
 
 }
 
-func (p *PageController) Post() {
+func (p *BlogController) Post() {
 
-
-	limit := p.Ctx.PostValueIntDefault("length", 12)
+	limit := p.Ctx.PostValueIntDefault("length", 10)
 	start := p.Ctx.PostValueIntDefault("start", 0)
+
 	dataAll := p.Service.GetAll()
 	data := p.Service.GetList(limit, start)
 	_, _ = p.Ctx.JSON(
 		iris.Map{
-			"status":          false,
-			"code":            200,
 			"recordsFiltered": len(dataAll),
 			"recordsTotal":    len(dataAll),
 			"data":            data,
@@ -90,8 +88,8 @@ func (p *PageController) Post() {
 		})
 }
 
-func (p *PageController) GetBy(page string) mvc.Result {
-	data := p.Service.GetByUuid(page)
+func (p *BlogController) GetBy(blog string) mvc.Result {
+	data := p.Service.GetByUuid(blog)
 	if data == nil {
 		return mvc.View{
 			Code:   iris.StatusNotFound,
@@ -103,7 +101,7 @@ func (p *PageController) GetBy(page string) mvc.Result {
 		}
 	}
 	return mvc.View{
-		Name: "page/form.html",
+		Name: "blog/form.html",
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,

@@ -143,11 +143,17 @@ func Backend() {
 	page.Register(pageService)
 	page.Handle(new(backend.PageController))
 
+	//页面管理
+	block := mvc.New(app.Party("/block"))
+	blockService := services.NewBlockService()
+	block.Register(blockService)
+	block.Handle(new(backend.BlockController))
+
 	//文章管理
-	news := mvc.New(app.Party("/news"))
-	newsService := services.NewNewsService()
-	news.Register(newsService)
-	news.Handle(new(backend.NewsController))
+	blog := mvc.New(app.Party("/blog"))
+	blogService := services.NewBlogService()
+	blog.Register(blogService)
+	blog.Handle(new(backend.BlogController))
 
 	//标签管理
 	tag := mvc.New(app.Party("/tag"))

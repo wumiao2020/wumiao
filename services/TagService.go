@@ -56,7 +56,7 @@ func (p tagService) GetByUuid(string string) *models.Tag {
 	}
 }
 func (p tagService) DeleteByID(id int64) error {
-	data := models.Tag{Id: id, IsActive: 0}
+	data := models.Tag{Id: id, Status: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
 	return err
 }

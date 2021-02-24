@@ -67,7 +67,7 @@ func (p categoryService) GetByIdentifier(string string) *models.Category {
 	}
 }
 func (p categoryService) DeleteByID(id int64) error {
-	data := models.Category{Id: id, IsActive: 0}
+	data := models.Category{Id: id, Status: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
 	return err
 }
