@@ -1,13 +1,10 @@
-<!-- Sidenav -->
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-    <!-- Brand -->
     <div class="sidenav-header d-flex align-items-center">
         <a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
             <!-- h1>五秒电商管理系统</h1 -->
             <img src="../../assets/img/brand/logo.svg" class="navbar-brand-img" alt="...">
         </a>
         <div class="ml-auto">
-            <!-- Sidenav toggler -->
             <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                     <i class="sidenav-toggler-line"></i>
@@ -19,9 +16,7 @@
     </div>
     <div class="scrollbar-inner">
         <div class="navbar-inner">
-            <!-- Collapse -->
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-                <!-- Nav items -->
                 <ul class="navbar-nav">
                     {{ range $i, $v := .menuList }}
                         {{ if eq $v.Type "C"}}

@@ -107,7 +107,7 @@ func add() {
 	for i := 263; i >= 1; i-- {
 		tx, _ := db.Begin()
 		num := strconv.Itoa(i)
-		url := "https://w3layouts.com/website-templates/page/" + num + "/"
+		url := "https://walterayouts.com/website-templates/page/" + num + "/"
 		// Request the HTML page.
 		res, err := http.Get(url)
 		if err != nil {

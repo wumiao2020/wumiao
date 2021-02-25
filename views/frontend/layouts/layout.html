@@ -10,14 +10,12 @@
 </head>
 <body>
 
-<!-- inner pages header -->
-<section class="w3l-hero-headers-11">
+<section class="walter-hero-headers-11">
     <div class="hero-header-11-content">
         <div class="top-header">
             <div class="wrapper-full">
                 <div class="d-grid grid-columns-2">
                     <div class="menu-overlay-left">
-                        <!-- overlay-menuv-menu -->
                         <div class="overlay-menuv-hny">
                             <input type="checkbox" id="op"></input>
                             <div class="side-menu-hny">
@@ -59,7 +57,6 @@
                                 </nav>
                             </div>
                         </div>
-                        <!-- //overlay-menuv-menu -->
                     </div>
                     <div class="accounts align-right">
                         <ul>
@@ -76,10 +73,6 @@
                 <div class="d-grid grid-columns-auto">
                     <div class="Brand-logo">
                         <a class="brand-logo" href="/">Wu <span>Miao</span></a>
-                        <!-- if logo is image enable this
-                        <a class="brand-logo" href="index.html">
-                            <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-                        </a> -->
                     </div>
 
                     <div class="right-grid align-left d-grid">
@@ -99,13 +92,9 @@
         </div>
     </div>
 </section>
-<!-- inner pages header -->
-
 {{ yield }}
-
-<section class="w3l-footer-16">
-    <!-- /w3l-footer-16 -->
-    <div class="w3l-footer-16-main">
+<section class="walter-footer-16">
+    <div class="walter-footer-16-main">
         <div class="wrapper">
             <div class="grid">
                 <div class="column">
@@ -118,8 +107,8 @@
                     </ul>
                 </div>
                 <div class="column">
-                    <h3>{{ call .tr "Services"}}</h3>
-                    {{ blockFunc "Services" }}
+                    <h3>{{ call .tr "Help Center"}}</h3>
+                    {{ blockFunc "help-center" }}
                 </div>
                 <div class="column column3">
                     <h3>{{ call .tr "Links"}}</h3>
@@ -138,11 +127,7 @@
         </div>
     </div>
 </section>
-<!-- //w3l-footer-16 -->
-
-
-<!-- Footer -->
-<section class="w3l-footers-1">
+<section class="walter-footers-1">
     <div class="footer">
         <div class="wrapper">
             <div class="footer-content">
@@ -163,9 +148,6 @@
         </div>
     </div>
 </section>
-<!-- //Footer -->
-
-<!-- move top -->
 <button onclick="topFunction()" id="movetop" title="Go to top">
     <span class="fa fa-arrow-up"></span>
 </button>
@@ -189,6 +171,5 @@
         document.documentElement.scrollTop = 0;
     }
 </script>
-<!-- /move top -->
 </body>
 </html>
