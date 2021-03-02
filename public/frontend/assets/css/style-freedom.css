@@ -24,7 +24,7 @@ html {
 }
 
 .wrapper {
-    width: 75%;
+    width: 92%;
     margin: 0 auto;
 }
 
@@ -5572,7 +5572,10 @@ button.owl-next {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 30px;
 }
-
+.walter-content-5 .content-left {
+    place-items: center;
+    display: grid;
+}
 .walter-content-5 .content-left h3 {
     font-size: 40px;
     line-height: 48px;
@@ -7276,7 +7279,7 @@ button.owl-next {
 }
 
 .walter-grids-block-5 .pagination {
-    margin-top: 70px;
+    margin: 70px 0;
     text-align: center;
 }
 

@@ -18,14 +18,14 @@ func (p *PageController) Get() mvc.Result {
 
 	newProduct := product.GetList(6, 0)
 	topProduct := product.GetTopList(6, 0)
-	news := blog.GetList(6, 0)
+	blog := blog.GetList(6, 0)
 	return mvc.View{
 		Name: "page/index.html",
 		Data: iris.Map{
 			"title":      p.Ctx.Tr("Home Page"),
 			"newProduct": newProduct,
 			"topProduct": topProduct,
-			"news":       news,
+			"blog":       blog,
 		},
 	}
 }
@@ -58,6 +58,15 @@ func (p *PageController) GetContact() mvc.Result {
 		Name: "page/contact.html",
 		Data: iris.Map{
 			"title": p.Ctx.Tr("Contact Us"),
+		},
+	}
+}
+
+func (p *PageController) GetAbout() mvc.Result {
+	return mvc.View{
+		Name: "page/about.html",
+		Data: iris.Map{
+			"title": p.Ctx.Tr("About Us"),
 		},
 	}
 }

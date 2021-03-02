@@ -11,8 +11,9 @@ type BlogService interface {
 	GetList(limit int, start int) []models.Blog
 	Get(string string) *models.Blog
 	GetByUuid(string string) *models.Blog
+	GetById(id int64) *models.Blog
 	DeleteByID(id int64) error
-	Update(data *models.Blog, columns []string) error
+	Update(data *models.Blog) error
 	Create(data *models.Blog) error
 }
 
@@ -55,6 +56,15 @@ func (p blogService) GetByUuid(string string) *models.Blog {
 		return nil
 	}
 }
+func (p blogService) GetById(id int64) *models.Blog {
+	data := &models.Blog{Id: id}
+	ok, err := p.engine.Get(data)
+	if ok && err == nil {
+		return data
+	} else {
+		return nil
+	}
+}
 func (p blogService) DeleteByID(id int64) error {
 	data := models.Blog{Id: id, Status: 0}
 	_, err := p.engine.Id(data.Id).Update(data)
@@ -70,8 +80,8 @@ func (p blogService) Get(string string) *models.Blog {
 	}
 }
 
-func (p blogService) Update(data *models.Blog, column []string) error {
-	_, err := p.engine.Where("uuid=?", data.Uuid).MustCols(column...).Update(data)
+func (p blogService) Update(data *models.Blog) error {
+	_, err := p.engine.Where("uuid=?", data.Uuid).AllCols().Update(data)
 	return err
 }
 func (p blogService) Create(data *models.Blog) error {

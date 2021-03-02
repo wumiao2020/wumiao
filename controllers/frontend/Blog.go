@@ -14,7 +14,7 @@ type BlogController struct {
 func (p *BlogController) Get() mvc.Result {
 	data := p.Service.GetAll()
 	return mvc.View{
-		Name: "news/list.html",
+		Name: "blog/index.html",
 		Data: iris.Map{
 			"title": p.Ctx.Tr("List page"),
 			"data":  data,

@@ -4,7 +4,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
-	"html/template"
+	"github.com/kataras/iris/v12/sessions"
 	"wumiao/models"
 	"wumiao/services"
 )
@@ -12,6 +12,13 @@ import (
 type BlogController struct {
 	Ctx     iris.Context
 	Service services.BlogService
+	Session *sessions.Session
+}
+
+func (p *BlogController) getCurrentUser() *models.Admins {
+	user := p.Session.Get(adminSession)
+	admins := user.(*models.Admins)
+	return admins
 }
 
 func (p *BlogController) Get() mvc.Result {
@@ -27,7 +34,8 @@ func (p *BlogController) Get() mvc.Result {
 func (p *BlogController) GetCreate() mvc.Result {
 	data := new(models.Blog)
 	return mvc.View{
-		Name: "blog/form.html",
+		Name:   "blog/form.html",
+		Layout: iris.NoLayout,
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,
@@ -35,40 +43,30 @@ func (p *BlogController) GetCreate() mvc.Result {
 	}
 }
 
-func (p *BlogController) PostCreate() {
-	postUuid := p.Ctx.PostValueDefault("uuid", "")
-	title := p.Ctx.PostValue("title")
-	status := p.Ctx.PostValueIntDefault("status", 0)
-	content := p.Ctx.FormValue("content")
-	identifier := p.Ctx.PostValueDefault("identifier", "")
-	metaTitle := p.Ctx.PostValue("meta_title")
-	metaKeywords := p.Ctx.PostValue("meta_keywords")
-	metaDescription := p.Ctx.PostValue("meta_description")
-	thumb := p.Ctx.PostValue("thumb")
-	data := models.Blog{Identifier: identifier, Thumb: thumb, MetaTitle: metaTitle, MetaKeywords: metaKeywords, MetaDescription: metaDescription, Title: title, Status: status, Content: template.HTML(content)}
-	if postUuid == "" {
-		data.Uuid = uuid.New().String()
-		if data.Identifier == "" {
-			data.Identifier = data.Uuid
-		}
-		err := p.Service.Create(&data)
-		if err == nil {
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "保存成功！！！", "uuid": data.Uuid})
-		} else {
-			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
-		}
-	} else {
-		data.Uuid = postUuid
-		if data.Identifier == "" {
-			data.Identifier = postUuid
-		}
-		err := p.Service.Update(&data, []string{"title", "status", "thumb", "content", "identifier", "meta_title", "meta_keywords", "meta_description"})
-		if err == nil {
-			_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": "修改成功！！！", "uuid": data.Uuid})
-		} else {
-			_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
-		}
+func (p *BlogController) PostSave() {
+	data := new(models.Blog)
+	err := p.Ctx.ReadJSON(&data)
+	admins := p.getCurrentUser()
+	data.Author = admins.Name
+	data.AuthorId = admins.Id
+	if len(data.Uuid) == 0 {
+		data.Uuid = uuid.NewString()
 	}
+	if len(data.Identifier) == 0 {
+		data.Identifier = data.Uuid
+	}
+	if data.Id == 0 {
+		err = p.Service.Create(data)
+	} else {
+		err = p.Service.Update(data)
+	}
+
+	if err == nil {
+		_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": p.Ctx.Tr("Save success !!!"), "id": data.Id})
+	} else {
+		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
+	}
+	return
 
 }
 
@@ -88,8 +86,8 @@ func (p *BlogController) Post() {
 		})
 }
 
-func (p *BlogController) GetBy(blog string) mvc.Result {
-	data := p.Service.GetByUuid(blog)
+func (p *BlogController) GetBy(id int64) mvc.Result {
+	data := p.Service.GetById(id)
 	if data == nil {
 		return mvc.View{
 			Code:   iris.StatusNotFound,
@@ -101,7 +99,8 @@ func (p *BlogController) GetBy(blog string) mvc.Result {
 		}
 	}
 	return mvc.View{
-		Name: "blog/form.html",
+		Name:   "blog/form.html",
+		Layout: iris.NoLayout,
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,

@@ -90,7 +90,7 @@
                 }
             },
             "ajax": {
-                "url": "/page",
+                "url": "/blog",
                 "type": "POST",
                 error: function (arg1) {
                     walter.notification(arg1.statusText, 'rose');
@@ -134,11 +134,11 @@
 
                         //编辑
                         if (row_edit) {
-                            str += '<a href="#!" class="table-action"  data-toggle="modal" data-title="' + row['title'] + '" data-url="/page/' + row['id'] + '" data-target="#modal-default" data-original-title="Edit product"> <i class="fas fa-user-edit"></i> </a>';
+                            str += '<a href="#!" class="table-action"  data-toggle="modal" data-title="' + row['title'] + '" data-url="/blog/' + row['id'] + '" data-target="#modal-default" data-original-title="Edit product"> <i class="fas fa-user-edit"></i> </a>';
                         }
                         //删除
                         if (row_del) {
-                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/page/' + row['id'] + '" data-current-action="delete"><i class="fas fa-trash"></i></a>';
+                            str += '<a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-current-id="' + row["id"] + '" data-current-name="' + row['name'] + '" data-current-url="/blog/' + row['id'] + '" data-current-action="delete"><i class="fas fa-trash"></i></a>';
                         }
 
                         return str;
