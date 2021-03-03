@@ -107,3 +107,20 @@ func (p *BlogController) GetBy(id int64) mvc.Result {
 		},
 	}
 }
+
+func (p *BlogController) PostBy(id int64) {
+	dataInfo := p.Service.GetById(id)
+	status := 1
+	if dataInfo.Status == status {
+		status = 0
+	}
+	dataInfo.Status = status
+	dataInfo.Id = id
+	err := p.Service.Update(dataInfo)
+	if err == nil {
+		_, _ = p.Ctx.JSON(iris.Map{"status": true, "message": p.Ctx.Tr("Save success !!!"), "id": dataInfo.Id})
+	} else {
+		_, _ = p.Ctx.JSON(iris.Map{"status": false, "message": err})
+	}
+	return
+}
