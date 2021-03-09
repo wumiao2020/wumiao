@@ -44,6 +44,10 @@ func (p *PageController) GetBy(page string) mvc.Result {
 			},
 		}
 	}
+
+	if data.PageLayout == "" {
+		data.PageLayout = "page.html"
+	}
 	return mvc.View{
 		Name: "page/" + data.PageLayout,
 		Data: iris.Map{
@@ -67,6 +71,15 @@ func (p *PageController) GetAbout() mvc.Result {
 		Name: "page/about.html",
 		Data: iris.Map{
 			"title": p.Ctx.Tr("About Us"),
+		},
+	}
+}
+
+func (p *PageController) GetServices() mvc.Result {
+	return mvc.View{
+		Name: "page/services.html",
+		Data: iris.Map{
+			"title": p.Ctx.Tr("Services"),
 		},
 	}
 }
