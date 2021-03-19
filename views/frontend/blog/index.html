@@ -14,98 +14,19 @@
     <section id="grids5-block">
         <div class="wrapper">
             <div class="d-grid">
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/blog1.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Multi-functional furniture to maximize space</a></h4>
-                </div>
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/blog2.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Large Collection Of Living Room Furniture</a></h4>
-                </div>
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/blog3.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Cosy and Comfortable Sofas to decorate your home</a></h4>
-                </div>
 
+                {{ range $i, $v := .blog }}
                 <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/blog4.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
+                    <a href="/blog/{{ $v.Uuid }}"><img src="{{ $v.Thumb }}" alt=""></a>
+                    <h5>{{ $v.UpdatedAt }}</h5>
                     <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
+                        <li><a href="#admin"><span class="fa fa-user"></span> {{ $v.Author }}</a></li>
+                        <li><a href="#comments"><span class="fa fa-comments"></span>3 {{ call $.tr "comments" }}</a></li>
+                        <li><a href="#shares"><span class="fa fa-share"></span>3 {{ call $.tr "shares" }}</a></li>
                     </ul>
-                    <h4><a href="blog-single.html">Cosy and Comfortable Sofas to decorate your home</a></h4>
+                    <h4><a href="/blog/{{ $v.Uuid }}">{{ $v.Title }}</a></h4>
                 </div>
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/p8.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Cosy and Comfortable Sofas to decorate your home</a></h4>
-                </div>
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/p1.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Cosy and Comfortable Sofas to decorate your home</a></h4>
-                </div>
-
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/p2.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Multi-functional furniture to maximize space</a></h4>
-                </div>
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/p5.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Large Collection Of Living Room Furniture</a></h4>
-                </div>
-                <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/p4.jpg" alt="" /></a>
-                    <h5>Posted on Aug. 10, 2019</h5>
-                    <ul class="blog-info">
-                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
-                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
-                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
-                    </ul>
-                    <h4><a href="blog-single.html">Cosy and Comfortable Sofas to decorate your home</a></h4>
-                </div>
+                {{ end }}
             </div>
             <div class="pagination">
                 <ul>

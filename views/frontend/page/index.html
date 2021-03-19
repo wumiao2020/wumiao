@@ -117,14 +117,14 @@
             <div class="d-grid">
                 {{ range $i, $v := .blog }}
                 <div class="grids5-info">
-                    <a href="blog-single.html"><img src="assets/images/blog4.jpg" alt=""></a>
+                    <a href="/blog/{{ $v.Uuid }}"><img src="{{ $v.Thumb }}" alt=""></a>
                     <h5>{{ $v.UpdatedAt }}</h5>
                     <ul class="blog-info">
                         <li><a href="#admin"><span class="fa fa-user"></span> {{ $v.Author }}</a></li>
                         <li><a href="#comments"><span class="fa fa-comments"></span>3 {{ call $.tr "comments" }}</a></li>
                         <li><a href="#shares"><span class="fa fa-share"></span>3 {{ call $.tr "shares" }}</a></li>
                     </ul>
-                    <h4><a href="blog-single.html">{{ $v.Title }}</a></h4>
+                    <h4><a href="/blog/{{ $v.Uuid }}">{{ $v.Title }}</a></h4>
                 </div>
                 {{ end }}
             </div>

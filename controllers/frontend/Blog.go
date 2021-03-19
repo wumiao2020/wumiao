@@ -12,18 +12,18 @@ type BlogController struct {
 }
 
 func (p *BlogController) Get() mvc.Result {
-	data := p.Service.GetAll()
+	data := p.Service.GetList(12, 0)
 	return mvc.View{
 		Name: "blog/index.html",
 		Data: iris.Map{
 			"title": p.Ctx.Tr("List page"),
-			"data":  data,
+			"blog":  data,
 		},
 	}
 }
 
-func (p *BlogController) GetBy(news string) mvc.Result {
-	data := p.Service.GetByUuid(news)
+func (p *BlogController) GetBy(uuid string) mvc.Result {
+	data := p.Service.GetByUuid(uuid)
 	if data == nil {
 		return mvc.View{
 			Code: iris.StatusNotFound,
@@ -34,7 +34,7 @@ func (p *BlogController) GetBy(news string) mvc.Result {
 		}
 	}
 	return mvc.View{
-		Name: "news/single.html",
+		Name: "blog/single.html",
 		Data: iris.Map{
 			"title": data.Title,
 			"data":  data,
