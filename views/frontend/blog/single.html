@@ -1,0 +1,143 @@
+<section class="walter-title-11-blog">
+    <div class="title11">
+        <div class="wrapper">
+            <div class="title11-content">
+                <h2>Blog Single</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="walter-text-11">
+    <div class="text11">
+        <div class="wrapper">
+            <div class="text11-content">
+                <a href="#living" class="tag">Living room</a>
+                <h6>{{ .data.CreatedAt }}</h6>
+                <h2 class="heading-no-margin">{{ .data.Title }}</h2>
+                <article>
+                    {{ .data.Content }}
+                </article>
+                <div class="social-share-blog">
+                    <h4 class="heading-no-margin">{{ call .tr "Share this post" }} :</h4>
+                    <ul class="social">
+                        <li><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+                        <li><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+                        <li><a href="#google"><span class="fa fa-google-plus"></span></a></li>
+                        <li><a href="#linkedin"><span class="fa fa-linkedin"></span></a></li>
+                    </ul>
+                </div>
+                <div class="comments">
+                    <h3 class="aside-title ">{{ call .tr "Recent comments" }}</h3>
+                    <div class="comments-grids">
+                        <div class="media-grid">
+                            <div class="media">
+                                <a class="" href="#"><img src="/assets/images/customer1.jpg" class="img-responsive"
+                                                          width="60px" alt="placeholder image"></a>
+                                <div class="media-body comments-grid-right">
+                                    <h5>Jack Harry</h5>
+                                    <ul class="">
+                                        <li class="font-weight-bold">10 mins ago
+                                            <i>|</i>
+                                        </li>
+                                        <li>
+                                            <a href="#comment" class="font-weight-bold">Reply</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <p>Mattis ut hendrerit non, facilisis eget mauris. Sed ultricies nec purus quis tempor.
+                                Phasellus ipsum bibendum eu nec purus quis tempor. Donec ipsum faucibus arcu elementum,
+                                luctus justo.</p>
+                        </div>
+                        <div class="media-grid">
+                            <div class="media">
+                                <a class="" href="#"><img src="/assets/images/customer2.jpg" class="img-responsive"
+                                                          width="60px" alt="placeholder image"></a>
+                                <div class="media-body comments-grid-right">
+                                    <h5>Charlie</h5>
+                                    <ul class="">
+                                        <li class="font-weight-bold">4 mins ago
+                                            <i>|</i>
+                                        </li>
+                                        <li>
+                                            <a href="#comment" class="font-weight-bold">Reply</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <p>Mattis ut hendrerit non, facilisis eget mauris. Sed ultricies nec purus quis tempor.
+                                Phasellus ipsum bibendum eu nec purus quis tempor. Donec ipsum faucibus arcu elementum,
+                                luctus justo. purus semper elementum purus quis tempor facilisis eget mauris.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="leave-comment-form" id="comment">
+                    <h3 class="aside-title">{{ call .tr "Leave a reply" }}</h3>
+                    <form action="#" method="post">
+                        <div class="input-grids">
+                            <div class="form-group">
+                                <input type="text" name="Name" class="form-control" placeholder='{{ call .tr "Name" }}' required="">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="Email" class="form-control" placeholder='{{ call .tr "Email" }}' required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="Message" class="form-control" placeholder='{{ call .tr "Your reply..." }}'
+                                      required=""></textarea>
+                        </div>
+                        <div class="submit text-right">
+                            <a href="#" class="actionbg">{{ call .tr "Add reply" }}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="walter-grids-block-5">
+    <section id="grids5-block">
+        <div class="wrapper">
+            <div class="section-title text-center">
+                <h3>{{ call .tr "More blog posts" }}</h3>
+            </div>
+            <div class="d-grid">
+                <div class="grids5-info">
+                    <a href="blog-single.html"><img src="/assets/images/p2.jpg" alt=""/></a>
+                    <h5>Posted on Aug. 10, 2019</h5>
+                    <ul class="blog-info">
+                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
+                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
+                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
+                    </ul>
+                    <h4><a href="blog-single.html">Multi-functional furniture to maximize space</a></h4>
+                </div>
+                <div class="grids5-info">
+                    <a href="blog-single.html"><img src="/assets/images/p5.jpg" alt=""/></a>
+                    <h5>Posted on Aug. 10, 2019</h5>
+                    <ul class="blog-info">
+                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
+                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
+                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
+                    </ul>
+                    <h4><a href="blog-single.html">Large Collection Of Living Room Furniture</a></h4>
+                </div>
+                <div class="grids5-info">
+                    <a href="blog-single.html"><img src="/assets/images/p4.jpg" alt=""/></a>
+                    <h5>Posted on Aug. 10, 2019</h5>
+                    <ul class="blog-info">
+                        <li><a href="#admin"><span class="fa fa-user"></span> admin</a></li>
+                        <li><a href="#comments"><span class="fa fa-comments"></span>3 comments</a></li>
+                        <li><a href="#shares"><span class="fa fa-share"></span>3 shares</a></li>
+                    </ul>
+                    <h4><a href="blog-single.html">Cosy and Comfortable Sofas to decorate your home</a></h4>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+

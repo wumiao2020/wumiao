@@ -80,14 +80,9 @@
     new FroalaEditor('#edit', {
         height: (window.innerHeight - 200) + 'px',
         language: 'zh_cn',
-        toolbarInline: false,
         enter: FroalaEditor.ENTER_P,
-        imageButtons: ["floatImageLeft", "floatImageNone", "floatImageRight", "linkImage", "replaceImage", "removeImage"],
         imageUploadURL: '/upload/images',
         videoUploadURL: '/upload/videos',
-        placeholderText: null,
-        imageManagerLoadURL: "",
-        imageManagerDeleteURL: "",
     })
 
     uploadImageInst()

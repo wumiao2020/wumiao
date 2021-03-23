@@ -3836,7 +3836,7 @@ p {
 }
 
 .walter-call-to-action-20 .calltoaction-20 {
-    padding: 60px 0 0;
+    padding: 60px 0;
 }
 
 .walter-call-to-action-20 .calltoaction-20 h3 {
@@ -3977,7 +3977,7 @@ p {
 }
 
 .walter-services-1 .services1 {
-    padding: 70px 0 0;
+    padding: 70px 0;
     background: var(--main-bg-color);
 }
 .walter-features-2 .feature-main .services-title,
@@ -4004,9 +4004,9 @@ p {
 
 .walter-services-1 .service-info {
     text-align: center;
-    padding: 20px;
+    padding: 30px 20px 40px;
     border: 1px solid rgba(130, 152, 171, 0.2);
-    border-top-width: 0;
+    border-width: 0 1px 1px;
     box-sizing: border-box;
     background: #fff;
     height: 100%;
@@ -4415,13 +4415,13 @@ button span.fa-angle-up {
     letter-spacing: 5px;
 }
 
-.walter-footer-16 li {
+.walter-footer-16 .column ul li {
     display: block;
     list-style: none;
     margin: 10px 0;
 }
 
-.walter-footer-16 li a {
+.walter-footer-16 .column ul li a {
     color: #828282;
     font-weight: normal;
     font-size: 16px;
@@ -4430,7 +4430,7 @@ button span.fa-angle-up {
     text-transform: capitalize;
 }
 
-.walter-footer-16 .walter-footer-16-main h3 a:hover, .walter-footer-16 li a:hover, .walter-footer-16 .walter-footer-16-main p a:hover {
+.walter-footer-16 .walter-footer-16-main h3 a:hover, .walter-footer-16 .column ul li a:hover, .walter-footer-16 .walter-footer-16-main p a:hover {
     color: #aaa;
 }
 
@@ -4523,7 +4523,7 @@ button span.fa-angle-up {
         padding: 3em 0;
     }
 
-    .walter-footer-16 li {
+    .walter-footer-16 .column ul li {
         margin: 5px 0;
     }
 
@@ -6327,7 +6327,7 @@ button.owl-next {
 }
 
 .walter-features-2 .img1 h4 {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 25px;
     color: var(--heading-color);
     font-weight: 600;
@@ -7214,7 +7214,7 @@ button.owl-next {
 }
 
 .walter-grids-block-5 #grids5-block {
-    padding: 70px 0 0;
+    padding: 70px 0;
 }
 
 .walter-grids-block-5 .d-grid {
@@ -7279,7 +7279,7 @@ button.owl-next {
 }
 
 .walter-grids-block-5 .pagination {
-    margin: 70px 0;
+    margin-top: 70px;
     text-align: center;
 }
 
@@ -9694,7 +9694,6 @@ h5.quantity {
 }
 
 .walter-features-photo-7 .product-single-walter p {
-    color: var(-para-color);
     margin: 15px 0;
     font-size: 16px;
     line-height: 25px;
