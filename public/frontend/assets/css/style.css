@@ -4012,7 +4012,8 @@ p {
     height: 100%;
 }
 .walter-services-1 .column.services-list-item a{
-    display: block;
+    display: grid;
+    height: 100%;
 }
 .walter-services-1 .service-info h4 {
     margin-top: 0.5rem;
