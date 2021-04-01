@@ -1,4 +1,5 @@
 /.idea
 /book
+/public/uploads
 /public/upload
 .env
