@@ -117,7 +117,8 @@
             <div class="d-grid">
                 {{ range $i, $v := .blog }}
                 <div class="grids5-info">
-                    <a href="/blog/{{ $v.Uuid }}"><img src="{{ $v.Thumb }}" alt=""></a>
+                    <a href="/blog/{{ $v.Uuid }}"><img src='{{if ne $v.Thumb ""}}{{ $v.Thumb }} {{else}} https://source.unsplash.com/user/erondu/1600x900
+?{{$i}} {{end}}' alt=""></a>
                     <h5>{{ $v.UpdatedAt }}</h5>
                     <ul class="blog-info">
                         <li><a href="#admin"><span class="fa fa-user"></span> {{ $v.Author }}</a></li>
